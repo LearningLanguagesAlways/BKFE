@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 · Numbers · Time · Dates · BKFES</title>
+<meta name="description" content="Week 2 of Beginning Korean for English Speakers: Native & Sino-Korean numbers, telling time, days of the week, months, and full dates.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+/* ── Week 2 custom interactive styles ─────────────────────────── */
+
+/* Number output display */
+.num-display {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  margin-top: .75rem;
+}
+.num-display input[type=number] {
+  width: 90px; padding: .5rem .7rem; border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm); font-size: 1.1rem; text-align: center;
+  background: var(--baek); color: var(--ink);
+  transition: border-color .15s;
+}
+.num-display input[type=number]:focus { outline: none; border-color: var(--cheong-bright); }
+.num-out {
+  flex: 1; background: var(--cheong); color: var(--hanji-2);
+  border-radius: var(--radius-sm); padding: .6rem 1rem;
+  font-family: var(--serif); font-size: clamp(1.2rem,3vw,1.8rem); font-weight: 600;
+  min-width: 120px; text-align: center;
+}
+.num-rom { font-size: var(--fs-small); color: var(--ink-faint); font-style: italic; align-self: center; }
+
+/* Clock simulator */
+.clock-wrap {
+  display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin: 1rem 0;
+}
+.clock-face {
+  position: relative;
+  width: clamp(140px, 28vw, 200px); height: clamp(140px, 28vw, 200px);
+  border-radius: 50%; background: var(--hanji-2);
+  border: 5px solid var(--cheong); box-shadow: var(--shadow); flex: none;
+}
+.clock-hand {
+  position: absolute; bottom: 50%; left: 50%;
+  transform-origin: bottom center; border-radius: 3px 3px 0 0;
+}
+.clock-h { width: 5px; height: 30%; margin-left: -2.5px; background: var(--ink); }
+.clock-m { width: 3px; height: 40%; margin-left: -1.5px; background: var(--cheong); }
+.clock-s { width: 2px; height: 44%; margin-left: -1px; background: var(--jeok); }
+.clock-center {
+  position: absolute; top: 50%; left: 50%;
+  width: 12px; height: 12px; background: var(--jeok);
+  border-radius: 50%; transform: translate(-50%,-50%); z-index: 5;
+}
+.clock-controls { flex: 1; min-width: 220px; }
+.clock-controls label {
+  display: block; font-size: .8rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint); margin-bottom: .25rem;
+}
+.clock-controls label + * { margin-bottom: .8rem; }
+.clock-controls input[type=range] { width: 100%; accent-color: var(--cheong); }
+.clock-controls select.input { margin-bottom: .8rem; }
+.clock-output {
+  background: var(--cheong); color: var(--hanji-2);
+  border-radius: var(--radius-sm); padding: .85rem 1rem; text-align: center;
+  margin-top: .5rem;
+}
+.clock-output .ko { font-family: var(--serif); font-size: clamp(1.1rem,2.5vw,1.4rem); font-weight: 600; }
+.clock-output .rom { font-size: var(--fs-small); opacity: .8; font-style: italic; margin-top: .2rem; }
+.clock-output .en  { font-size: var(--fs-small); opacity: .7; margin-top: .1rem; }
+
+/* Clock tick marks */
+.clock-tick {
+  position: absolute; top: 50%; left: 50%;
+  font-size: .45rem; color: var(--ink-faint);
+}
+
+/* Calendar */
+.cal-nav { display: flex; align-items: center; gap: .75rem; margin-bottom: .5rem; }
+.cal-nav strong { flex: 1; text-align: center; font-family: var(--serif); font-size: 1.05rem; color: var(--cheong); }
+.cal-nav-btn {
+  padding: .3rem .7rem; border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm); background: var(--hanji-2); font-weight: 700;
+  transition: all .15s;
+}
+.cal-nav-btn:hover { border-color: var(--cheong); color: var(--cheong); background: var(--cheong-tint); }
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+.cal-head { text-align: center; font-size: .7rem; font-weight: 700; color: var(--ink-faint); padding: .25rem 0; }
+.cal-day {
+  text-align: center; padding: clamp(.3rem,.8vw,.5rem) .2rem;
+  border-radius: 6px; cursor: pointer; font-size: clamp(.72rem,1.5vw,.88rem);
+  border: 1.5px solid transparent; transition: background .12s;
+}
+.cal-day:hover { background: var(--cheong-tint); }
+.cal-day.is-sel { background: var(--cheong); color: var(--hanji-2); }
+.cal-day.is-empty { cursor: default; }
+.cal-day.is-today { border-color: var(--hwang); font-weight: 700; }
+.cal-output {
+  margin-top: .75rem; background: var(--hanji-deep);
+  border: 1px dashed var(--line-strong); border-radius: var(--radius-sm);
+  padding: .8rem 1rem; font-family: var(--serif);
+  font-size: clamp(.95rem,2vw,1.1rem); color: var(--cheong);
+  text-align: center; min-height: 3rem;
+}
+
+/* Counter pick game */
+.counter-pool { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+.counter-chip {
+  padding: .5rem 1rem; border: 1.5px solid var(--cheong);
+  border-radius: var(--radius-sm); background: var(--hanji-2);
+  cursor: pointer; font-size: 1rem; font-family: var(--serif);
+  transition: all .15s; user-select: none;
+}
+.counter-chip:hover { background: var(--cheong-tint); }
+.counter-chip.is-sel { background: var(--cheong); color: var(--hanji-2); }
+.counter-chip.is-placed { opacity: .35; pointer-events: none; }
+.counter-zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: .75rem; margin: .75rem 0; }
+.counter-zone {
+  border: 2px dashed var(--hwang); border-radius: var(--radius-sm);
+  padding: .9rem; min-height: 90px; transition: background .12s; cursor: pointer;
+}
+.counter-zone:hover { background: var(--hwang-tint); }
+.counter-zone-lbl { font-weight: 700; color: var(--hwang); font-size: .82rem; margin-bottom: .2rem; }
+.counter-zone-sub { font-size: .72rem; color: var(--ink-faint); margin-bottom: .4rem; }
+.counter-zone-placed { display: flex; flex-wrap: wrap; gap: .3rem; }
+.placed-chip {
+  background: var(--jade); color: var(--hanji-2);
+  border-radius: 4px; padding: .25rem .6rem; font-size: .88rem;
+  cursor: pointer; font-family: var(--serif);
+}
+.placed-chip:hover { background: var(--jeok); }
+
+/* Appointment builder */
+.appt-builder .appt-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: .6rem; }
+.appt-builder .appt-lbl { font-weight: 700; font-size: .82rem; color: var(--ink-faint); letter-spacing: .08em; text-transform: uppercase; min-width: 80px; }
+.appt-out {
+  margin-top: .75rem; background: var(--cheong); color: var(--hanji-2);
+  border-radius: var(--radius-sm); padding: .9rem 1.1rem;
+  font-family: var(--serif); font-size: clamp(1rem,2.2vw,1.2rem); text-align: center;
+  min-height: 3rem; line-height: 1.6;
+}
+.appt-out .sub { font-size: var(--fs-small); opacity: .8; margin-top: .3rem; font-style: italic; }
+</style>
+</head>
+<body data-week="week02">
+
+<!-- ══════════ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__seal">한</span>
+      <span class="brand__txt"><b>BKFES</b><span>Beginning Korean · English Speakers</span></span>
+    </a>
+    <span class="header-spacer"></span>
+    <div class="header-actions" data-name-wrap>
+      <span class="faint">👋 <strong data-name-display></strong></span>
+    </div>
+    <div class="header-actions">
+      <a class="btn btn--ghost btn--sm" href="../index.html">← 홈 · Home</a>
+      <button class="btn btn--ghost btn--sm js-open-library" type="button">📓 <span class="label-full">내 답안 · Library</span></button>
+    </div>
+  </div>
+  <div class="saekdong saekdong--thin"></div>
+</header>
+
+<!-- ══════════ HERO ════════════════════════════════════════════════ -->
+<section class="ws-hero">
+  <div class="wrap">
+    <p class="eyebrow">Week 2 · 6월 8일 · June 08</p>
+    <h1>Numbers · Time · Dates</h1>
+    <p class="ws-hero__sub">숫자 두 세트를 배우고, 시간을 말하고, 날짜를 완성해요.<br>
+    Master two number systems, tell the time, and express full Korean dates.</p>
+    <div class="ws-progress">
+      <div class="progressbar"><div class="progressbar__fill"></div></div>
+      <span class="progresslabel">0 / 11 완료 · sections done</span>
+    </div>
+    <p class="autosave-note" style="margin-top:.8rem">💾 답안은 자동 저장돼요 · Your answers save automatically as you type.</p>
+  </div>
+</section>
+
+<!-- ══════════ SECTION NAV PILLS ══════════════════════════════════ -->
+<nav class="ws-nav" aria-label="Worksheet sections">
+  <div class="wrap">
+    <div class="ws-nav__track">
+      <button class="pill" data-target="welcome"><span class="pill__no">0</span> 시작 Start</button>
+      <button class="pill" data-target="review"><span class="pill__no">1</span> 복습 Review</button>
+      <button class="pill" data-target="native"><span class="pill__no">2</span> 순우리말 수</button>
+      <button class="pill" data-target="sino"><span class="pill__no">3</span> 한자어 수</button>
+      <button class="pill" data-target="time"><span class="pill__no">4</span> 시간 Time</button>
+      <button class="pill" data-target="dates"><span class="pill__no">5</span> 날짜 Dates</button>
+      <button class="pill" data-target="vocab"><span class="pill__no">6</span> 어휘 Vocab</button>
+      <button class="pill" data-target="practice"><span class="pill__no">7</span> 연습 Practice</button>
+      <button class="pill" data-target="games"><span class="pill__no">8</span> 게임 Games</button>
+      <button class="pill" data-target="dialogue"><span class="pill__no">9</span> 대화 Dialogue</button>
+      <button class="pill" data-target="reflect"><span class="pill__no">10</span> 복습 Review</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 0 — Welcome
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel is-active" id="welcome">
+  <div class="panel-head">
+    <span class="step-no">0</span>
+    <div><h2>환영합니다! <span class="panel-head__ko">Welcome Back</span></h2></div>
+  </div>
+  <p class="panel-intro">잘 돌아오셨어요! 한글을 읽을 수 있으니 이제 숫자로 넘어가요.<br>
+  You can read Hangul — now let's unlock numbers, time, and dates!</p>
+
+  <div class="card stack">
+    <h3>이번 주 목표 · This week you will…</h3>
+    <ul>
+      <li>🔢 <strong>Count 1–99</strong> in both <em>Native Korean</em> and <em>Sino-Korean</em> number systems.</li>
+      <li>⏰ <strong>Tell the time</strong> — hours (Native), minutes (Sino), AM/PM, noon &amp; midnight.</li>
+      <li>📅 <strong>Say days of the week, months &amp; full dates</strong> — including today's date in Korean.</li>
+      <li>🗓️ <strong>Make and accept an appointment</strong> using natural Korean.</li>
+      <li>🗣️ <strong>Learn ~35 real-world words</strong> for daily schedules and life.</li>
+    </ul>
+  </div>
+
+  <div class="note note--gold">
+    <h4>두 가지 숫자 체계 · Why does Korean have TWO number systems?</h4>
+    <p>Korean borrowed one set of numbers from Chinese (한자어 수 · Sino-Korean) for minutes, money, dates, and phone numbers. It kept its own ancient set (순우리말 수 · Native Korean) for hours, ages, and counting objects. By the end of today you'll know exactly which to use — and it becomes automatic fast!</p>
+  </div>
+
+  <div class="note note--jade">
+    <h4>이렇게 사용하세요 · How to use this worksheet</h4>
+    <p>Tap the pills at the top to jump between sections.
+    <span class="mode mode--teacher">함께 Teacher-led</span>
+    <span class="mode mode--solo">혼자 Independent</span>
+    <span class="mode mode--play">게임 Game</span>
+    — say everything <strong>out loud</strong>. Your answers auto-save in your browser.</p>
+  </div>
+
+  <div class="panel-foot">
+    <a class="btn btn--ghost" href="../index.html">← 홈 · Home</a>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 1 — Week 1 Review
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="review">
+  <div class="panel-head">
+    <span class="step-no">1</span>
+    <div><h2>복습 <span class="panel-head__ko">Week 1 Quick Review</span></h2></div>
+  </div>
+  <p class="panel-intro">먼저 지난주를 빠르게 점검해요 — 소리 내어 읽어 보세요!<br>
+  Let's quickly check Week 1 before moving forward — say everything out loud!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <table class="vocab">
+    <caption>핵심 표현 복습 · Key phrases from Week 1</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">안녕하세요</td><td class="v-rom">annyeonghaseyo</td><td class="v-en">Hello (polite)</td></tr>
+      <tr><td class="v-ko">제 이름은 ___이에요/예요</td><td class="v-rom">je ireumeun…</td><td class="v-en">My name is ___</td></tr>
+      <tr><td class="v-ko">저는 ___에서 왔어요</td><td class="v-rom">jeoneun…-eseo wasseoyo</td><td class="v-en">I'm from ___</td></tr>
+      <tr><td class="v-ko">만나서 반갑습니다</td><td class="v-rom">mannaseo bangapseumnida</td><td class="v-en">Nice to meet you</td></tr>
+      <tr><td class="v-ko">감사합니다</td><td class="v-rom">gamsahamnida</td><td class="v-en">Thank you</td></tr>
+      <tr><td class="v-ko">괜찮아요</td><td class="v-rom">gwaenchanayo</td><td class="v-en">It's okay / No problem</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" data-quiz="w1-review" style="margin-top:1.4rem">
+    <div class="game__head">
+      <h3>✏️ 빠른 셀프 체크 · Quick self-check</h3>
+      <span class="game__score">점수 · Score: 0 / 4</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Tap an answer to check it instantly. Say the correct one aloud!</p>
+
+    <div class="quiz-q" data-explain="감사합니다 = thank you. 죄송합니다 = sorry.">
+      <div class="stem">1. <span class="big">감사합니다</span> means…</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">Thank you</button>
+        <button class="choice">I'm sorry</button>
+        <button class="choice">Goodbye</button>
+        <button class="choice">Excuse me</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="Vowel-ending name → 예요. Consonant-ending name → 이에요.">
+      <div class="stem">2. Your name ends in a <strong>vowel</strong>. You say: 제 이름은 ___ …</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">예요</button>
+        <button class="choice">이에요</button>
+        <button class="choice">입니다</button>
+        <button class="choice">예요?</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="ㅁ (m) + ㅣ (i) = 미. Try to visualise the syllable block!">
+      <div class="stem">3. ㅁ + ㅣ =</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">미</button>
+        <button class="choice">나</button>
+        <button class="choice">소</button>
+        <button class="choice">무</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="화장실 is one of the most useful words you can know!">
+      <div class="stem">4. <span class="big">화장실</span> means…</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">Restroom</button>
+        <button class="choice">School</button>
+        <button class="choice">Water</button>
+        <button class="choice">Family</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 순우리말 수 · Next: Native Numbers →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 2 — Native Korean Numbers
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="native">
+  <div class="panel-head">
+    <span class="step-no">2</span>
+    <div><h2>순우리말 수 <span class="panel-head__ko">Native Korean Numbers</span></h2></div>
+  </div>
+  <p class="panel-intro">한국 고유의 숫자예요 — 시간(시), 나이(살), 물건 세기(개)에 써요.<br>
+  Korea's own ancient numbers — used for hours, ages, and counting objects.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="note note--gold">
+    <h4>📌 순우리말 수를 쓰는 경우 · When to use Native Korean numbers</h4>
+    <p>시 (hours on a clock) &nbsp;·&nbsp; 살 (age in years) &nbsp;·&nbsp; 개 (counting objects) &nbsp;·&nbsp; 명 (counting people) &nbsp;·&nbsp; 층 (floor of a building)</p>
+  </div>
+
+  <h3 style="margin-top:1.6rem">1–10</h3>
+  <div class="glyph-grid">
+    <div class="glyph"><div class="glyph__char">하나</div><div class="glyph__rom">hana</div><div class="glyph__name">1</div></div>
+    <div class="glyph"><div class="glyph__char">둘</div><div class="glyph__rom">dul</div><div class="glyph__name">2</div></div>
+    <div class="glyph"><div class="glyph__char">셋</div><div class="glyph__rom">set</div><div class="glyph__name">3</div></div>
+    <div class="glyph"><div class="glyph__char">넷</div><div class="glyph__rom">net</div><div class="glyph__name">4</div></div>
+    <div class="glyph"><div class="glyph__char">다섯</div><div class="glyph__rom">daseot</div><div class="glyph__name">5</div></div>
+    <div class="glyph"><div class="glyph__char">여섯</div><div class="glyph__rom">yeoseot</div><div class="glyph__name">6</div></div>
+    <div class="glyph"><div class="glyph__char">일곱</div><div class="glyph__rom">ilgop</div><div class="glyph__name">7</div></div>
+    <div class="glyph"><div class="glyph__char">여덟</div><div class="glyph__rom">yeodeol</div><div class="glyph__name">8</div></div>
+    <div class="glyph"><div class="glyph__char">아홉</div><div class="glyph__rom">ahop</div><div class="glyph__name">9</div></div>
+    <div class="glyph"><div class="glyph__char">열</div><div class="glyph__rom">yeol</div><div class="glyph__name">10</div></div>
+  </div>
+
+  <h3 style="margin-top:1.8rem">11–90 — 십의 자리 · Tens</h3>
+  <p class="muted">Combine tens + ones: <strong>열 (10) + 하나 (1) = 열하나 (11)</strong>. Simple!</p>
+  <div class="glyph-grid" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr))">
+    <div class="glyph"><div class="glyph__char">스물</div><div class="glyph__rom">seumul</div><div class="glyph__name">20</div><div class="glyph__hint">스물하나 = 21</div></div>
+    <div class="glyph"><div class="glyph__char">서른</div><div class="glyph__rom">seoreun</div><div class="glyph__name">30</div><div class="glyph__hint">서른둘 = 32</div></div>
+    <div class="glyph"><div class="glyph__char">마흔</div><div class="glyph__rom">maheun</div><div class="glyph__name">40</div><div class="glyph__hint">마흔셋 = 43</div></div>
+    <div class="glyph"><div class="glyph__char">쉰</div><div class="glyph__rom">swin</div><div class="glyph__name">50</div><div class="glyph__hint">쉰다섯 = 55</div></div>
+    <div class="glyph"><div class="glyph__char">예순</div><div class="glyph__rom">yesun</div><div class="glyph__name">60</div><div class="glyph__hint">예순일곱 = 67</div></div>
+    <div class="glyph"><div class="glyph__char">일흔</div><div class="glyph__rom">ilheun</div><div class="glyph__name">70</div><div class="glyph__hint">일흔여덟 = 78</div></div>
+    <div class="glyph"><div class="glyph__char">여든</div><div class="glyph__rom">yeodeun</div><div class="glyph__name">80</div><div class="glyph__hint">여든아홉 = 89</div></div>
+    <div class="glyph"><div class="glyph__char">아흔</div><div class="glyph__rom">aheun</div><div class="glyph__name">90</div></div>
+  </div>
+
+  <div class="note note--red" style="margin-top:1.6rem">
+    <h4>⚠️ 중요! Counter shortening rule — 조수사 앞에서 줄어요</h4>
+    <p>Before a counter word, some numbers shorten:<br>
+    <strong>하나 → 한</strong> &nbsp;|&nbsp; <strong>둘 → 두</strong> &nbsp;|&nbsp; <strong>셋 → 세</strong> &nbsp;|&nbsp; <strong>넷 → 네</strong><br>
+    예: 사과 <strong>한</strong> 개 (one apple) ✓ &nbsp;&nbsp; NOT: 사과 하나 개 ✗</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.4rem">
+    <h3>🧮 숫자 변환기 · Native Number Builder</h3>
+    <div class="mode-tags"><span class="mode mode--play">게임 Try it</span></div>
+    <p class="muted">Type any number 1–99 to see it in Native Korean instantly.</p>
+    <div class="num-display">
+      <input type="number" id="nativeIn" min="1" max="99" value="7">
+      <div class="num-out" id="nativeOut">일곱</div>
+      <span class="num-rom" id="nativeRom">ilgop</span>
+    </div>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>✏️ 연습 · Counter practice</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 사과 세 개 — what does this mean?</div>
+      <input class="input" type="text" placeholder="Three apples (사과 = apple, 개 = counter for objects)" data-save="native_q1" data-label="Counter: 사과 세 개">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> Write "five people" using 명</div>
+      <div class="fillrow">
+        <input class="input inline-input" type="text" placeholder="사람 ___ 명" data-save="native_q2" data-label="Counter: five people">
+      </div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> How old are you? Write it in Korean.</div>
+      <div class="fillrow">
+        <span class="cue">저는</span>
+        <input class="input inline-input" type="text" placeholder="____" data-save="native_age" data-label="My age in Korean">
+        <span class="cue">살이에요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 한자어 수 · Next: Sino-Korean Numbers →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 3 — Sino-Korean Numbers
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="sino">
+  <div class="panel-head">
+    <span class="step-no">3</span>
+    <div><h2>한자어 수 <span class="panel-head__ko">Sino-Korean Numbers</span></h2></div>
+  </div>
+  <p class="panel-intro">한자(漢字)에서 온 숫자예요 — 분, 월, 년, 돈, 전화번호에 써요.<br>
+  Borrowed from Chinese characters — used for minutes, dates, money, phone numbers.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="note note--gold">
+    <h4>📌 한자어 수를 쓰는 경우 · When to use Sino-Korean numbers</h4>
+    <p>분 (minutes) &nbsp;·&nbsp; 월 (month) &nbsp;·&nbsp; 년 (year) &nbsp;·&nbsp; 원 (won / money) &nbsp;·&nbsp; 번 (number / times) &nbsp;·&nbsp; 전화번호 (phone number)</p>
+  </div>
+
+  <h3 style="margin-top:1.6rem">0–10</h3>
+  <div class="glyph-grid">
+    <div class="glyph"><div class="glyph__char">영/공</div><div class="glyph__rom">yeong/gong</div><div class="glyph__name">0</div><div class="glyph__hint">공 for phone #s</div></div>
+    <div class="glyph"><div class="glyph__char">일</div><div class="glyph__rom">il</div><div class="glyph__name">1</div></div>
+    <div class="glyph"><div class="glyph__char">이</div><div class="glyph__rom">i</div><div class="glyph__name">2</div></div>
+    <div class="glyph"><div class="glyph__char">삼</div><div class="glyph__rom">sam</div><div class="glyph__name">3</div></div>
+    <div class="glyph"><div class="glyph__char">사</div><div class="glyph__rom">sa</div><div class="glyph__name">4</div></div>
+    <div class="glyph"><div class="glyph__char">오</div><div class="glyph__rom">o</div><div class="glyph__name">5</div></div>
+    <div class="glyph"><div class="glyph__char">육</div><div class="glyph__rom">yuk</div><div class="glyph__name">6</div></div>
+    <div class="glyph"><div class="glyph__char">칠</div><div class="glyph__rom">chil</div><div class="glyph__name">7</div></div>
+    <div class="glyph"><div class="glyph__char">팔</div><div class="glyph__rom">pal</div><div class="glyph__name">8</div></div>
+    <div class="glyph"><div class="glyph__char">구</div><div class="glyph__rom">gu</div><div class="glyph__name">9</div></div>
+    <div class="glyph"><div class="glyph__char">십</div><div class="glyph__rom">sip</div><div class="glyph__name">10</div></div>
+  </div>
+
+  <h3 style="margin-top:1.8rem">11–100 — 규칙적이에요! · Very regular!</h3>
+  <div class="note note--jade">
+    <h4>패턴 · The pattern: tens-digit + 십 + ones-digit</h4>
+    <p>
+      <strong>십일</strong> = 11 &nbsp;|&nbsp; <strong>이십</strong> = 20 &nbsp;|&nbsp; <strong>삼십칠</strong> = 37 &nbsp;|&nbsp; <strong>구십구</strong> = 99<br>
+      <strong>백</strong> = 100 &nbsp;|&nbsp; <strong>천</strong> = 1,000 &nbsp;|&nbsp; <strong>만</strong> = 10,000
+    </p>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>🧮 한자어 변환기 · Sino-Korean Number Builder</h3>
+    <div class="mode-tags"><span class="mode mode--play">게임 Try it</span></div>
+    <p class="muted">Type any number 0–9,999 to see it in Sino-Korean.</p>
+    <div class="num-display">
+      <input type="number" id="sinoIn" min="0" max="9999" value="25">
+      <div class="num-out" id="sinoOut">이십오</div>
+      <span class="num-rom" id="sinoRom">i-sip-o</span>
+    </div>
+  </div>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>📦 조수사 Top 3 Counters</caption>
+    <thead><tr><th>Counter</th><th>로마자</th><th>Used for</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">개</td><td class="v-rom">gae</td><td class="v-en">general objects (things)</td><td class="v-en">사과 두 개 — two apples</td></tr>
+      <tr><td class="v-ko">명</td><td class="v-rom">myeong</td><td class="v-en">people</td><td class="v-en">학생 세 명 — three students</td></tr>
+      <tr><td class="v-ko">살</td><td class="v-rom">sal</td><td class="v-en">years of age</td><td class="v-en">스물다섯 살 — 25 years old</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>✏️ 연습 · Sino-Korean practice</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> Write 45 in Sino-Korean (for 45 minutes)</div>
+      <div class="fillrow">
+        <input class="input inline-input" type="text" placeholder="___" data-save="sino_45" data-label="Write 45 in Sino-Korean">
+        <span class="cue">분</span>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> Write your birth year in Korean (e.g. 1995 = 천구백구십오년)</div>
+      <input class="input" type="text" placeholder="___년" data-save="sino_birthyear" data-label="My birth year in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> How much is 3,500원? Write it out.</div>
+      <input class="input" type="text" placeholder="삼천오백 원" data-save="sino_money" data-label="Write 3,500 won in Korean">
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 시간 · Next: Telling Time →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 4 — Telling Time
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="time">
+  <div class="panel-head">
+    <span class="step-no">4</span>
+    <div><h2>시간 <span class="panel-head__ko">Telling Time</span></h2></div>
+  </div>
+  <p class="panel-intro">지금 몇 시예요? — 시간 말하는 법을 배워요!<br>
+  "What time is it?" — let's learn to tell the time in Korean!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <div class="note note--gold">
+    <h4>⏰ 핵심 규칙 · The Golden Rule</h4>
+    <p><strong>시 (o'clock / hours)</strong> → Native Korean &nbsp;|&nbsp; <strong>분 (minutes)</strong> → Sino-Korean<br>
+    오전 (AM) &nbsp;·&nbsp; 오후 (PM) &nbsp;·&nbsp; 정오 (noon) &nbsp;·&nbsp; 자정 (midnight) &nbsp;·&nbsp; 반 (half / :30)</p>
+  </div>
+
+  <table class="vocab" style="margin-top:1rem">
+    <caption>핵심 표현 · Key time expressions</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">몇 시예요?</td><td class="v-rom">myeot siyeyo?</td><td class="v-en">What time is it?</td></tr>
+      <tr><td class="v-ko">세 시예요</td><td class="v-rom">se siyeyo</td><td class="v-en">It is 3 o'clock</td></tr>
+      <tr><td class="v-ko">두 시 반이에요</td><td class="v-rom">du si ban-ieyo</td><td class="v-en">It's 2:30</td></tr>
+      <tr><td class="v-ko">오전 열 시</td><td class="v-rom">ojeon yeol si</td><td class="v-en">10 AM</td></tr>
+      <tr><td class="v-ko">오후 다섯 시</td><td class="v-rom">ohu daseot si</td><td class="v-en">5 PM</td></tr>
+      <tr><td class="v-ko">열두 시 삼십 분이에요</td><td class="v-rom">yeoldu si samsip bunieyo</td><td class="v-en">It's 12:30</td></tr>
+      <tr><td class="v-ko">정각</td><td class="v-rom">jeonggak</td><td class="v-en">exactly on the hour</td></tr>
+    </tbody>
+  </table>
+
+  <div class="game" style="margin-top:1.4rem">
+    <div class="game__head">
+      <h3>🕰️ 시계 시뮬레이터 · Interactive Clock</h3>
+    </div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Try it</span></div>
+    <p class="muted">Move the sliders to set a time — the Korean sentence updates instantly! Say it aloud!</p>
+
+    <div class="clock-wrap">
+      <div class="clock-face" id="clockFace">
+        <div class="clock-hand clock-h" id="hHand"></div>
+        <div class="clock-hand clock-m" id="mHand"></div>
+        <div class="clock-hand clock-s" id="sHand"></div>
+        <div class="clock-center"></div>
+      </div>
+      <div class="clock-controls">
+        <label>시 · Hour: <strong id="hVal">3</strong></label>
+        <input type="range" id="hSlider" min="1" max="12" value="3">
+        <label>분 · Minute: <strong id="mVal">00</strong></label>
+        <input type="range" id="mSlider" min="0" max="59" value="0">
+        <label>오전 / 오후</label>
+        <select class="input" id="apSelect">
+          <option value="오전">오전 AM</option>
+          <option value="오후">오후 PM</option>
+        </select>
+        <div class="clock-output" id="clockOut">
+          <div class="ko">오후 세 시예요</div>
+          <div class="rom">ohu se siyeyo</div>
+          <div class="en">It is 3:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>✏️ 시간 쓰기 · Write the time in Korean</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 7:00 AM</div>
+      <input class="input" type="text" placeholder="오전 일곱 시예요" data-save="time_7am" data-label="Write 7:00 AM in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 2:30 PM</div>
+      <input class="input" type="text" placeholder="오후 두 시 반이에요" data-save="time_230pm" data-label="Write 2:30 PM in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 10:15 AM</div>
+      <input class="input" type="text" placeholder="오전 열 시 십오 분이에요" data-save="time_1015am" data-label="Write 10:15 AM in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">4.</span> What time do you usually wake up? (몇 시에 일어나요?)</div>
+      <div class="fillrow">
+        <span class="cue">저는 보통</span>
+        <input class="input inline-input" type="text" placeholder="____" data-save="time_wakeup" data-label="What time I wake up">
+        <span class="cue">에 일어나요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 날짜 · Next: Days &amp; Dates →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 5 — Days, Months, Dates
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="dates">
+  <div class="panel-head">
+    <span class="step-no">5</span>
+    <div><h2>날짜 <span class="panel-head__ko">Days · Months · Dates</span></h2></div>
+  </div>
+  <p class="panel-intro">오늘이 무슨 요일이에요? 오늘 날짜가 어떻게 돼요?<br>
+  What day is it? What is today's date? — Let's find out in Korean!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <table class="vocab">
+    <caption>요일 Days of the Week</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th><th>한자 Hanja hint</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">월요일</td><td class="v-rom">woryoil</td><td class="v-en">Monday</td><td class="v-en">月 — Moon / month</td></tr>
+      <tr><td class="v-ko">화요일</td><td class="v-rom">hwayoil</td><td class="v-en">Tuesday</td><td class="v-en">火 — Fire</td></tr>
+      <tr><td class="v-ko">수요일</td><td class="v-rom">suyoil</td><td class="v-en">Wednesday</td><td class="v-en">水 — Water</td></tr>
+      <tr><td class="v-ko">목요일</td><td class="v-rom">mogyoil</td><td class="v-en">Thursday</td><td class="v-en">木 — Wood / tree</td></tr>
+      <tr><td class="v-ko">금요일</td><td class="v-rom">geumyoil</td><td class="v-en">Friday</td><td class="v-en">金 — Gold / metal</td></tr>
+      <tr><td class="v-ko">토요일</td><td class="v-rom">toyoil</td><td class="v-en">Saturday</td><td class="v-en">土 — Earth / soil</td></tr>
+      <tr><td class="v-ko">일요일</td><td class="v-rom">iryoil</td><td class="v-en">Sunday</td><td class="v-en">日 — Sun / day</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--jade" style="margin-top:1.2rem">
+    <h4>🌏 문화 노트 · Culture note — the Five Elements</h4>
+    <p>Korean weekday names come from the five Taoist cosmic elements (오행) plus the Sun and Moon — the same system used in Japan and China. 금요일 (Gold day) = Friday. 수요일 (Water day) = Wednesday. Once you know the Hanja, you never forget the days!</p>
+  </div>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>월 Months — Sino-Korean number + 월</caption>
+    <thead><tr><th>Month</th><th>한국어</th><th>Month</th><th>한국어</th></tr></thead>
+    <tbody>
+      <tr><td class="v-en">January</td><td class="v-ko">일월 (1월)</td><td class="v-en">July</td><td class="v-ko">칠월 (7월)</td></tr>
+      <tr><td class="v-en">February</td><td class="v-ko">이월 (2월)</td><td class="v-en">August</td><td class="v-ko">팔월 (8월)</td></tr>
+      <tr><td class="v-en">March</td><td class="v-ko">삼월 (3월)</td><td class="v-en">September</td><td class="v-ko">구월 (9월)</td></tr>
+      <tr><td class="v-en">April</td><td class="v-ko">사월 (4월)</td><td class="v-en">October</td><td class="v-ko">시월 (10월) ⚠️</td></tr>
+      <tr><td class="v-en">May</td><td class="v-ko">오월 (5월)</td><td class="v-en">November</td><td class="v-ko">십일월 (11월)</td></tr>
+      <tr><td class="v-en">June</td><td class="v-ko">유월 (6월) ⚠️</td><td class="v-en">December</td><td class="v-ko">십이월 (12월)</td></tr>
+    </tbody>
+  </table>
+  <p class="faint" style="margin-top:.4rem">⚠️ 예외 두 개 · Two irregular months: 6월 = <strong>유월</strong> (not 육월) · 10월 = <strong>시월</strong> (not 십월) — spoken contractions.</p>
+
+  <div class="note note--gold" style="margin-top:1.2rem">
+    <h4>📅 날짜 공식 · Full date formula</h4>
+    <p><strong>[Year]년 [Month]월 [Day]일</strong><br>
+    Example: <strong>이천이십육년 유월 팔일</strong> = June 8, 2026<br>
+    오늘은 무슨 요일이에요? · What day is today?<br>
+    오늘은 <strong>___요일</strong>이에요.</p>
+  </div>
+
+  <div class="game" style="margin-top:1.4rem">
+    <div class="game__head"><h3>📅 날짜 선택기 · Date Picker</h3></div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Try it</span></div>
+    <p class="muted">Tap any day to see it as a full Korean date expression!</p>
+    <div style="max-width:420px">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="calPrev">◀</button>
+        <strong id="calTitle"></strong>
+        <button class="cal-nav-btn" id="calNext">▶</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-output" id="calOut">← 날짜를 선택하세요 · Tap a date above</div>
+    </div>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>✏️ 날짜 쓰기 · Write the date</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> Write today's date in Korean</div>
+      <input class="input" type="text" placeholder="이천이십육년 유월 ___일" data-save="date_today" data-label="Today's date in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> Write your birthday (생일) in Korean</div>
+      <input class="input" type="text" placeholder="___년 ___월 ___일" data-save="date_bday" data-label="My birthday in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> What day of the week is tomorrow? (내일은?)</div>
+      <div class="fillrow">
+        <span class="cue">내일은</span>
+        <input class="input inline-input" type="text" placeholder="___요일" data-save="date_tomorrow" data-label="What day is tomorrow">
+        <span class="cue">이에요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 어휘 · Next: Vocabulary →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 6 — Vocabulary
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="vocab">
+  <div class="panel-head">
+    <span class="step-no">6</span>
+    <div><h2>어휘 <span class="panel-head__ko">Vocabulary</span></h2></div>
+  </div>
+  <p class="panel-intro">Read each word aloud, then cover the English and test yourself.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Read aloud together</span><span class="mode mode--solo">혼자 Self-test</span></div>
+
+  <table class="vocab">
+    <caption>① 시간 표현 · Time expressions</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">지금</td><td class="v-rom">jigeum</td><td class="v-en">now</td></tr>
+      <tr><td class="v-ko">오늘</td><td class="v-rom">oneul</td><td class="v-en">today</td></tr>
+      <tr><td class="v-ko">내일</td><td class="v-rom">naeil</td><td class="v-en">tomorrow</td></tr>
+      <tr><td class="v-ko">어제</td><td class="v-rom">eoje</td><td class="v-en">yesterday</td></tr>
+      <tr><td class="v-ko">아침</td><td class="v-rom">achim</td><td class="v-en">morning</td></tr>
+      <tr><td class="v-ko">점심</td><td class="v-rom">jeomsim</td><td class="v-en">lunch / noon</td></tr>
+      <tr><td class="v-ko">저녁</td><td class="v-rom">jeonyeok</td><td class="v-en">evening / dinner</td></tr>
+      <tr><td class="v-ko">밤</td><td class="v-rom">bam</td><td class="v-en">night</td></tr>
+      <tr><td class="v-ko">이번 주</td><td class="v-rom">ibeon ju</td><td class="v-en">this week</td></tr>
+      <tr><td class="v-ko">다음 주</td><td class="v-rom">daeum ju</td><td class="v-en">next week</td></tr>
+      <tr><td class="v-ko">주말</td><td class="v-rom">jumal</td><td class="v-en">weekend</td></tr>
+      <tr><td class="v-ko">언제</td><td class="v-rom">eonje</td><td class="v-en">when</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>② 숫자 관련 · Numbers in everyday life</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">몇</td><td class="v-rom">myeot</td><td class="v-en">how many / what (number)</td></tr>
+      <tr><td class="v-ko">몇 살이에요?</td><td class="v-rom">myeot sarieyo?</td><td class="v-en">How old are you?</td></tr>
+      <tr><td class="v-ko">몇 시예요?</td><td class="v-rom">myeot siyeyo?</td><td class="v-en">What time is it?</td></tr>
+      <tr><td class="v-ko">전화번호</td><td class="v-rom">jeonhwa beonho</td><td class="v-en">phone number</td></tr>
+      <tr><td class="v-ko">얼마예요?</td><td class="v-rom">eolmayeyo?</td><td class="v-en">How much is it?</td></tr>
+      <tr><td class="v-ko">원</td><td class="v-rom">won</td><td class="v-en">Korean won (₩)</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>③ 약속 · Appointments &amp; schedules</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">약속</td><td class="v-rom">yaksok</td><td class="v-en">appointment / promise / plan</td></tr>
+      <tr><td class="v-ko">시간 있어요?</td><td class="v-rom">sigan isseoyo?</td><td class="v-en">Do you have time? Are you free?</td></tr>
+      <tr><td class="v-ko">만나다</td><td class="v-rom">mannada</td><td class="v-en">to meet</td></tr>
+      <tr><td class="v-ko">어때요?</td><td class="v-rom">eottaeyo?</td><td class="v-en">How about it? What do you think?</td></tr>
+      <tr><td class="v-ko">좋아요!</td><td class="v-rom">joayo!</td><td class="v-en">Great! Sounds good!</td></tr>
+      <tr><td class="v-ko">늦다</td><td class="v-rom">neutda</td><td class="v-en">to be late</td></tr>
+      <tr><td class="v-ko">기다리다</td><td class="v-rom">gidarida</td><td class="v-en">to wait</td></tr>
+      <tr><td class="v-ko">그때 봐요</td><td class="v-rom">geuttae bwayo</td><td class="v-en">See you then!</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" style="margin-top:1.6rem">
+    <h3>⭐ 나의 단어 · My words to remember</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Choose your three favourite new words — writing your own choices makes them stick!</p>
+    <input class="input" type="text" placeholder="1." data-save="vocab_fav_1" data-label="Favourite word 1" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="2." data-save="vocab_fav_2" data-label="Favourite word 2" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="3." data-save="vocab_fav_3" data-label="Favourite word 3">
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 연습 · Next: Practice →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 7 — Practice
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="practice">
+  <div class="panel-head">
+    <span class="step-no">7</span>
+    <div><h2>연습 <span class="panel-head__ko">Practice</span></h2></div>
+  </div>
+  <p class="panel-intro">지금까지 배운 것을 연습해요 — 소리 내어 말하는 것도 잊지 마세요!<br>
+  Put it all together — and don't forget to say everything out loud!</p>
+
+  <div class="exercise">
+    <h3>A. 숫자 쓰기 · Write the Korean number</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 17 — Native Korean (for 17 objects)</div>
+      <input class="input" type="text" placeholder="열일곱" data-save="prac_a1" data-label="Write 17 Native Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 45 minutes — Sino-Korean + 분</div>
+      <div class="fillrow">
+        <input class="input inline-input" type="text" placeholder="사십오" data-save="prac_a2" data-label="Write 45 Sino-Korean">
+        <span class="cue">분</span>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> Write your phone area code in Sino-Korean (e.g. 404 → 사백사)</div>
+      <input class="input" type="text" placeholder="e.g. 사백사" data-save="prac_a3" data-label="My area code in Korean">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">4.</span> Write your birth month in Korean (e.g. March = 삼월)</div>
+      <input class="input" type="text" placeholder="___월" data-save="prac_a4" data-label="My birth month in Korean">
+    </div>
+  </div>
+
+  <div class="exercise" data-quiz="w2-time" style="margin-top:1rem">
+    <div class="game__head">
+      <h3>B. 시간 퀴즈 · Time Quiz</h3>
+      <span class="game__score">점수 · Score: 0 / 5</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Quiz</span></div>
+    <p class="muted">Tap the correct Korean expression for each time shown.</p>
+
+    <div class="quiz-q" data-explain="PM → 오후. Hours use Native Korean: 3 = 세.">
+      <div class="stem">1. ⏰ 3:00 PM</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">오후 세 시예요</button>
+        <button class="choice">오전 삼 시예요</button>
+        <button class="choice">오후 다섯 시예요</button>
+        <button class="choice">오전 세 시예요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="반 means 'half past'. 7 AM = 오전 일곱 시.">
+      <div class="stem">2. ⏰ 7:30 AM</div>
+      <div class="choices">
+        <button class="choice">오후 일곱 시 반이에요</button>
+        <button class="choice" data-correct="true">오전 일곱 시 반이에요</button>
+        <button class="choice">오전 칠 시 반이에요</button>
+        <button class="choice">오전 일곱 시 삼십이에요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="정오 is the special word for noon.">
+      <div class="stem">3. ⏰ 12:00 noon</div>
+      <div class="choices">
+        <button class="choice">오전 열두 시예요</button>
+        <button class="choice">밤 열두 시예요</button>
+        <button class="choice" data-correct="true">정오예요</button>
+        <button class="choice">오후 열두 시 정각이에요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="금요일 = Friday. 시간 있어요? = Are you free?">
+      <div class="stem">4. You want to ask if your friend is free this Friday.</div>
+      <div class="choices">
+        <button class="choice">이번 주 목요일에 시간 있어요?</button>
+        <button class="choice" data-correct="true">이번 주 금요일에 시간 있어요?</button>
+        <button class="choice">다음 주 금요일에 시간 있어요?</button>
+        <button class="choice">이번 주 토요일에 시간 있어요?</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="Months use Sino-Korean. June = 유월 (irregular — not 육월!).">
+      <div class="stem">5. June 8th, 2026 in Korean is…</div>
+      <div class="choices">
+        <button class="choice">이천이십육년 육월 팔일</button>
+        <button class="choice" data-correct="true">이천이십육년 유월 팔일</button>
+        <button class="choice">이천이십육년 유월 여덟일</button>
+        <button class="choice">이천이십육 유월 팔일</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 게임 · Next: Games →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 8 — Games
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="games">
+  <div class="panel-head">
+    <span class="step-no">8</span>
+    <div><h2>게임 <span class="panel-head__ko">Games</span></h2></div>
+  </div>
+  <p class="panel-intro">Learning sticks when it's fun. Flip cards, make matches, and say everything out loud!</p>
+  <div class="mode-tags"><span class="mode mode--play">게임 Play</span><span class="mode mode--solo">혼자 Independent</span><span class="mode mode--teacher">함께 As a class</span></div>
+
+  <!-- Flashcard 1: Native numbers -->
+  <div class="game" data-flashcards="native-nums" data-flashcards-src="fc-native-data">
+    <div class="game__head">
+      <h3>🃏 순우리말 수 카드 · Native number flashcards</h3>
+      <span class="flash-counter faint"></span>
+    </div>
+    <p class="muted">Tap the card — see the Korean → say the number → flip to check.</p>
+    <div class="flash-stage">
+      <div class="flashcard">
+        <div class="flashcard__inner">
+          <div class="flashcard__face flashcard__front"><div class="big"></div></div>
+          <div class="flashcard__face flashcard__back"><div><div class="rom"></div><div class="en"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-controls">
+      <button class="btn btn--ghost btn--sm js-flash-prev">← 이전</button>
+      <button class="btn btn--ghost btn--sm js-flash-next">다음 →</button>
+      <button class="btn btn--gold btn--sm js-flash-shuffle">🔀 섞기 · Shuffle</button>
+    </div>
+  </div>
+
+  <!-- Flashcard 2: Sino numbers -->
+  <div class="game" data-flashcards="sino-nums" data-flashcards-src="fc-sino-data">
+    <div class="game__head">
+      <h3>🃏 한자어 수 카드 · Sino-Korean number flashcards</h3>
+      <span class="flash-counter faint"></span>
+    </div>
+    <p class="muted">Same idea — but Sino-Korean this time. Remember which context each number is used in!</p>
+    <div class="flash-stage">
+      <div class="flashcard">
+        <div class="flashcard__inner">
+          <div class="flashcard__face flashcard__front"><div class="big"></div></div>
+          <div class="flashcard__face flashcard__back"><div><div class="rom"></div><div class="en"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-controls">
+      <button class="btn btn--ghost btn--sm js-flash-prev">← 이전</button>
+      <button class="btn btn--ghost btn--sm js-flash-next">다음 →</button>
+      <button class="btn btn--gold btn--sm js-flash-shuffle">🔀 섞기 · Shuffle</button>
+    </div>
+  </div>
+
+  <!-- Match game 1: native numbers ↔ numeral -->
+  <div class="game" data-match="native-match" data-match-src="match-native-data" data-left-glyph="true">
+    <div class="game__head">
+      <h3>🔗 순우리말 수 짝 맞추기 · Match Native Korean → Number</h3>
+      <span class="game__score">맞춤 · Matched: 0 / 6</span>
+    </div>
+    <p class="muted">Tap a Korean number word, then tap its matching numeral.</p>
+    <div class="match-board">
+      <div class="match-col" data-side="left"><h4>한국어 · Korean</h4></div>
+      <div class="match-col" data-side="right"><h4>숫자 · Numeral</h4></div>
+    </div>
+    <div style="margin-top:1rem"><button class="btn btn--ghost btn--sm js-match-reset">↺ 다시 · Reset</button></div>
+  </div>
+
+  <!-- Match game 2: time vocab ↔ English -->
+  <div class="game" data-match="time-match" data-match-src="match-time-data">
+    <div class="game__head">
+      <h3>🔗 시간 어휘 짝 맞추기 · Match Time Words → English</h3>
+      <span class="game__score">맞춤 · Matched: 0 / 6</span>
+    </div>
+    <p class="muted">Tap a Korean time word, then tap its English meaning.</p>
+    <div class="match-board">
+      <div class="match-col" data-side="left"><h4>한국어 · Korean</h4></div>
+      <div class="match-col" data-side="right"><h4>English</h4></div>
+    </div>
+    <div style="margin-top:1rem"><button class="btn btn--ghost btn--sm js-match-reset">↺ 다시 · Reset</button></div>
+  </div>
+
+  <!-- Counter Click Game (custom) -->
+  <div class="game">
+    <div class="game__head">
+      <h3>🧩 조수사 분류 게임 · Counter Sort Game</h3>
+      <span class="game__score" id="counterScore">맞춤: 0 / 6</span>
+    </div>
+    <p class="muted">Click a phrase below, then click the correct counter box. Tap a placed card to remove it.</p>
+    <div class="counter-pool" id="counterPool"></div>
+    <div class="counter-zones" id="counterZones">
+      <div class="counter-zone" id="zone-gae" onclick="assignCounter('개')">
+        <div class="counter-zone-lbl">개 (gae)</div>
+        <div class="counter-zone-sub">for objects / things</div>
+        <div class="counter-zone-placed" id="placed-gae"></div>
+      </div>
+      <div class="counter-zone" id="zone-myeong" onclick="assignCounter('명')">
+        <div class="counter-zone-lbl">명 (myeong)</div>
+        <div class="counter-zone-sub">for people</div>
+        <div class="counter-zone-placed" id="placed-myeong"></div>
+      </div>
+      <div class="counter-zone" id="zone-sal" onclick="assignCounter('살')">
+        <div class="counter-zone-lbl">살 (sal)</div>
+        <div class="counter-zone-sub">for age (years old)</div>
+        <div class="counter-zone-placed" id="placed-sal"></div>
+      </div>
+    </div>
+    <button class="btn btn--ghost btn--sm" onclick="resetCounter()" style="margin-top:.5rem">↺ 다시 · Reset</button>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 대화 · Next: Dialogue →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 9 — Dialogue & Role-play
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="dialogue">
+  <div class="panel-head">
+    <span class="step-no">9</span>
+    <div><h2>대화 <span class="panel-head__ko">Dialogue &amp; Role-play</span></h2></div>
+  </div>
+  <p class="panel-intro">Real conversations using today's language. Read aloud, swap roles, then make it your own!</p>
+
+  <!-- Dialogue 1: What time is it? -->
+  <div class="dialogue">
+    <h3 style="font-family:var(--sans);margin-bottom:.6rem">🎭 대화 1 · What time is it?</h3>
+    <div class="mode-tags"><span class="mode mode--teacher">함께 Read A &amp; B aloud with your teacher — then swap!</span></div>
+
+    <div class="turn turn--b">
+      <div class="turn__who">B · 친구</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">저기요, 지금 몇 시예요?</div>
+        <div class="turn__rom">jeogiyo, jigeum myeot siyeyo?</div>
+        <div class="turn__en">Excuse me, what time is it now?</div>
+      </div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">오후 두 시 반이에요.</div>
+        <div class="turn__rom">ohu du si ban-ieyo.</div>
+        <div class="turn__en">It's 2:30 PM.</div>
+      </div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 친구</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">감사합니다!</div>
+        <div class="turn__rom">gamsahamnida!</div>
+        <div class="turn__en">Thank you!</div>
+      </div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">아니요, 괜찮아요!</div>
+        <div class="turn__rom">aniyo, gwaenchanayo!</div>
+        <div class="turn__en">No problem!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialogue 2: Making an appointment -->
+  <div class="dialogue" style="margin-top:1.4rem">
+    <h3 style="font-family:var(--sans);margin-bottom:.6rem">🎭 대화 2 · Making an appointment</h3>
+    <div class="mode-tags"><span class="mode mode--teacher">함께 With your teacher</span></div>
+
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">이번 주 금요일에 시간 있어요?</div>
+        <div class="turn__rom">ibeon ju geumyoil-e sigan isseoyo?</div>
+        <div class="turn__en">Do you have time this Friday?</div>
+      </div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 친구</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">네, 있어요! 몇 시에 만날까요?</div>
+        <div class="turn__rom">ne, isseoyo! myeot sie mannalkkayo?</div>
+        <div class="turn__en">Yes, I'm free! What time shall we meet?</div>
+      </div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">오후 세 시 어때요?</div>
+        <div class="turn__rom">ohu se si eottaeyo?</div>
+        <div class="turn__en">How about 3 PM?</div>
+      </div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 친구</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">좋아요! 그럼 금요일 오후 세 시에 봐요.</div>
+        <div class="turn__rom">joayo! geureom geumyoil ohu se sie bwayo.</div>
+        <div class="turn__en">Great! Let's meet Friday at 3 PM then.</div>
+      </div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble">
+        <div class="turn__ko">네, 그때 봐요. 화이팅!</div>
+        <div class="turn__rom">ne, geuttae bwayo. hwaiting!</div>
+        <div class="turn__en">Yes, see you then. You've got this!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appointment builder -->
+  <div class="game" style="margin-top:1.4rem">
+    <div class="game__head"><h3>🗓️ 약속 만들기 · Appointment Sentence Builder</h3></div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Interactive</span></div>
+    <p class="muted">Pick a day, time, and activity — your Korean sentence appears automatically!</p>
+    <div class="appt-builder">
+      <div class="appt-row">
+        <span class="appt-lbl">요일 Day</span>
+        <select class="input" id="apptDay" onchange="buildAppt()">
+          <option value="월요일">월요일 Monday</option>
+          <option value="화요일">화요일 Tuesday</option>
+          <option value="수요일">수요일 Wednesday</option>
+          <option value="목요일">목요일 Thursday</option>
+          <option value="금요일" selected>금요일 Friday</option>
+          <option value="토요일">토요일 Saturday</option>
+          <option value="일요일">일요일 Sunday</option>
+        </select>
+      </div>
+      <div class="appt-row">
+        <span class="appt-lbl">시간 Hour</span>
+        <select class="input" id="apptHour" onchange="buildAppt()">
+          <option value="한">한 시 (1)</option>
+          <option value="두">두 시 (2)</option>
+          <option value="세" selected>세 시 (3)</option>
+          <option value="네">네 시 (4)</option>
+          <option value="다섯">다섯 시 (5)</option>
+          <option value="여섯">여섯 시 (6)</option>
+          <option value="일곱">일곱 시 (7)</option>
+          <option value="여덟">여덟 시 (8)</option>
+          <option value="아홉">아홉 시 (9)</option>
+          <option value="열">열 시 (10)</option>
+          <option value="열한">열한 시 (11)</option>
+          <option value="열두">열두 시 (12)</option>
+        </select>
+        <select class="input" id="apptAP" onchange="buildAppt()">
+          <option value="오전">오전 AM</option>
+          <option value="오후" selected>오후 PM</option>
+        </select>
+      </div>
+      <div class="appt-row">
+        <span class="appt-lbl">활동 Activity</span>
+        <select class="input" id="apptAct" onchange="buildAppt()">
+          <option value="만나요">만나요 — let's meet</option>
+          <option value="공부해요">공부해요 — let's study</option>
+          <option value="밥 먹어요">밥 먹어요 — let's eat</option>
+          <option value="커피 마셔요">커피 마셔요 — let's have coffee</option>
+          <option value="운동해요">운동해요 — let's exercise</option>
+        </select>
+      </div>
+      <div class="appt-out" id="apptOut">← 위에서 선택하면 문장이 나와요!</div>
+    </div>
+  </div>
+
+  <div class="exercise" style="margin-top:1.4rem">
+    <h3>🗣️ 나의 버전 · Write your own appointment conversation</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent: write your lines</span><span class="mode mode--teacher">함께 Then perform with a partner</span></div>
+    <p class="muted">Use the model as a guide — change the day, time, and activity. Make it real!</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">A.</span> You ask if your friend is free (choose your own day)</div>
+      <input class="input" type="text" placeholder="이번 주 ___요일에 시간 있어요?" data-save="dlg_ask" data-label="Dialogue: Ask if friend is free">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">B.</span> Suggest a time</div>
+      <input class="input" type="text" placeholder="오후 ___ 시 어때요?" data-save="dlg_suggest" data-label="Dialogue: Suggest a time">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">★</span> Write the full conversation (both A and B)</div>
+      <textarea class="textarea" placeholder="A: 이번 주 ___요일에 시간 있어요?&#10;B: 네, 있어요! 몇 시에 만날까요?&#10;A: ___시 어때요?&#10;B: 좋아요! 그때 봐요 😊" data-save="dlg_full" data-label="My full appointment conversation"></textarea>
+    </div>
+  </div>
+
+  <div class="note note--gold">
+    <h4>도전 · Challenge</h4>
+    <p>Go around the class and make a <strong>real appointment</strong> with three different people — use a different day and time for each one. 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 10 — Review & Reflect
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="reflect">
+  <div class="panel-head">
+    <span class="step-no">10</span>
+    <div><h2>복습 &amp; 돌아보기 <span class="panel-head__ko">Review &amp; Reflect</span></h2></div>
+  </div>
+  <p class="panel-intro">정말 잘하셨어요! 이제 한국어로 시간과 날짜를 말할 수 있어요. 대단해요!<br>
+  Excellent work! You can now tell the time and express dates in Korean — that's huge!</p>
+
+  <div class="exercise">
+    <h3>✅ 할 수 있어요 · I can now…</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <ul class="checklist">
+      <li><input type="checkbox" id="ck1" data-save="ck_native10" data-label="Can count 1-10 Native Korean"><label for="ck1">Count 1–10 in <strong>Native Korean</strong> (하나, 둘, 셋…)</label></li>
+      <li><input type="checkbox" id="ck2" data-save="ck_sino10" data-label="Can count 1-10 Sino-Korean"><label for="ck2">Count 1–10 in <strong>Sino-Korean</strong> (일, 이, 삼…)</label></li>
+      <li><input type="checkbox" id="ck3" data-save="ck_counters" data-label="Uses counters correctly"><label for="ck3">Use <strong>개, 명, 살</strong> correctly with the right numbers</label></li>
+      <li><input type="checkbox" id="ck4" data-save="ck_time" data-label="Can tell the time"><label for="ck4">Tell the time using <strong>시</strong> (Native hours) + <strong>분</strong> (Sino minutes)</label></li>
+      <li><input type="checkbox" id="ck5" data-save="ck_ampm" data-label="Knows AM/PM/noon"><label for="ck5">Say <strong>오전 / 오후 / 정오</strong> correctly</label></li>
+      <li><input type="checkbox" id="ck6" data-save="ck_days" data-label="Knows all 7 days"><label for="ck6">Say all <strong>7 days of the week</strong> (요일)</label></li>
+      <li><input type="checkbox" id="ck7" data-save="ck_months" data-label="Knows months"><label for="ck7">Name the <strong>12 months</strong> including the two irregular ones (유월, 시월)</label></li>
+      <li><input type="checkbox" id="ck8" data-save="ck_fulldate" data-label="Can say full date"><label for="ck8">Express a <strong>full date</strong> in 년/월/일 format</label></li>
+      <li><input type="checkbox" id="ck9" data-save="ck_appt" data-label="Can make an appointment"><label for="ck9">Make a simple <strong>appointment</strong> in Korean</label></li>
+      <li><input type="checkbox" id="ck10" data-save="ck_vocab30" data-label="Learned 15+ new words"><label for="ck10">Use <strong>15+ new words</strong> from this week</label></li>
+    </ul>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>💭 돌아보기 · Reflection</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt">오늘 가장 좋았던 것은? · One thing you enjoyed today</div>
+      <textarea class="textarea" placeholder="예: 시계 시뮬레이터가 재미있었어요!" data-save="reflect_good" data-label="Reflection: enjoyed"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">어려웠던 것은? · One thing that was tricky</div>
+      <textarea class="textarea" placeholder="예: Remembering which number system to use…" data-save="reflect_hard" data-label="Reflection: tricky"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">이번 주 가장 유용한 표현은? · Most useful expression this week</div>
+      <textarea class="textarea" placeholder="예: 몇 시예요? — I can use this every day!" data-save="reflect_useful" data-label="Reflection: most useful"></textarea>
+    </div>
+  </div>
+
+  <div class="card center stack" style="margin-top:1.4rem">
+    <h3>🎉 2주차 완료! · Week 2 Complete!</h3>
+    <p class="muted">이제 한국어로 시간과 날짜를 말할 수 있어요! You can tell the time and express dates in Korean — huge progress!</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn--primary js-finish">✓ 완료 표시 · Mark complete</button>
+      <button class="btn btn--gold js-open-library">📓 내 답안 보기 · Review &amp; export</button>
+    </div>
+  </div>
+
+  <div class="note note--jade" style="margin-top:1.6rem">
+    <h4>다음 주 미리보기 · Coming up — Week 3</h4>
+    <p><strong>Greetings + Sentence Structure</strong> — you'll learn how Korean sentences are built (Subject–Object–Verb order), master everyday greetings, and start making your own sentences from scratch. 매일 숫자를 소리 내어 연습하세요! 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <a class="btn btn--primary" href="../index.html">홈으로 · Back to course home →</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ LIBRARY MODAL (identical to week01) ══════════════ -->
+<div class="modal-overlay" id="libraryModal" role="dialog" aria-modal="true" aria-labelledby="libTitle">
+  <div class="modal">
+    <div class="modal__head">
+      <h2 id="libTitle">📓 내 답안 · My Library</h2>
+      <button class="modal__close js-close-modal" aria-label="Close">×</button>
+    </div>
+    <div class="modal__body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--primary btn--sm js-export-csv" type="button">⬇ CSV 내보내기 · Export CSV</button>
+      <button class="btn btn--ghost btn--sm js-export-json" type="button">⬇ JSON</button>
+      <span class="header-spacer"></span>
+      <button class="btn btn--ghost btn--sm js-clear-all" type="button" style="color:var(--jeok);border-color:var(--jeok)">🗑 전체 삭제 · Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ═══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-brand">한 · BKFES</span>
+    <small>Week 2 · Numbers · Time · Dates · Beginning Korean for English Speakers · © <span data-year>2026</span></small>
+  </div>
+</footer>
+
+<!-- ══════════ GAME DATA (JSON) ══════════════════════════════════ -->
+<script type="application/json" id="fc-native-data">
+[
+  {"front":"하나","rom":"hana","en":"1"},
+  {"front":"둘","rom":"dul","en":"2"},
+  {"front":"셋","rom":"set","en":"3"},
+  {"front":"넷","rom":"net","en":"4"},
+  {"front":"다섯","rom":"daseot","en":"5"},
+  {"front":"여섯","rom":"yeoseot","en":"6"},
+  {"front":"일곱","rom":"ilgop","en":"7"},
+  {"front":"여덟","rom":"yeodeol","en":"8"},
+  {"front":"아홉","rom":"ahop","en":"9"},
+  {"front":"열","rom":"yeol","en":"10"},
+  {"front":"스물","rom":"seumul","en":"20"},
+  {"front":"서른","rom":"seoreun","en":"30"},
+  {"front":"마흔","rom":"maheun","en":"40"},
+  {"front":"쉰","rom":"swin","en":"50"}
+]
+</script>
+
+<script type="application/json" id="fc-sino-data">
+[
+  {"front":"영 / 공","rom":"yeong / gong","en":"0 (공 for phone numbers)"},
+  {"front":"일","rom":"il","en":"1"},
+  {"front":"이","rom":"i","en":"2"},
+  {"front":"삼","rom":"sam","en":"3"},
+  {"front":"사","rom":"sa","en":"4"},
+  {"front":"오","rom":"o","en":"5"},
+  {"front":"육","rom":"yuk","en":"6"},
+  {"front":"칠","rom":"chil","en":"7"},
+  {"front":"팔","rom":"pal","en":"8"},
+  {"front":"구","rom":"gu","en":"9"},
+  {"front":"십","rom":"sip","en":"10"},
+  {"front":"이십","rom":"isip","en":"20"},
+  {"front":"삼십","rom":"samsip","en":"30"},
+  {"front":"백","rom":"baek","en":"100"}
+]
+</script>
+
+<script type="application/json" id="match-native-data">
+[
+  {"id":1,"left":"하나","right":"1"},
+  {"id":2,"left":"셋","right":"3"},
+  {"id":3,"left":"다섯","right":"5"},
+  {"id":4,"left":"일곱","right":"7"},
+  {"id":5,"left":"열","right":"10"},
+  {"id":6,"left":"스물","right":"20"}
+]
+</script>
+
+<script type="application/json" id="match-time-data">
+[
+  {"id":1,"left":"오전","right":"AM"},
+  {"id":2,"left":"오후","right":"PM"},
+  {"id":3,"left":"시","right":"o'clock (hour)"},
+  {"id":4,"left":"분","right":"minute"},
+  {"id":5,"left":"반","right":"half past (:30)"},
+  {"id":6,"left":"정오","right":"noon"}
+]
+</script>
+
+<!-- ══════════ CUSTOM INTERACTIVE JAVASCRIPT ══════════════════════
+     Handles: number builders, clock, calendar, appointment builder,
+     counter sort game. Runs after DOM is ready (scripts at body end).
+══════════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  /* ── Native number data ──────────────────────────────────── */
+  var NAT = ['','하나','둘','셋','넷','다섯','여섯','일곱','여덟','아홉','열'];
+  var NAT_TENS = ['','열','스물','서른','마흔','쉰','예순','일흔','여든','아흔'];
+  var NAT_ROM  = ['','hana','dul','set','net','daseot','yeoseot','ilgop','yeodeol','ahop','yeol'];
+  var NAT_TENS_ROM = ['','yeol','seumul','seoreun','maheun','swin','yesun','ilheun','yeodeun','aheun'];
+
+  function nativeNum(n) {
+    if (n < 1 || n > 99) return '—';
+    if (n <= 10) return NAT[n];
+    var t = Math.floor(n/10), o = n % 10;
+    return NAT_TENS[t] + (o ? NAT[o] : '');
+  }
+  function nativeRom(n) {
+    if (n < 1 || n > 99) return '';
+    if (n <= 10) return NAT_ROM[n];
+    var t = Math.floor(n/10), o = n % 10;
+    return NAT_TENS_ROM[t] + (o ? NAT_ROM[o] : '');
+  }
+
+  /* ── Sino-Korean number data ─────────────────────────────── */
+  var SINO_U  = ['영','일','이','삼','사','오','육','칠','팔','구'];
+  var SINO_UR = ['yeong','il','i','sam','sa','o','yuk','chil','pal','gu'];
+
+  function sinoNum(n) {
+    if (n === 0) return '영';
+    var res = '';
+    var man = Math.floor(n/10000);
+    if (man) { res += (man > 1 ? SINO_U[man] : '') + '만 '; n -= man*10000; }
+    var cheon = Math.floor(n/1000);
+    if (cheon) { res += (cheon > 1 ? SINO_U[cheon] : '') + '천 '; n -= cheon*1000; }
+    var baek = Math.floor(n/100);
+    if (baek) { res += (baek > 1 ? SINO_U[baek] : '') + '백 '; n -= baek*100; }
+    var sip = Math.floor(n/10);
+    if (sip) { res += (sip > 1 ? SINO_U[sip] : '') + '십 '; n -= sip*10; }
+    if (n) res += SINO_U[n];
+    return res.trim();
+  }
+  function sinoRom(n) {
+    return sinoNum(n)
+      .replace(/만/g,'man').replace(/천/g,'cheon').replace(/백/g,'baek').replace(/십/g,'sip')
+      .split(' ').filter(Boolean).map(function(t){
+        return SINO_UR[SINO_U.indexOf(t)] || t;
+      }).join('-');
+  }
+
+  /* ── Native number builder ───────────────────────────────── */
+  var nIn = document.getElementById('nativeIn');
+  var nOut = document.getElementById('nativeOut');
+  var nRom = document.getElementById('nativeRom');
+  if (nIn) {
+    function updateNative() {
+      var v = parseInt(nIn.value) || 1;
+      nOut.textContent = nativeNum(v);
+      nRom.textContent = nativeRom(v);
+    }
+    nIn.addEventListener('input', updateNative);
+    updateNative();
+  }
+
+  /* ── Sino number builder ─────────────────────────────────── */
+  var sIn = document.getElementById('sinoIn');
+  var sOut = document.getElementById('sinoOut');
+  var sRom = document.getElementById('sinoRom');
+  if (sIn) {
+    function updateSino() {
+      var v = parseInt(sIn.value);
+      if (isNaN(v) || v < 0) v = 0;
+      sOut.textContent = sinoNum(v);
+      sRom.textContent = sinoRom(v);
+    }
+    sIn.addEventListener('input', updateSino);
+    updateSino();
+  }
+
+  /* ── Clock simulator ─────────────────────────────────────── */
+  var hSlider = document.getElementById('hSlider');
+  var mSlider = document.getElementById('mSlider');
+  var apSel   = document.getElementById('apSelect');
+  var hHand   = document.getElementById('hHand');
+  var mHand   = document.getElementById('mHand');
+  var sHand   = document.getElementById('sHand');
+  var clockOut = document.getElementById('clockOut');
+
+  var NAT_HOUR_KR  = ['','한','두','세','네','다섯','여섯','일곱','여덟','아홉','열','열한','열두'];
+  var NAT_HOUR_ROM = ['','han','du','se','ne','daseot','yeoseot','ilgop','yeodeol','ahop','yeol','yeol-han','yeol-du'];
+
+  function updateClock() {
+    var h = parseInt(hSlider.value);
+    var m = parseInt(mSlider.value);
+    var ap = apSel.value;
+    document.getElementById('hVal').textContent = h;
+    document.getElementById('mVal').textContent = (m < 10 ? '0' : '') + m;
+
+    var hDeg = (h % 12) * 30 + m * 0.5;
+    var mDeg = m * 6;
+    hHand.style.transform = 'translateX(-50%) rotate(' + hDeg + 'deg)';
+    mHand.style.transform = 'translateX(-50%) rotate(' + mDeg + 'deg)';
+
+    var apKr  = ap;
+    var apRom = ap === '오전' ? 'ojeon' : 'ohu';
+    var hrKr  = NAT_HOUR_KR[h];
+    var hrRom = NAT_HOUR_ROM[h];
+    var ko, rom, en;
+
+    if (m === 0) {
+      ko  = apKr + ' ' + hrKr + ' 시예요';
+      rom = apRom + ' ' + hrRom + ' si-ye-yo';
+      en  = 'It is ' + h + ':00 ' + (ap === '오전' ? 'AM' : 'PM');
+    } else if (m === 30) {
+      ko  = apKr + ' ' + hrKr + ' 시 반이에요';
+      rom = apRom + ' ' + hrRom + ' si ban-ieyo';
+      en  = 'It is ' + h + ':30 ' + (ap === '오전' ? 'AM' : 'PM');
+    } else {
+      var minKr  = sinoNum(m) + ' 분';
+      var minRom = sinoRom(m) + '-bun';
+      ko  = apKr + ' ' + hrKr + ' 시 ' + minKr + '이에요';
+      rom = apRom + ' ' + hrRom + ' si ' + minRom + '-ieyo';
+      en  = 'It is ' + h + ':' + (m < 10 ? '0' : '') + m + ' ' + (ap === '오전' ? 'AM' : 'PM');
+    }
+    clockOut.innerHTML = '<div class="ko">' + ko + '</div><div class="rom">' + rom + '</div><div class="en">' + en + '</div>';
+  }
+
+  if (hSlider) {
+    hSlider.addEventListener('input', updateClock);
+    mSlider.addEventListener('input', updateClock);
+    apSel.addEventListener('change', updateClock);
+    // live second hand
+    setInterval(function() {
+      if (sHand) sHand.style.transform = 'translateX(-50%) rotate(' + (new Date().getSeconds() * 6) + 'deg)';
+    }, 1000);
+    updateClock();
+  }
+
+  /* ── Calendar ────────────────────────────────────────────── */
+  var KR_MONTHS = ['일월','이월','삼월','사월','오월','유월','칠월','팔월','구월','시월','십일월','십이월'];
+  var EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var KR_DAYS   = ['일','월','화','수','목','금','토'];
+  var KR_DOW    = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+  var SINO_DAY  = ['일','이','삼','사','오','육','칠','팔','구','십','십일','십이','십삼','십사','십오','십육','십칠','십팔','십구','이십','이십일','이십이','이십삼','이십사','이십오','이십육','이십칠','이십팔','이십구','삼십','삼십일'];
+
+  var calYear  = 2026;
+  var calMonth = 5; // June (0-indexed)
+  var calGrid  = document.getElementById('calGrid');
+  var calTitle = document.getElementById('calTitle');
+  var calOut   = document.getElementById('calOut');
+
+  function buildCal() {
+    if (!calGrid) return;
+    calTitle.textContent = calYear + '년 ' + KR_MONTHS[calMonth] + ' (' + EN_MONTHS[calMonth] + ' ' + calYear + ')';
+    var html = KR_DAYS.map(function(d){ return '<div class="cal-head">' + d + '</div>'; }).join('');
+    var first = new Date(calYear, calMonth, 1).getDay();
+    var days  = new Date(calYear, calMonth + 1, 0).getDate();
+    var today = new Date();
+    for (var i = 0; i < first; i++) html += '<div class="cal-day is-empty"></div>';
+    for (var d = 1; d <= days; d++) {
+      var isToday = (today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d);
+      html += '<div class="cal-day' + (isToday ? ' is-today' : '') + '" data-d="' + d + '">' + d + '</div>';
+    }
+    calGrid.innerHTML = html;
+    calGrid.querySelectorAll('.cal-day[data-d]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        calGrid.querySelectorAll('.cal-day').forEach(function(e){ e.classList.remove('is-sel'); });
+        el.classList.add('is-sel');
+        var day = parseInt(el.dataset.d);
+        var dow = new Date(calYear, calMonth, day).getDay();
+        var yr  = sinoNum(calYear).replace(/ /g,'');
+        calOut.innerHTML = '<strong>' + yr + '년 ' + KR_MONTHS[calMonth] + ' ' + SINO_DAY[day-1] + '일 (' + KR_DOW[dow] + ')</strong><br>' +
+          '<span style="font-size:.8rem;opacity:.65">' + EN_MONTHS[calMonth] + ' ' + day + ', ' + calYear + ' &nbsp;·&nbsp; ' + KR_DOW[dow] + '</span>';
+      });
+    });
+  }
+
+  var cpBtn = document.getElementById('calPrev');
+  var cnBtn = document.getElementById('calNext');
+  if (cpBtn) {
+    cpBtn.addEventListener('click', function(){ calMonth > 0 ? calMonth-- : (calMonth=11, calYear--); buildCal(); });
+    cnBtn.addEventListener('click', function(){ calMonth < 11 ? calMonth++ : (calMonth=0, calYear++); buildCal(); });
+    buildCal();
+  }
+
+  /* ── Appointment builder ─────────────────────────────────── */
+  window.buildAppt = function() {
+    var day  = document.getElementById('apptDay').value;
+    var hour = document.getElementById('apptHour').value;
+    var ap   = document.getElementById('apptAP').value;
+    var act  = document.getElementById('apptAct').value;
+    var out  = document.getElementById('apptOut');
+    if (!out) return;
+    out.innerHTML = '<span style="font-size:1.1rem">' + day + ' ' + ap + ' ' + hour + ' 시에 ' + act + '.</span>' +
+      '<div class="sub">On ' + day + ' at ' + hour + ' (' + (ap==='오전'?'AM':'PM') + ') — ' + act + '</div>';
+  };
+  if (document.getElementById('apptOut')) buildAppt();
+
+  /* ── Counter Sort Game ───────────────────────────────────── */
+  var COUNTER_ITEMS = [
+    {text:'사과 두 ___', correct:'개'},
+    {text:'학생 세 ___', correct:'명'},
+    {text:'저는 스물셋 ___이에요', correct:'살'},
+    {text:'커피 한 ___', correct:'개'},
+    {text:'친구 다섯 ___', correct:'명'},
+    {text:'할머니 일흔 ___이에요', correct:'살'}
+  ];
+  var selectedChip = null;
+  var placedItems  = { '개':[], '명':[], '살':[] };
+
+  function buildCounterGame() {
+    var pool = document.getElementById('counterPool');
+    if (!pool) return;
+    pool.innerHTML = '';
+    selectedChip = null;
+    placedItems = { '개':[], '명':[], '살':[] };
+    ['placed-gae','placed-myeong','placed-sal'].forEach(function(id){ document.getElementById(id).innerHTML = ''; });
+    updateCounterScore();
+
+    COUNTER_ITEMS.forEach(function(item, i) {
+      var el = document.createElement('div');
+      el.className = 'counter-chip';
+      el.dataset.idx = i;
+      el.dataset.correct = item.correct;
+      el.textContent = item.text;
+      el.addEventListener('click', function() {
+        if (el.classList.contains('is-placed')) return;
+        document.querySelectorAll('.counter-chip.is-sel').forEach(function(c){ c.classList.remove('is-sel'); });
+        if (selectedChip === el) { selectedChip = null; return; }
+        el.classList.add('is-sel');
+        selectedChip = el;
+      });
+      pool.appendChild(el);
+    });
+  }
+
+  window.assignCounter = function(counter) {
+    if (!selectedChip) return;
+    var zoneIdMap = { '개':'placed-gae', '명':'placed-myeong', '살':'placed-sal' };
+    var zoneEl = document.getElementById(zoneIdMap[counter]);
+    var correct = selectedChip.dataset.correct === counter;
+    var chip = document.createElement('div');
+    chip.className = 'placed-chip';
+    chip.style.background = correct ? 'var(--jade)' : 'var(--jeok)';
+    chip.textContent = selectedChip.textContent;
+    chip.title = correct ? '✓ 정답!' : '✗ 다시 시도해 보세요';
+    (function(src, zone, c) {
+      c.addEventListener('click', function() {
+        c.remove();
+        src.classList.remove('is-placed');
+        updateCounterScore();
+      });
+    })(selectedChip, zoneEl, chip);
+    zoneEl.appendChild(chip);
+    selectedChip.classList.add('is-placed','is-sel');
+    selectedChip.classList.remove('is-sel');
+    selectedChip = null;
+    updateCounterScore();
+  };
+
+  function updateCounterScore() {
+    var scoreEl = document.getElementById('counterScore');
+    if (!scoreEl) return;
+    var total   = document.querySelectorAll('.counter-chip').length;
+    var placed  = document.querySelectorAll('.placed-chip').length;
+    var correct = document.querySelectorAll('.placed-chip[style*="jade"]').length;
+    scoreEl.textContent = '맞춤: ' + correct + ' / ' + total;
+  }
+
+  window.resetCounter = buildCounterGame;
+  buildCounterGame();
+
+})();
+</script>
+
+<!-- ══════════ SHARED SCRIPTS (must stay in this order) ═════════ -->
+<script src="../js/weeks.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/worksheet.js"></script>
+</body>
+</html>
