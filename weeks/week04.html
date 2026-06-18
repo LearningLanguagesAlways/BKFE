@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 · Particles 은/는 · 이/가 · 을/를 · BKFES</title>
+<meta name="description" content="Week 4 of Beginning Korean for English Speakers: the topic markers 은/는, subject markers 이/가, and object markers 을/를 — Korea's grammatical glue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+/* ── Week 4 custom interactive styles ─────────────────────────── */
+
+/* Particle reference cards */
+.particle-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin:1rem 0; }
+.particle-card { border-radius:var(--radius); padding:1.1rem 1.2rem; border-top:5px solid; background:var(--hanji-2); }
+.particle-card.topic { border-color:var(--cheong); }
+.particle-card.subject { border-color:var(--jeok); }
+.particle-card.object { border-color:var(--jade); }
+.particle-card .p-big { font-family:var(--serif); font-size:2rem; font-weight:700; }
+.particle-card.topic .p-big { color:var(--cheong); }
+.particle-card.subject .p-big { color:var(--jeok); }
+.particle-card.object .p-big { color:var(--jade); }
+.particle-card .p-role { font-weight:700; margin:.2rem 0; }
+.particle-card .p-rule { font-size:var(--fs-small); color:var(--ink-soft); }
+
+/* Consonant/vowel split rule box */
+.rule-split { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin:.8rem 0; }
+@media (max-width:520px){ .rule-split { grid-template-columns:1fr; } }
+.rule-half { border-radius:var(--radius-sm); padding:.8rem 1rem; }
+.rule-half.cons { background:var(--jeok-tint); border:1px solid var(--jeok); }
+.rule-half.vow  { background:var(--cheong-tint); border:1px solid var(--cheong); }
+.rule-half h5 { font-family:var(--sans); font-size:.95rem; margin-bottom:.3rem; }
+.rule-half .pp { font-family:var(--serif); font-size:1.4rem; font-weight:700; }
+.rule-half.cons .pp { color:var(--jeok); }
+.rule-half.vow .pp { color:var(--cheong); }
+
+/* Sentence with highlighted particles */
+.hl-sentence { font-family:var(--serif); font-size:clamp(1.3rem,3vw,1.8rem); line-height:1.7; margin:.6rem 0; text-align:center; }
+.hl-topic   { color:var(--cheong); font-weight:700; }
+.hl-subject { color:var(--jeok); font-weight:700; }
+.hl-object  { color:var(--jade); font-weight:700; }
+.hl-legend { display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; justify-content:center; font-size:var(--fs-small); margin-top:.4rem; }
+.hl-legend span { display:inline-flex; align-items:center; gap:.35rem; }
+.hl-dot { width:12px; height:12px; border-radius:3px; display:inline-block; }
+
+/* Particle picker game */
+.pp-game { margin-top:1rem; }
+.pp-question { background:var(--hanji-deep); border-radius:var(--radius-sm); padding:1rem 1.2rem; margin-bottom:.8rem; }
+.pp-sentence { font-family:var(--serif); font-size:1.25rem; margin-bottom:.7rem; }
+.pp-blank { display:inline-block; min-width:48px; border-bottom:2.5px dashed var(--jeok); text-align:center; color:var(--jeok); font-weight:700; }
+.pp-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.pp-opt {
+  padding:.45rem 1.1rem; border:1.5px solid var(--line-strong); border-radius:var(--radius-sm);
+  background:var(--baek); font-family:var(--serif); font-size:1.1rem; cursor:pointer; transition:all .15s;
+}
+.pp-opt:hover { border-color:var(--cheong); background:var(--cheong-tint); }
+.pp-opt.correct { background:var(--jade-tint); border-color:var(--jade); color:var(--jade); font-weight:700; }
+.pp-opt.wrong { background:var(--jeok-tint); border-color:var(--jeok); color:var(--jeok); }
+.pp-feedback { font-size:var(--fs-small); font-weight:600; margin-top:.5rem; min-height:1.2em; }
+</style>
+</head>
+<body data-week="week04">
+
+<!-- ══════════ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__seal">한</span>
+      <span class="brand__txt"><b>BKFES</b><span>Beginning Korean · English Speakers</span></span>
+    </a>
+    <span class="header-spacer"></span>
+    <div class="header-actions" data-name-wrap>
+      <span class="faint">👋 <strong data-name-display></strong></span>
+    </div>
+    <div class="header-actions">
+      <a class="btn btn--ghost btn--sm" href="../index.html">← 홈 · Home</a>
+      <button class="btn btn--ghost btn--sm js-open-library" type="button">📓 <span class="label-full">내 답안 · Library</span></button>
+    </div>
+  </div>
+  <div class="saekdong saekdong--thin"></div>
+</header>
+
+<!-- ══════════ HERO ════════════════════════════════════════════════ -->
+<section class="ws-hero">
+  <div class="wrap">
+    <p class="eyebrow">Week 4 · 6월 22일 · June 22</p>
+    <h1>Particles: 은/는 · 이/가 · 을/를</h1>
+    <p class="ws-hero__sub">한국어 문장을 이어 주는 작은 표시, 조사를 배워요.<br>
+    Meet Korea's grammatical glue — the little markers that tell you the topic, subject, and object.</p>
+    <div class="ws-progress">
+      <div class="progressbar"><div class="progressbar__fill"></div></div>
+      <span class="progresslabel">0 / 11 완료 · sections done</span>
+    </div>
+    <p class="autosave-note" style="margin-top:.8rem">💾 답안은 자동 저장돼요 · Your answers save automatically as you type.</p>
+  </div>
+</section>
+
+<!-- ══════════ SECTION NAV PILLS ══════════════════════════════════ -->
+<nav class="ws-nav" aria-label="Worksheet sections">
+  <div class="wrap">
+    <div class="ws-nav__track">
+      <button class="pill" data-target="welcome"><span class="pill__no">0</span> 시작 Start</button>
+      <button class="pill" data-target="review"><span class="pill__no">1</span> 복습 Review</button>
+      <button class="pill" data-target="overview"><span class="pill__no">2</span> 조사 Overview</button>
+      <button class="pill" data-target="topic"><span class="pill__no">3</span> 은/는 Topic</button>
+      <button class="pill" data-target="subject"><span class="pill__no">4</span> 이/가 Subject</button>
+      <button class="pill" data-target="object"><span class="pill__no">5</span> 을/를 Object</button>
+      <button class="pill" data-target="vocab"><span class="pill__no">6</span> 어휘 Vocab</button>
+      <button class="pill" data-target="practice"><span class="pill__no">7</span> 연습 Practice</button>
+      <button class="pill" data-target="games"><span class="pill__no">8</span> 게임 Games</button>
+      <button class="pill" data-target="dialogue"><span class="pill__no">9</span> 대화 Dialogue</button>
+      <button class="pill" data-target="reflect"><span class="pill__no">10</span> 복습 Review</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 0 — Welcome
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel is-active" id="welcome">
+  <div class="panel-head">
+    <span class="step-no">0</span>
+    <div><h2>환영합니다! <span class="panel-head__ko">Welcome Back</span></h2></div>
+  </div>
+  <p class="panel-intro">4주차예요! 지난주에 은/는을 만났어요. 오늘은 조사 세 쌍을 완성해요.<br>
+  Week 4! Last week you met 은/는 — today we complete the trio of beginner particles.</p>
+
+  <div class="card stack">
+    <h3>이번 주 목표 · This week you will…</h3>
+    <ul>
+      <li>📍 <strong>Master the topic marker 은/는</strong> — "as for…" (a quick refresher + deeper feel).</li>
+      <li>🎯 <strong>Learn the subject marker 이/가</strong> — who or what does the action.</li>
+      <li>🎁 <strong>Learn the object marker 을/를</strong> — what the action is done to.</li>
+      <li>🔀 <strong>Feel the difference</strong> between 은/는 and 이/가 — the famous beginner puzzle.</li>
+      <li>🗣️ <strong>Build complete sentences</strong> with every slot correctly marked.</li>
+    </ul>
+  </div>
+
+  <div class="note note--gold">
+    <h4>오늘의 큰 그림 · The big idea today</h4>
+    <p>English uses <em>word order</em> to show who does what. Korean uses <em>particles</em> — tiny tags glued to the end of a word. <strong>저<span style="color:var(--cheong)">는</span> 커피<span style="color:var(--jade)">를</span> 마셔요</strong> = "As for me, (I) drink coffee." Once you can spot these markers, you can read any Korean sentence's structure at a glance.</p>
+  </div>
+
+  <div class="note note--jade">
+    <h4>이렇게 사용하세요 · How to use this worksheet</h4>
+    <p>Tap the pills to move around.
+    <span class="mode mode--teacher">함께 Teacher-led</span>
+    <span class="mode mode--solo">혼자 Independent</span>
+    <span class="mode mode--play">게임 Game</span>
+    — say everything <strong>out loud</strong>. Your answers auto-save.</p>
+  </div>
+
+  <div class="panel-foot">
+    <a class="btn btn--ghost" href="../index.html">← 홈 · Home</a>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 1 — Review (Weeks 1-3)
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="review">
+  <div class="panel-head">
+    <span class="step-no">1</span>
+    <div><h2>복습 <span class="panel-head__ko">Weeks 1–3 Review</span></h2></div>
+  </div>
+  <p class="panel-intro">지난 3주를 빠르게 점검해요 — 소리 내어 읽어 보세요!<br>
+  A quick check of the last three weeks before we go on — read aloud!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <table class="vocab">
+    <caption>핵심 정리 · Key points so far</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">저는 학생이에요</td><td class="v-rom">jeoneun haksaeng-ieyo</td><td class="v-en">I am a student</td></tr>
+      <tr><td class="v-ko">저는 한국어를 공부해요</td><td class="v-rom">jeoneun hangugeoreul gongbuhaeyo</td><td class="v-en">I study Korean (S·O·V)</td></tr>
+      <tr><td class="v-ko">잘 지냈어요?</td><td class="v-rom">jal jinaesseoyo?</td><td class="v-en">How have you been?</td></tr>
+      <tr><td class="v-ko">또 만나요</td><td class="v-rom">tto mannayo</td><td class="v-en">See you again</td></tr>
+      <tr><td class="v-ko">동사는 맨 끝</td><td class="v-rom">dongsaneun maen kkeut</td><td class="v-en">The verb comes last</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" data-quiz="w4-review" style="margin-top:1.4rem">
+    <div class="game__head">
+      <h3>✏️ 빠른 셀프 체크 · Quick self-check</h3>
+      <span class="game__score">점수 · Score: 0 / 4</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Tap an answer to check it instantly. Say the correct one aloud!</p>
+
+    <div class="quiz-q" data-explain="The verb always comes last in Korean.">
+      <div class="stem">1. In Korean word order, the verb goes…</div>
+      <div class="choices">
+        <button class="choice">first</button>
+        <button class="choice">second</button>
+        <button class="choice" data-correct="true">last</button>
+        <button class="choice">anywhere</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="저 ends in a vowel → 저는.">
+      <div class="stem">2. "As for me" is…</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">저는</button>
+        <button class="choice">저은</button>
+        <button class="choice">저를</button>
+        <button class="choice">저도</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="해요체 (the 요 form) is the safe everyday-polite level.">
+      <div class="stem">3. The safest everyday speech level for beginners is…</div>
+      <div class="choices">
+        <button class="choice">반말 (casual)</button>
+        <button class="choice" data-correct="true">해요체 (polite 요)</button>
+        <button class="choice">합쇼체 only</button>
+        <button class="choice">no ending</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="잘 먹겠습니다 is said BEFORE eating.">
+      <div class="stem">4. Before a meal, Koreans say…</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">잘 먹겠습니다</button>
+        <button class="choice">잘 먹었습니다</button>
+        <button class="choice">안녕히 가세요</button>
+        <button class="choice">천만에요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 조사 개요 · Next: Particle Overview →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 2 — Particle Overview
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="overview">
+  <div class="panel-head">
+    <span class="step-no">2</span>
+    <div><h2>조사 <span class="panel-head__ko">What Are Particles?</span></h2></div>
+  </div>
+  <p class="panel-intro">조사는 단어 뒤에 붙어서 그 단어의 역할을 알려줘요.<br>
+  Particles attach to the end of a word to show its job in the sentence.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <div class="particle-cards">
+    <div class="particle-card topic">
+      <div class="p-big">은 / 는</div>
+      <div class="p-role">Topic marker</div>
+      <div class="p-rule">"As for…" — sets up what you're talking about. 은 after consonant, 는 after vowel.</div>
+    </div>
+    <div class="particle-card subject">
+      <div class="p-big">이 / 가</div>
+      <div class="p-role">Subject marker</div>
+      <div class="p-rule">Marks <em>who/what does</em> the action. 이 after consonant, 가 after vowel.</div>
+    </div>
+    <div class="particle-card object">
+      <div class="p-big">을 / 를</div>
+      <div class="p-role">Object marker</div>
+      <div class="p-rule">Marks <em>what the action is done to</em>. 을 after consonant, 를 after vowel.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.4rem">한 문장에서 모두 보기 · All three in one sentence</h3>
+  <div class="note">
+    <p class="hl-sentence">저<span class="hl-topic">는</span> 커피<span class="hl-object">를</span> 좋아해요</p>
+    <div class="hl-legend">
+      <span><span class="hl-dot" style="background:var(--cheong)"></span> 는 = topic (me)</span>
+      <span><span class="hl-dot" style="background:var(--jade)"></span> 를 = object (coffee)</span>
+    </div>
+    <p style="text-align:center;margin-top:.6rem;color:var(--ink-soft)">"As for me, (I) like coffee."</p>
+  </div>
+
+  <div class="note note--gold">
+    <h4>💡 핵심 패턴 · The pattern to remember</h4>
+    <p>Every particle has <strong>two forms</strong> — one for words ending in a <strong>consonant</strong>, one for words ending in a <strong>vowel</strong>. The pattern is the same idea you learned for 이에요/예요 in Week 1. Your ear will start to choose the right one automatically with practice!</p>
+  </div>
+
+  <div class="note note--jade">
+    <h4>🌏 왜 조사가 좋을까요? · Why particles are wonderful</h4>
+    <p>Because particles mark each word's job, Korean word order is flexible and the subject can even be dropped. The particle — not the position — carries the meaning. That's why "커피를 저는 좋아해요" is still understandable: 를 still marks coffee as the object!</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 은/는 · Next: Topic Marker →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 3 — Topic Marker 은/는
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="topic">
+  <div class="panel-head">
+    <span class="step-no">3</span>
+    <div><h2>은 / 는 <span class="panel-head__ko">Topic Marker</span></h2></div>
+  </div>
+  <p class="panel-intro">"~로 말하자면" — 주제를 정해 주는 조사예요.<br>
+  The topic marker means "as for…" — it sets up what the sentence is about.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="rule-split">
+    <div class="rule-half cons">
+      <h5>Ends in a consonant</h5>
+      <p class="pp">+ 은</p>
+      <p class="p-rule">이름 → 이름<strong>은</strong> &nbsp;·&nbsp; 선생님 → 선생님<strong>은</strong></p>
+    </div>
+    <div class="rule-half vow">
+      <h5>Ends in a vowel</h5>
+      <p class="pp">+ 는</p>
+      <p class="p-rule">저 → 저<strong>는</strong> &nbsp;·&nbsp; 친구 → 친구<strong>는</strong></p>
+    </div>
+  </div>
+
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>은/는 in action</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">저<strong>는</strong> 미국 사람이에요</td><td class="v-rom">jeoneun Miguk saram-ieyo</td><td class="v-en">As for me, I'm American</td></tr>
+      <tr><td class="v-ko">오늘<strong>은</strong> 월요일이에요</td><td class="v-rom">oneureun woryoil-ieyo</td><td class="v-en">Today is Monday</td></tr>
+      <tr><td class="v-ko">커피<strong>는</strong> 맛있어요</td><td class="v-rom">keopineun masisseoyo</td><td class="v-en">Coffee is delicious</td></tr>
+      <tr><td class="v-ko">한국어<strong>는</strong> 재미있어요</td><td class="v-rom">hangugeoneun jaemiisseoyo</td><td class="v-en">Korean is fun</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--gold">
+    <h4>💡 은/는의 두 번째 역할 · The "contrast" feel</h4>
+    <p>은/는 also gently signals <em>contrast</em>: "커피<strong>는</strong> 좋아해요" can hint "I like <em>coffee</em> (but maybe not tea)." You don't need to master this yet — just know that 은/는 highlights and compares topics. It's one reason Korean feels so nuanced!</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 은 또는 는? · Add the topic marker</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 저 + ___</div>
+      <div class="fillrow"><span class="cue">저</span><input class="input inline-input" type="text" placeholder="은 / 는?" data-save="topic_q1" data-label="Topic: 저"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 책 + ___</div>
+      <div class="fillrow"><span class="cue">책</span><input class="input inline-input" type="text" placeholder="은 / 는?" data-save="topic_q2" data-label="Topic: 책"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 영화 + ___</div>
+      <div class="fillrow"><span class="cue">영화</span><input class="input inline-input" type="text" placeholder="은 / 는?" data-save="topic_q3" data-label="Topic: 영화"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 이/가 · Next: Subject Marker →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 4 — Subject Marker 이/가
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="subject">
+  <div class="panel-head">
+    <span class="step-no">4</span>
+    <div><h2>이 / 가 <span class="panel-head__ko">Subject Marker</span></h2></div>
+  </div>
+  <p class="panel-intro">누가, 무엇이 행동을 하는지 표시해요.<br>
+  The subject marker points to who or what is doing the action.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="rule-split">
+    <div class="rule-half cons">
+      <h5>Ends in a consonant</h5>
+      <p class="pp">+ 이</p>
+      <p class="p-rule">선생님 → 선생님<strong>이</strong> &nbsp;·&nbsp; 책 → 책<strong>이</strong></p>
+    </div>
+    <div class="rule-half vow">
+      <h5>Ends in a vowel</h5>
+      <p class="pp">+ 가</p>
+      <p class="p-rule">친구 → 친구<strong>가</strong> &nbsp;·&nbsp; 날씨 → 날씨<strong>가</strong></p>
+    </div>
+  </div>
+
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>이/가 in action</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">친구<strong>가</strong> 와요</td><td class="v-rom">chinguga wayo</td><td class="v-en">A friend is coming</td></tr>
+      <tr><td class="v-ko">날씨<strong>가</strong> 좋아요</td><td class="v-rom">nalssiga joayo</td><td class="v-en">The weather is nice</td></tr>
+      <tr><td class="v-ko">책<strong>이</strong> 재미있어요</td><td class="v-rom">chaeg-i jaemiisseoyo</td><td class="v-en">The book is interesting</td></tr>
+      <tr><td class="v-ko">선생님<strong>이</strong> 한국 사람이에요</td><td class="v-rom">seonsaengnim-i Hanguk saram-ieyo</td><td class="v-en">The teacher is Korean</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--red">
+    <h4>🤔 은/는 vs 이/가 — the famous beginner puzzle</h4>
+    <p>Both can look like the English subject, but the feel differs:</p>
+    <p>• <strong>은/는 (topic):</strong> general statements, comparisons, "as for X…". &nbsp; 저<strong>는</strong> 학생이에요. (Introducing yourself.)<br>
+       • <strong>이/가 (subject):</strong> new information, answering "who?/what?", emphasis on the doer. &nbsp; 누가 와요? — 친구<strong>가</strong> 와요. ("<em>Who</em> is coming?" — "A <em>friend</em> is.")</p>
+    <p class="faint" style="margin-top:.4rem">팁 · Don't stress about perfection. Native speakers feel this over time — for now, use 은/는 for "talking about" and 이/가 for "pointing out / new info."</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 이 또는 가? · Add the subject marker</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 친구 + ___ 와요</div>
+      <div class="fillrow"><span class="cue">친구</span><input class="input inline-input" type="text" placeholder="이 / 가?" data-save="subj_q1" data-label="Subject: 친구"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 책 + ___ 좋아요</div>
+      <div class="fillrow"><span class="cue">책</span><input class="input inline-input" type="text" placeholder="이 / 가?" data-save="subj_q2" data-label="Subject: 책"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 날씨 + ___ 좋아요</div>
+      <div class="fillrow"><span class="cue">날씨</span><input class="input inline-input" type="text" placeholder="이 / 가?" data-save="subj_q3" data-label="Subject: 날씨"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 을/를 · Next: Object Marker →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 5 — Object Marker 을/를
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="object">
+  <div class="panel-head">
+    <span class="step-no">5</span>
+    <div><h2>을 / 를 <span class="panel-head__ko">Object Marker</span></h2></div>
+  </div>
+  <p class="panel-intro">행동이 가닿는 대상을 표시해요 — "무엇을?"<br>
+  The object marker shows what the action is done to — answering "what?".</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="rule-split">
+    <div class="rule-half cons">
+      <h5>Ends in a consonant</h5>
+      <p class="pp">+ 을</p>
+      <p class="p-rule">밥 → 밥<strong>을</strong> &nbsp;·&nbsp; 책 → 책<strong>을</strong></p>
+    </div>
+    <div class="rule-half vow">
+      <h5>Ends in a vowel</h5>
+      <p class="pp">+ 를</p>
+      <p class="p-rule">커피 → 커피<strong>를</strong> &nbsp;·&nbsp; 영화 → 영화<strong>를</strong></p>
+    </div>
+  </div>
+
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>을/를 in action — note the S·O·V order</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">저는 밥<strong>을</strong> 먹어요</td><td class="v-rom">jeoneun bab-eul meogeoyo</td><td class="v-en">I eat rice</td></tr>
+      <tr><td class="v-ko">저는 커피<strong>를</strong> 마셔요</td><td class="v-rom">jeoneun keopireul masyeoyo</td><td class="v-en">I drink coffee</td></tr>
+      <tr><td class="v-ko">친구가 영화<strong>를</strong> 봐요</td><td class="v-rom">chinguga yeonghwareul bwayo</td><td class="v-en">A friend watches a movie</td></tr>
+      <tr><td class="v-ko">저는 한국어<strong>를</strong> 공부해요</td><td class="v-rom">jeoneun hangugeoreul gongbuhaeyo</td><td class="v-en">I study Korean</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:1.4rem">전체 그림 · The whole picture, color-coded</h3>
+  <div class="note">
+    <p class="hl-sentence">친구<span class="hl-subject">가</span> 영화<span class="hl-object">를</span> 봐요</p>
+    <div class="hl-legend">
+      <span><span class="hl-dot" style="background:var(--jeok)"></span> 가 = subject (friend)</span>
+      <span><span class="hl-dot" style="background:var(--jade)"></span> 를 = object (movie)</span>
+    </div>
+    <p style="text-align:center;margin-top:.6rem;color:var(--ink-soft)">"A friend watches a movie." (friend · movie · watches)</p>
+  </div>
+
+  <div class="note note--gold">
+    <h4>💬 실생활 팁 · Real-life tip — particles get dropped in speech</h4>
+    <p>In casual conversation Koreans often <em>drop</em> 을/를 (and sometimes 이/가): "밥 먹어요?" instead of "밥을 먹어요?". For writing and clear speech, though, use them — they make your meaning unmistakable. Learn them fully now; drop them later by choice!</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 을 또는 를? · Add the object marker</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 밥 + ___ 먹어요</div>
+      <div class="fillrow"><span class="cue">밥</span><input class="input inline-input" type="text" placeholder="을 / 를?" data-save="obj_q1" data-label="Object: 밥"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 커피 + ___ 마셔요</div>
+      <div class="fillrow"><span class="cue">커피</span><input class="input inline-input" type="text" placeholder="을 / 를?" data-save="obj_q2" data-label="Object: 커피"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 책 + ___ 읽어요</div>
+      <div class="fillrow"><span class="cue">책</span><input class="input inline-input" type="text" placeholder="을 / 를?" data-save="obj_q3" data-label="Object: 책"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 어휘 · Next: Vocabulary →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 6 — Vocabulary
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="vocab">
+  <div class="panel-head">
+    <span class="step-no">6</span>
+    <div><h2>어휘 <span class="panel-head__ko">Vocabulary</span></h2></div>
+  </div>
+  <p class="panel-intro">조사를 붙여 연습할 단어들이에요. 소리 내어 읽어 보세요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Read aloud together</span><span class="mode mode--solo">혼자 Self-test</span></div>
+
+  <table class="vocab">
+    <caption>① 사람 &amp; 주어 · People &amp; subjects</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">저 / 나</td><td class="v-rom">jeo / na</td><td class="v-en">I (polite / casual)</td></tr>
+      <tr><td class="v-ko">친구</td><td class="v-rom">chingu</td><td class="v-en">friend</td></tr>
+      <tr><td class="v-ko">선생님</td><td class="v-rom">seonsaengnim</td><td class="v-en">teacher</td></tr>
+      <tr><td class="v-ko">학생</td><td class="v-rom">haksaeng</td><td class="v-en">student</td></tr>
+      <tr><td class="v-ko">가족</td><td class="v-rom">gajok</td><td class="v-en">family</td></tr>
+      <tr><td class="v-ko">사람</td><td class="v-rom">saram</td><td class="v-en">person</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>② 사물 &amp; 목적어 · Things &amp; objects</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">밥</td><td class="v-rom">bap</td><td class="v-en">rice / meal</td></tr>
+      <tr><td class="v-ko">물</td><td class="v-rom">mul</td><td class="v-en">water</td></tr>
+      <tr><td class="v-ko">커피</td><td class="v-rom">keopi</td><td class="v-en">coffee</td></tr>
+      <tr><td class="v-ko">책</td><td class="v-rom">chaek</td><td class="v-en">book</td></tr>
+      <tr><td class="v-ko">영화</td><td class="v-rom">yeonghwa</td><td class="v-en">movie</td></tr>
+      <tr><td class="v-ko">음악</td><td class="v-rom">eumak</td><td class="v-en">music</td></tr>
+      <tr><td class="v-ko">한국어</td><td class="v-rom">hangugeo</td><td class="v-en">Korean (language)</td></tr>
+      <tr><td class="v-ko">사과</td><td class="v-rom">sagwa</td><td class="v-en">apple</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>③ 동사 &amp; 형용사 · Verbs &amp; descriptive words (요 form)</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">먹어요</td><td class="v-rom">meogeoyo</td><td class="v-en">eat(s)</td></tr>
+      <tr><td class="v-ko">마셔요</td><td class="v-rom">masyeoyo</td><td class="v-en">drink(s)</td></tr>
+      <tr><td class="v-ko">봐요</td><td class="v-rom">bwayo</td><td class="v-en">see(s) / watch(es)</td></tr>
+      <tr><td class="v-ko">읽어요</td><td class="v-rom">ilgeoyo</td><td class="v-en">read(s)</td></tr>
+      <tr><td class="v-ko">좋아해요</td><td class="v-rom">joahaeyo</td><td class="v-en">like(s)</td></tr>
+      <tr><td class="v-ko">와요</td><td class="v-rom">wayo</td><td class="v-en">come(s)</td></tr>
+      <tr><td class="v-ko">좋아요</td><td class="v-rom">joayo</td><td class="v-en">(is) good / nice</td></tr>
+      <tr><td class="v-ko">재미있어요</td><td class="v-rom">jaemiisseoyo</td><td class="v-en">(is) fun / interesting</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" style="margin-top:1.6rem">
+    <h3>⭐ 나의 단어 · My words to remember</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Choose your three favourite new words and write them here.</p>
+    <input class="input" type="text" placeholder="1." data-save="vocab_fav_1" data-label="Favourite word 1" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="2." data-save="vocab_fav_2" data-label="Favourite word 2" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="3." data-save="vocab_fav_3" data-label="Favourite word 3">
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 연습 · Next: Practice →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 7 — Practice
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="practice">
+  <div class="panel-head">
+    <span class="step-no">7</span>
+    <div><h2>연습 <span class="panel-head__ko">Practice</span></h2></div>
+  </div>
+  <p class="panel-intro">조사를 모두 모아서 연습해요 — 소리 내어 말하는 것도 잊지 마세요!</p>
+
+  <div class="exercise">
+    <h3>A. 조사 채우기 · Complete the sentence</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Fill each blank with the correct particle (은/는, 이/가, or 을/를).</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 저___ 커피___ 좋아해요. (I like coffee)</div>
+      <input class="input" type="text" placeholder="저는 커피를 좋아해요" data-save="prac_a1" data-label="Practice: I like coffee">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 친구___ 밥___ 먹어요. (A friend eats rice)</div>
+      <input class="input" type="text" placeholder="친구가 밥을 먹어요" data-save="prac_a2" data-label="Practice: friend eats rice">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 날씨___ 좋아요. (The weather is nice)</div>
+      <input class="input" type="text" placeholder="날씨가 좋아요" data-save="prac_a3" data-label="Practice: weather is nice">
+    </div>
+  </div>
+
+  <div class="exercise" data-quiz="w4-particles" style="margin-top:1rem">
+    <div class="game__head">
+      <h3>B. 조사 퀴즈 · Particle Quiz</h3>
+      <span class="game__score">점수 · Score: 0 / 6</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Quiz</span></div>
+    <p class="muted">Tap the correct particle for each blank.</p>
+
+    <div class="quiz-q" data-explain="커피 ends in a vowel, and it's the object → 를.">
+      <div class="stem">1. 저는 커피___ 마셔요. (I drink coffee)</div>
+      <div class="choices">
+        <button class="choice">은</button>
+        <button class="choice">이</button>
+        <button class="choice" data-correct="true">를</button>
+        <button class="choice">을</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="밥 ends in a consonant, and it's the object → 을.">
+      <div class="stem">2. 저는 밥___ 먹어요. (I eat rice)</div>
+      <div class="choices">
+        <button class="choice">를</button>
+        <button class="choice" data-correct="true">을</button>
+        <button class="choice">가</button>
+        <button class="choice">는</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="친구 ends in a vowel, doing the action → subject 가.">
+      <div class="stem">3. 친구___ 와요. (A friend is coming)</div>
+      <div class="choices">
+        <button class="choice">이</button>
+        <button class="choice" data-correct="true">가</button>
+        <button class="choice">을</button>
+        <button class="choice">은</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="책 ends in a consonant, subject of 좋아요 → 이.">
+      <div class="stem">4. 책___ 재미있어요. (The book is interesting)</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">이</button>
+        <button class="choice">가</button>
+        <button class="choice">를</button>
+        <button class="choice">는</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="저 ends in a vowel; introducing yourself = topic → 는.">
+      <div class="stem">5. ___ 미국 사람이에요. (As for me, I'm American)</div>
+      <div class="choices">
+        <button class="choice">저은</button>
+        <button class="choice" data-correct="true">저는</button>
+        <button class="choice">저가</button>
+        <button class="choice">저를</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="영화 ends in a vowel, and it's the object → 를.">
+      <div class="stem">6. 친구가 영화___ 봐요. (A friend watches a movie)</div>
+      <div class="choices">
+        <button class="choice">을</button>
+        <button class="choice" data-correct="true">를</button>
+        <button class="choice">가</button>
+        <button class="choice">은</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 게임 · Next: Games →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 8 — Games
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="games">
+  <div class="panel-head">
+    <span class="step-no">8</span>
+    <div><h2>게임 <span class="panel-head__ko">Games</span></h2></div>
+  </div>
+  <p class="panel-intro">Learning sticks when it's fun. Flip cards, make matches, and pick the right particle out loud!</p>
+  <div class="mode-tags"><span class="mode mode--play">게임 Play</span><span class="mode mode--solo">혼자 Independent</span><span class="mode mode--teacher">함께 As a class</span></div>
+
+  <!-- Flashcards: particles -->
+  <div class="game" data-flashcards="particles" data-flashcards-src="fc-particle-data">
+    <div class="game__head">
+      <h3>🃏 조사 카드 · Particle flashcards</h3>
+      <span class="flash-counter faint"></span>
+    </div>
+    <p class="muted">See the particle → say its job and rule → flip to check.</p>
+    <div class="flash-stage">
+      <div class="flashcard">
+        <div class="flashcard__inner">
+          <div class="flashcard__face flashcard__front"><div class="big"></div></div>
+          <div class="flashcard__face flashcard__back"><div><div class="rom"></div><div class="en"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-controls">
+      <button class="btn btn--ghost btn--sm js-flash-prev">← 이전</button>
+      <button class="btn btn--ghost btn--sm js-flash-next">다음 →</button>
+      <button class="btn btn--gold btn--sm js-flash-shuffle">🔀 섞기 · Shuffle</button>
+    </div>
+  </div>
+
+  <!-- Match: word → correct particle form -->
+  <div class="game" data-match="particle-match" data-match-src="match-particle-data">
+    <div class="game__head">
+      <h3>🔗 짝 맞추기 · Match word → its object form</h3>
+      <span class="game__score">맞춤 · Matched: 0 / 6</span>
+    </div>
+    <p class="muted">Tap a word, then tap the same word correctly marked with 을 or 를.</p>
+    <div class="match-board">
+      <div class="match-col" data-side="left"><h4>단어 · Word</h4></div>
+      <div class="match-col" data-side="right"><h4>+ 을/를</h4></div>
+    </div>
+    <div style="margin-top:1rem"><button class="btn btn--ghost btn--sm js-match-reset">↺ 다시 · Reset</button></div>
+  </div>
+
+  <!-- Particle Picker (custom) -->
+  <div class="game">
+    <div class="game__head">
+      <h3>🎯 조사 고르기 게임 · Particle Picker</h3>
+      <span class="game__score" id="ppScore">점수: 0 / 6</span>
+    </div>
+    <p class="muted">Read each sentence and tap the correct particle for the blank. The game tells you instantly!</p>
+    <div class="pp-game" id="ppGame"></div>
+    <button class="btn btn--ghost btn--sm" onclick="resetPP()" style="margin-top:.5rem">↺ 다시 · Reset</button>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 대화 · Next: Dialogue →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 9 — Dialogue & Role-play
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="dialogue">
+  <div class="panel-head">
+    <span class="step-no">9</span>
+    <div><h2>대화 <span class="panel-head__ko">Dialogue &amp; Role-play</span></h2></div>
+  </div>
+  <p class="panel-intro">진짜 대화예요. 조사가 어떻게 쓰이는지 잘 보세요. 소리 내어 읽고 역할을 바꿔요!</p>
+
+  <div class="dialogue">
+    <h3 style="font-family:var(--sans);margin-bottom:.6rem">🎭 모델 대화 · Talking about likes</h3>
+    <div class="mode-tags"><span class="mode mode--teacher">함께 Read A &amp; B aloud — watch the particles!</span></div>
+
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">민수 씨는 뭐를 좋아해요?</div><div class="turn__rom">Minsu ssineun mworeul joahaeyo?</div><div class="turn__en">Minsu, what do you like?</div></div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 민수</div>
+      <div class="turn__bubble"><div class="turn__ko">저는 영화를 좋아해요. 알렉스 씨는요?</div><div class="turn__rom">jeoneun yeonghwareul joahaeyo. Alex ssineunyo?</div><div class="turn__en">I like movies. How about you, Alex?</div></div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">저는 음악을 좋아해요. 그리고 커피도 좋아해요!</div><div class="turn__rom">jeoneun eumageul joahaeyo. geurigo keopido joahaeyo!</div><div class="turn__en">I like music. And I like coffee too!</div></div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 민수</div>
+      <div class="turn__bubble"><div class="turn__ko">오, 저도 커피를 좋아해요! 친구가 카페를 해요.</div><div class="turn__rom">o, jeodo keopireul joahaeyo! chinguga kapereul haeyo.</div><div class="turn__en">Oh, I like coffee too! My friend runs a café.</div></div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">우와, 좋아요! 같이 가요.</div><div class="turn__rom">uwa, joayo! gachi gayo.</div><div class="turn__en">Wow, great! Let's go together.</div></div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>🗣️ 나의 버전 · Your version</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent: write your lines</span><span class="mode mode--teacher">함께 Then perform with a partner</span></div>
+    <p class="muted">Talk about what <em>you</em> like. Use 은/는 for yourself and 을/를 for the things you like!</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> "I like ___" — fill with a thing you like + 을/를</div>
+      <input class="input" type="text" placeholder="저는 ___을/를 좋아해요." data-save="dlg_like1" data-label="Dialogue: I like (1)">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> "I like ___ too" — another favourite (+ 도 = also)</div>
+      <input class="input" type="text" placeholder="그리고 ___도 좋아해요." data-save="dlg_like2" data-label="Dialogue: I like (2)">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">★</span> Write the whole conversation in your own words</div>
+      <textarea class="textarea" placeholder="A: ___ 씨는 뭐를 좋아해요?&#10;B: 저는 ___을/를 좋아해요. ___ 씨는요?&#10;A: ..." data-save="dlg_full" data-label="My full Week 4 conversation"></textarea>
+    </div>
+  </div>
+
+  <div class="note note--gold">
+    <h4>도전 · Challenge</h4>
+    <p>Ask <strong>three classmates</strong> "뭐를 좋아해요?" and answer using full sentences with the right particles. Listen for 은/는, 이/가, and 을/를 in their answers! 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 10 — Review & Reflect
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="reflect">
+  <div class="panel-head">
+    <span class="step-no">10</span>
+    <div><h2>복습 &amp; 돌아보기 <span class="panel-head__ko">Review &amp; Reflect</span></h2></div>
+  </div>
+  <p class="panel-intro">정말 잘하셨어요! 이제 조사를 붙여 완전한 문장을 만들 수 있어요. 대단해요!<br>
+  Excellent work! You can now mark every part of a sentence with the right particle — a big step!</p>
+
+  <div class="exercise">
+    <h3>✅ 할 수 있어요 · I can now…</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <ul class="checklist">
+      <li><input type="checkbox" id="ck1" data-save="ck_what" data-label="Knows what particles are"><label for="ck1">Explain that <strong>particles</strong> mark a word's job in the sentence</label></li>
+      <li><input type="checkbox" id="ck2" data-save="ck_topic" data-label="Can use 은/는"><label for="ck2">Add the topic marker <strong>은/는</strong> ("as for…")</label></li>
+      <li><input type="checkbox" id="ck3" data-save="ck_subject" data-label="Can use 이/가"><label for="ck3">Add the subject marker <strong>이/가</strong> (who/what does it)</label></li>
+      <li><input type="checkbox" id="ck4" data-save="ck_object" data-label="Can use 을/를"><label for="ck4">Add the object marker <strong>을/를</strong> (what it's done to)</label></li>
+      <li><input type="checkbox" id="ck5" data-save="ck_rule" data-label="Knows consonant/vowel rule"><label for="ck5">Choose the right form based on <strong>consonant vs vowel</strong> ending</label></li>
+      <li><input type="checkbox" id="ck6" data-save="ck_diff" data-label="Feels 은/는 vs 이/가"><label for="ck6">Sense the difference between <strong>은/는</strong> (topic) and <strong>이/가</strong> (new info)</label></li>
+      <li><input type="checkbox" id="ck7" data-save="ck_build" data-label="Can build a full marked sentence"><label for="ck7">Build a sentence like <strong>친구가 영화를 봐요</strong></label></li>
+      <li><input type="checkbox" id="ck8" data-save="ck_words" data-label="Learned 15+ words"><label for="ck8">Use <strong>15+ words</strong> from this week</label></li>
+    </ul>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>💭 돌아보기 · Reflection</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt">오늘 가장 좋았던 것은? · One thing you enjoyed today</div>
+      <textarea class="textarea" placeholder="예: 조사 고르기 게임이 재미있었어요!" data-save="reflect_good" data-label="Reflection: enjoyed"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">어려웠던 것은? · One thing that was tricky</div>
+      <textarea class="textarea" placeholder="예: Choosing between 은/는 and 이/가 is still tricky." data-save="reflect_hard" data-label="Reflection: tricky"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">조사를 모두 넣은 문장 · Write one full sentence with all the right particles</div>
+      <textarea class="textarea" placeholder="저는 ___을/를 좋아해요." data-save="reflect_sentence" data-label="Reflection: my marked sentence"></textarea>
+    </div>
+  </div>
+
+  <div class="card center stack" style="margin-top:1.4rem">
+    <h3>🎉 4주차 완료! · Week 4 Complete!</h3>
+    <p class="muted">이제 조사를 쓸 수 있어요! You can now use Korea's grammatical glue — your sentences are becoming truly Korean!</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn--primary js-finish">✓ 완료 표시 · Mark complete</button>
+      <button class="btn btn--gold js-open-library">📓 내 답안 보기 · Review &amp; export</button>
+    </div>
+  </div>
+
+  <div class="note note--jade" style="margin-top:1.6rem">
+    <h4>다음 주 미리보기 · Coming up — Week 5</h4>
+    <p><strong>Present Tense Polite Form (-아요 / -어요)</strong> — you've been using 먹어요, 마셔요, 좋아해요 already; next week you'll learn the <em>rule</em> behind them so you can turn any verb into natural polite Korean. 매일 한 문장씩 조사를 붙여 보세요! 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <a class="btn btn--primary" href="../index.html">홈으로 · Back to course home →</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ LIBRARY MODAL ════════════════════════════════════ -->
+<div class="modal-overlay" id="libraryModal" role="dialog" aria-modal="true" aria-labelledby="libTitle">
+  <div class="modal">
+    <div class="modal__head">
+      <h2 id="libTitle">📓 내 답안 · My Library</h2>
+      <button class="modal__close js-close-modal" aria-label="Close">×</button>
+    </div>
+    <div class="modal__body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--primary btn--sm js-export-csv" type="button">⬇ CSV 내보내기 · Export CSV</button>
+      <button class="btn btn--ghost btn--sm js-export-json" type="button">⬇ JSON</button>
+      <span class="header-spacer"></span>
+      <button class="btn btn--ghost btn--sm js-clear-all" type="button" style="color:var(--jeok);border-color:var(--jeok)">🗑 전체 삭제 · Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ═══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-brand">한 · BKFES</span>
+    <small>Week 4 · Particles 은/는 · 이/가 · 을/를 · Beginning Korean for English Speakers · © <span data-year>2026</span></small>
+  </div>
+</footer>
+
+<!-- ══════════ GAME DATA (JSON) ══════════════════════════════════ -->
+<script type="application/json" id="fc-particle-data">
+[
+  {"front":"은 / 는","rom":"eun / neun","en":"TOPIC marker — 'as for…'. 은 after consonant, 는 after vowel."},
+  {"front":"이 / 가","rom":"i / ga","en":"SUBJECT marker — who/what does it. 이 after consonant, 가 after vowel."},
+  {"front":"을 / 를","rom":"eul / reul","en":"OBJECT marker — what it's done to. 을 after consonant, 를 after vowel."},
+  {"front":"저는","rom":"jeoneun","en":"'as for me' (저 + 는, vowel)"},
+  {"front":"이름은","rom":"ireumeun","en":"'as for the name' (이름 + 은, consonant)"},
+  {"front":"친구가","rom":"chinguga","en":"'a friend (does)' (친구 + 가, vowel)"},
+  {"front":"책이","rom":"chaegi","en":"'the book (is)' (책 + 이, consonant)"},
+  {"front":"커피를","rom":"keopireul","en":"'coffee (object)' (커피 + 를, vowel)"},
+  {"front":"밥을","rom":"babeul","en":"'rice (object)' (밥 + 을, consonant)"}
+]
+</script>
+
+<script type="application/json" id="match-particle-data">
+[
+  {"id":1,"left":"밥","right":"밥을"},
+  {"id":2,"left":"커피","right":"커피를"},
+  {"id":3,"left":"책","right":"책을"},
+  {"id":4,"left":"영화","right":"영화를"},
+  {"id":5,"left":"물","right":"물을"},
+  {"id":6,"left":"음악","right":"음악을"}
+]
+</script>
+
+<!-- ══════════ CUSTOM JAVASCRIPT (particle picker) ═══════════════ -->
+<script>
+(function() {
+  /* ── Particle Picker Game ──────────────────────────────────── */
+  var PP_QUESTIONS = [
+    {pre:'저', blank:true, post:' 학생이에요.', en:'As for me, I am a student.', options:['은','는','이','가'], correct:'는'},
+    {pre:'친구', blank:true, post:' 와요.', en:'A friend is coming.', options:['은','가','을','를'], correct:'가'},
+    {pre:'저는 밥', blank:true, post:' 먹어요.', en:'I eat rice.', options:['은','가','을','를'], correct:'을'},
+    {pre:'저는 커피', blank:true, post:' 마셔요.', en:'I drink coffee.', options:['는','이','을','를'], correct:'를'},
+    {pre:'책', blank:true, post:' 재미있어요.', en:'The book is interesting.', options:['은','이','을','를'], correct:'이'},
+    {pre:'친구가 영화', blank:true, post:' 봐요.', en:'A friend watches a movie.', options:['은','가','을','를'], correct:'를'}
+  ];
+  var ppAnswered = 0, ppCorrect = 0;
+
+  function buildPP() {
+    var wrap = document.getElementById('ppGame');
+    if (!wrap) return;
+    ppAnswered = 0; ppCorrect = 0;
+    document.getElementById('ppScore').textContent = '점수: 0 / ' + PP_QUESTIONS.length;
+    wrap.innerHTML = '';
+    PP_QUESTIONS.forEach(function(q, qi) {
+      var box = document.createElement('div');
+      box.className = 'pp-question';
+      var opts = q.options.map(function(o) {
+        return '<button class="pp-opt" data-q="' + qi + '" data-o="' + o + '">' + o + '</button>';
+      }).join('');
+      box.innerHTML =
+        '<div class="pp-sentence">' + q.pre + '<span class="pp-blank" id="ppBlank' + qi + '">?</span>' + q.post + '</div>' +
+        '<div class="pp-options">' + opts + '</div>' +
+        '<div class="pp-feedback" id="ppFb' + qi + '"></div>';
+      wrap.appendChild(box);
+    });
+    wrap.querySelectorAll('.pp-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var qi = parseInt(btn.dataset.q);
+        var q = PP_QUESTIONS[qi];
+        var box = btn.closest('.pp-question');
+        if (box.dataset.done) return;
+        box.dataset.done = '1';
+        ppAnswered++;
+        var fb = document.getElementById('ppFb' + qi);
+        var blank = document.getElementById('ppBlank' + qi);
+        blank.textContent = btn.dataset.o;
+        if (btn.dataset.o === q.correct) {
+          btn.classList.add('correct');
+          ppCorrect++;
+          fb.style.color = 'var(--jade)';
+          fb.textContent = '✓ 맞아요! · Correct — ' + q.en;
+        } else {
+          btn.classList.add('wrong');
+          box.querySelectorAll('.pp-opt').forEach(function(b) {
+            if (b.dataset.o === q.correct) b.classList.add('correct');
+          });
+          blank.textContent = q.correct;
+          fb.style.color = 'var(--jeok)';
+          fb.textContent = '✗ 정답은 ' + q.correct + ' · ' + q.en;
+        }
+        document.getElementById('ppScore').textContent = '점수: ' + ppCorrect + ' / ' + PP_QUESTIONS.length;
+        if (ppAnswered === PP_QUESTIONS.length && window.BKFESStore) {
+          window.BKFESStore.saveField('week04', 'game_particle_picker', ppCorrect + '/' + PP_QUESTIONS.length, 'Particle Picker game');
+        }
+      });
+    });
+  }
+
+  window.resetPP = buildPP;
+  buildPP();
+})();
+</script>
+
+<!-- ══════════ SHARED SCRIPTS (must stay in this order) ═════════ -->
+<script src="../js/weeks.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/worksheet.js"></script>
+</body>
+</html>
