@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 · Location &amp; Prepositions · BKFES</title>
+<meta name="description" content="Week 8 of Beginning Korean for English Speakers: location particles 에 / 에서, existence verbs 있어요 / 없어요, and position words.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.particle-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1rem 0;}
+.particle-card{border-radius:var(--radius);padding:1.1rem 1.2rem;border-top:5px solid;background:var(--hanji-2);}
+.particle-card.e{border-color:var(--cheong);}.particle-card.eseo{border-color:var(--jeok);}
+.particle-card .p-big{font-family:var(--serif);font-size:1.9rem;font-weight:700;}
+.particle-card.e .p-big{color:var(--cheong);}.particle-card.eseo .p-big{color:var(--jeok);}
+.particle-card .p-role{font-weight:700;margin:.2rem 0;}.particle-card .p-rule{font-size:var(--fs-small);color:var(--ink-soft);}
+.pos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.8rem;margin:1rem 0;}
+.pos-card{border-radius:var(--radius);padding:.9rem;text-align:center;border:1.5px solid var(--line-strong);background:var(--hanji-2);}
+.pos-card .pos-ko{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--cheong);}
+.pos-card .pos-en{font-size:.82rem;font-weight:700;margin-top:.2rem;}
+.pos-card .pos-vis{font-size:1.6rem;margin-bottom:.2rem;}
+.exist-flip{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;justify-content:center;margin:1rem 0;}
+.exist-box{border-radius:var(--radius-sm);padding:.7rem 1.1rem;font-family:var(--serif);font-size:clamp(1.1rem,2.6vw,1.5rem);font-weight:600;border:2px solid;background:var(--hanji-2);text-align:center;}
+.exist-yes{border-color:var(--jade);color:var(--jade);}.exist-no{border-color:var(--jeok);color:var(--jeok);}
+.exist-arrow{font-size:1.6rem;color:var(--ink-faint);}
+.exist-note{display:block;font-family:var(--sans);font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-bottom:.2rem;}
+.pp{margin-top:1rem;}
+.pp-q{background:var(--hanji-deep);border-radius:var(--radius-sm);padding:1rem 1.2rem;margin-bottom:.8rem;}
+.pp-sentence{font-family:var(--serif);font-size:1.2rem;margin-bottom:.4rem;}
+.pp-en{font-size:.8rem;color:var(--ink-faint);font-style:italic;margin-bottom:.7rem;}
+.pp-blank{display:inline-block;min-width:54px;border-bottom:2.5px dashed var(--jeok);text-align:center;color:var(--jeok);font-weight:700;}
+.pp-options{display:flex;flex-wrap:wrap;gap:.5rem;}
+.pp-opt{padding:.45rem 1rem;border:1.5px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--baek);font-family:var(--serif);font-size:1.05rem;cursor:pointer;transition:all .15s;}
+.pp-opt:hover{border-color:var(--cheong);background:var(--cheong-tint);}
+.pp-opt.correct{background:var(--jade-tint);border-color:var(--jade);color:var(--jade);font-weight:700;}
+.pp-opt.wrong{background:var(--jeok-tint);border-color:var(--jeok);color:var(--jeok);}
+.pp-feedback{font-size:var(--fs-small);font-weight:600;margin-top:.5rem;min-height:1.2em;}
+</style>
+</head>
+<body data-week="week08">
+
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="brand" href="../index.html"><span class="brand__seal">한</span><span class="brand__txt"><b>BKFES</b><span>Beginning Korean · English Speakers</span></span></a>
+    <span class="header-spacer"></span>
+    <div class="header-actions" data-name-wrap><span class="faint">👋 <strong data-name-display></strong></span></div>
+    <div class="header-actions"><a class="btn btn--ghost btn--sm" href="../index.html">← 홈 · Home</a><button class="btn btn--ghost btn--sm js-open-library" type="button">📓 <span class="label-full">내 답안 · Library</span></button></div>
+  </div>
+  <div class="saekdong saekdong--thin"></div>
+</header>
+
+<section class="ws-hero">
+  <div class="wrap">
+    <p class="eyebrow">Week 8 · 7월 20일 · July 20</p>
+    <h1>Location &amp; Prepositions</h1>
+    <p class="ws-hero__sub">에, 에서, 있어요, 없어요 — 어디에 있는지, 어디에서 하는지 말해요!<br>
+    Say where things <em>are</em> and where things <em>happen</em> — the building blocks of describing your world.</p>
+    <div class="ws-progress"><div class="progressbar"><div class="progressbar__fill"></div></div><span class="progresslabel">0 / 11 완료 · sections done</span></div>
+    <p class="autosave-note" style="margin-top:.8rem">💾 답안은 자동 저장돼요 · Your answers save automatically as you type.</p>
+  </div>
+</section>
+
+<nav class="ws-nav" aria-label="Worksheet sections">
+  <div class="wrap"><div class="ws-nav__track">
+    <button class="pill" data-target="welcome"><span class="pill__no">0</span> 시작 Start</button>
+    <button class="pill" data-target="review"><span class="pill__no">1</span> 복습 Review</button>
+    <button class="pill" data-target="exist"><span class="pill__no">2</span> 있다/없다</button>
+    <button class="pill" data-target="e"><span class="pill__no">3</span> 에 at/to</button>
+    <button class="pill" data-target="eseo"><span class="pill__no">4</span> 에서 at/from</button>
+    <button class="pill" data-target="position"><span class="pill__no">5</span> 위치 Position</button>
+    <button class="pill" data-target="vocab"><span class="pill__no">6</span> 어휘 Vocab</button>
+    <button class="pill" data-target="practice"><span class="pill__no">7</span> 연습 Practice</button>
+    <button class="pill" data-target="games"><span class="pill__no">8</span> 게임 Games</button>
+    <button class="pill" data-target="dialogue"><span class="pill__no">9</span> 대화 Dialogue</button>
+    <button class="pill" data-target="reflect"><span class="pill__no">10</span> 복습 Review</button>
+  </div></div>
+</nav>
+
+<main class="wrap">
+
+<section class="panel is-active" id="welcome">
+  <div class="panel-head"><span class="step-no">0</span><div><h2>환영합니다! <span class="panel-head__ko">Welcome Back</span></h2></div></div>
+  <p class="panel-intro">8주차예요! 마지막 새 문법이에요. 위치와 장소를 표현해요.<br>
+  Week 8 — your last big new grammar! Let's describe where everything is and happens.</p>
+  <div class="card stack">
+    <h3>이번 주 목표 · This week you will…</h3>
+    <ul>
+      <li>📍 <strong>Use 있어요 / 없어요</strong> — "there is / isn't" and "I have / don't have".</li>
+      <li>🎯 <strong>Use the location particle 에</strong> — "at / in / to" a place.</li>
+      <li>🏃 <strong>Use the action-location particle 에서</strong> — where an action happens / "from".</li>
+      <li>🧭 <strong>Learn position words</strong> — 위, 아래, 앞, 뒤, 옆, 안.</li>
+      <li>🗣️ <strong>Describe a room and give simple directions.</strong></li>
+    </ul>
+  </div>
+  <div class="note note--gold">
+    <h4>오늘의 큰 그림 · The big idea today</h4>
+    <p>Two location particles, one key difference: <strong>에</strong> marks where something <em>exists or is going</em> (집<strong>에</strong> 있어요 — I'm at home). <strong>에서</strong> marks where an <em>action happens</em> (집<strong>에서</strong> 공부해요 — I study at home). Master that one contrast and location clicks!</p>
+  </div>
+  <div class="note note--jade">
+    <h4>이렇게 사용하세요 · How to use this worksheet</h4>
+    <p>Tap the pills to move around. Tap any 🔊 to hear the Korean.
+    <span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span><span class="mode mode--play">게임 Game</span></p>
+  </div>
+  <div class="panel-foot"><a class="btn btn--ghost" href="../index.html">← 홈 · Home</a><button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button></div>
+</section>
+
+<section class="panel" id="review">
+  <div class="panel-head"><span class="step-no">1</span><div><h2>복습 <span class="panel-head__ko">Weeks 1–7 Review</span></h2></div></div>
+  <p class="panel-intro">지난 7주를 빠르게 점검해요 — 소리 내어 읽어 보세요!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+  <table class="vocab">
+    <caption>핵심 정리 · Key points so far</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">어제 영화를 봤어요</td><td class="v-rom">eoje yeonghwareul bwasseoyo</td><td class="v-en">I watched a movie yesterday</td></tr>
+      <tr><td class="v-ko">뭐 했어요?</td><td class="v-rom">mwo haesseoyo?</td><td class="v-en">What did you do?</td></tr>
+      <tr><td class="v-ko">매일 운동해요</td><td class="v-rom">maeil undonghaeyo</td><td class="v-en">I exercise every day</td></tr>
+      <tr><td class="v-ko">이름이 뭐예요?</td><td class="v-rom">ireumi mwoyeyo?</td><td class="v-en">What's your name?</td></tr>
+    </tbody>
+  </table>
+  <div class="exercise" data-quiz="w8-review" style="margin-top:1.4rem">
+    <div class="game__head"><h3>✏️ 빠른 셀프 체크 · Quick self-check</h3><span class="game__score">점수 · Score: 0 / 4</span></div>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="quiz-q" data-explain="ㅓ → 었어요."><div class="stem">1. 먹다 (past) →</div><div class="choices"><button class="choice">먹았어요</button><button class="choice" data-correct="true">먹었어요</button><button class="choice">먹해어요</button><button class="choice">머거요</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="가 + 았어요 → 갔어요."><div class="stem">2. 가다 (past) →</div><div class="choices"><button class="choice" data-correct="true">갔어요</button><button class="choice">가았어요</button><button class="choice">가요</button><button class="choice">겄어요</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="어디 = where."><div class="stem">3. "Where?" is…</div><div class="choices"><button class="choice">언제</button><button class="choice" data-correct="true">어디</button><button class="choice">왜</button><button class="choice">누구</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="하다 → 했어요."><div class="stem">4. 공부하다 (past) →</div><div class="choices"><button class="choice" data-correct="true">공부했어요</button><button class="choice">공부핬어요</button><button class="choice">공부았어요</button><button class="choice">공부어요</button></div><div class="quiz-feedback"></div></div>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 있다/없다 · Next: There is/isn't →</button></div>
+</section>
+
+<section class="panel" id="exist">
+  <div class="panel-head"><span class="step-no">2</span><div><h2>있어요 / 없어요 <span class="panel-head__ko">There Is / There Isn't</span></h2></div></div>
+  <p class="panel-intro">존재를 나타내는 가장 중요한 두 동사예요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+  <div class="note note--gold">
+    <h4>📌 핵심 · Two meanings each</h4>
+    <div class="exist-flip">
+      <div class="exist-box exist-yes"><span class="exist-note">있어요</span>there is / I have</div>
+      <div class="exist-arrow">↔</div>
+      <div class="exist-box exist-no"><span class="exist-note">없어요</span>there isn't / I don't have</div>
+    </div>
+  </div>
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>있어요 / 없어요 in action</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">시간 있어요?</td><td class="v-rom">sigan isseoyo?</td><td class="v-en">Do you have time?</td></tr>
+      <tr><td class="v-ko">네, 있어요</td><td class="v-rom">ne, isseoyo</td><td class="v-en">Yes, I do (have)</td></tr>
+      <tr><td class="v-ko">아니요, 없어요</td><td class="v-rom">aniyo, eopseoyo</td><td class="v-en">No, I don't (have)</td></tr>
+      <tr><td class="v-ko">화장실이 어디에 있어요?</td><td class="v-rom">hwajangsiri eodie isseoyo?</td><td class="v-en">Where is the restroom?</td></tr>
+      <tr><td class="v-ko">친구가 집에 있어요</td><td class="v-rom">chinguga jibe isseoyo</td><td class="v-en">My friend is at home</td></tr>
+    </tbody>
+  </table>
+  <div class="note note--jade">
+    <h4>💡 과거형 · Past form</h4>
+    <p><strong>있었어요</strong> (there was / I had) · <strong>없었어요</strong> (there wasn't / I didn't have). "어제 시간 없었어요." = "I didn't have time yesterday."</p>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 에 · Next: 에 (at/to) →</button></div>
+</section>
+
+<section class="panel" id="e">
+  <div class="panel-head"><span class="step-no">3</span><div><h2>에 <span class="panel-head__ko">The Particle 에 — at / in / to</span></h2></div></div>
+  <p class="panel-intro">존재하는 장소나 가는 방향을 나타내요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+  <div class="particle-cards">
+    <div class="particle-card e"><div class="p-big">에 (위치)</div><div class="p-role">Location of existence</div><div class="p-rule">With 있어요/없어요: 집<strong>에</strong> 있어요 (I'm at home).</div></div>
+    <div class="particle-card e"><div class="p-big">에 (방향)</div><div class="p-role">Destination</div><div class="p-rule">With 가요/와요: 학교<strong>에</strong> 가요 (I go to school).</div></div>
+  </div>
+  <table class="vocab" style="margin-top:1rem">
+    <caption>에 in action</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">집에 있어요</td><td class="v-rom">jibe isseoyo</td><td class="v-en">(I'm) at home</td></tr>
+      <tr><td class="v-ko">학교에 가요</td><td class="v-rom">hakgyoe gayo</td><td class="v-en">(I) go to school</td></tr>
+      <tr><td class="v-ko">세 시에 만나요</td><td class="v-rom">se sie mannayo</td><td class="v-en">(Let's) meet at 3:00 (also time!)</td></tr>
+      <tr><td class="v-ko">책상 위에 있어요</td><td class="v-rom">chaeksang wie isseoyo</td><td class="v-en">It's on the desk</td></tr>
+    </tbody>
+  </table>
+  <div class="note note--gold">
+    <h4>💡 에 also marks TIME</h4>
+    <p>You already used 에 for time in Week 2! 세 시<strong>에</strong> (at 3:00), 월요일<strong>에</strong> (on Monday). Same particle — "at a point in time or space."</p>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 에서 · Next: 에서 →</button></div>
+</section>
+
+<section class="panel" id="eseo">
+  <div class="panel-head"><span class="step-no">4</span><div><h2>에서 <span class="panel-head__ko">The Particle 에서 — at / from</span></h2></div></div>
+  <p class="panel-intro">행동이 일어나는 장소, 또는 출발점을 나타내요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+  <div class="particle-cards">
+    <div class="particle-card eseo"><div class="p-big">에서 (행동)</div><div class="p-role">Where an action happens</div><div class="p-rule">집<strong>에서</strong> 공부해요 (I study at home).</div></div>
+    <div class="particle-card eseo"><div class="p-big">에서 (출발)</div><div class="p-role">From (origin)</div><div class="p-rule">미국<strong>에서</strong> 왔어요 (I came from the US).</div></div>
+  </div>
+  <div class="note note--red">
+    <h4>⚠️ 에 vs 에서 — the key difference</h4>
+    <p><strong>에</strong> = where something simply <em>is</em>, or where you're <em>going</em> (with 있다/가다/오다).<br>
+    <strong>에서</strong> = where an <em>action</em> happens (with 공부하다, 먹다, 일하다…).<br>
+    집<strong>에</strong> 있어요 (I'm at home) vs 집<strong>에서</strong> 밥을 먹어요 (I eat at home).</p>
+  </div>
+  <table class="vocab" style="margin-top:1rem">
+    <caption>에서 in action</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">식당에서 밥을 먹어요</td><td class="v-rom">sikdang-eseo babeul meogeoyo</td><td class="v-en">I eat at a restaurant</td></tr>
+      <tr><td class="v-ko">카페에서 공부해요</td><td class="v-rom">kape-eseo gongbuhaeyo</td><td class="v-en">I study at a café</td></tr>
+      <tr><td class="v-ko">한국에서 왔어요</td><td class="v-rom">Hanguk-eseo wasseoyo</td><td class="v-en">I came from Korea</td></tr>
+      <tr><td class="v-ko">어디에서 일해요?</td><td class="v-rom">eodi-eseo ilhaeyo?</td><td class="v-en">Where do you work?</td></tr>
+    </tbody>
+  </table>
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 에 또는 에서? · 에 or 에서?</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q"><div class="q__prompt"><span class="qn">1.</span> 집___ 있어요. (I'm at home)</div><div class="fillrow"><span class="cue">집</span><input class="input inline-input" type="text" placeholder="에 / 에서?" data-save="ee_q1" data-label="에/에서: at home (exist)"></div></div>
+    <div class="q"><div class="q__prompt"><span class="qn">2.</span> 카페___ 공부해요. (I study at a café)</div><div class="fillrow"><span class="cue">카페</span><input class="input inline-input" type="text" placeholder="에 / 에서?" data-save="ee_q2" data-label="에/에서: study at café"></div></div>
+    <div class="q"><div class="q__prompt"><span class="qn">3.</span> 학교___ 가요. (I go to school)</div><div class="fillrow"><span class="cue">학교</span><input class="input inline-input" type="text" placeholder="에 / 에서?" data-save="ee_q3" data-label="에/에서: go to school"></div></div>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 위치 · Next: Position Words →</button></div>
+</section>
+
+<section class="panel" id="position">
+  <div class="panel-head"><span class="step-no">5</span><div><h2>위치 <span class="panel-head__ko">Position Words</span></h2></div></div>
+  <p class="panel-intro">물건이 어디 있는지 정확히 말해요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+  <div class="pos-grid">
+    <div class="pos-card"><div class="pos-vis">⬆️</div><div class="pos-ko">위</div><div class="pos-en">on / above</div></div>
+    <div class="pos-card"><div class="pos-vis">⬇️</div><div class="pos-ko">아래 / 밑</div><div class="pos-en">under / below</div></div>
+    <div class="pos-card"><div class="pos-vis">⬅️</div><div class="pos-ko">앞</div><div class="pos-en">in front</div></div>
+    <div class="pos-card"><div class="pos-vis">➡️</div><div class="pos-ko">뒤</div><div class="pos-en">behind</div></div>
+    <div class="pos-card"><div class="pos-vis">↔️</div><div class="pos-ko">옆</div><div class="pos-en">beside / next to</div></div>
+    <div class="pos-card"><div class="pos-vis">📦</div><div class="pos-ko">안</div><div class="pos-en">inside</div></div>
+    <div class="pos-card"><div class="pos-vis">🌳</div><div class="pos-ko">밖</div><div class="pos-en">outside</div></div>
+    <div class="pos-card"><div class="pos-vis">🎯</div><div class="pos-ko">사이</div><div class="pos-en">between</div></div>
+  </div>
+  <div class="note note--gold">
+    <h4>📌 패턴 · The pattern: [thing] [position]에 있어요</h4>
+    <p>책이 책상 <strong>위에</strong> 있어요. — The book is <strong>on</strong> the desk.<br>
+    고양이가 의자 <strong>아래에</strong> 있어요. — The cat is <strong>under</strong> the chair.<br>
+    은행이 학교 <strong>옆에</strong> 있어요. — The bank is <strong>next to</strong> the school.</p>
+  </div>
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 위치 말하기 · Describe the position</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q"><div class="q__prompt"><span class="qn">1.</span> "The book is on the desk." (책 / 책상 / 위)</div><input class="input" type="text" placeholder="책이 책상 위에 있어요." data-save="pos_q1" data-label="Position: book on desk"></div>
+    <div class="q"><div class="q__prompt"><span class="qn">2.</span> Describe where something near you is, in Korean.</div><input class="input" type="text" placeholder="___이/가 ___ 옆에 있어요." data-save="pos_q2" data-label="Position: my own"></div>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 어휘 · Next: Vocabulary →</button></div>
+</section>
+
+<section class="panel" id="vocab">
+  <div class="panel-head"><span class="step-no">6</span><div><h2>어휘 <span class="panel-head__ko">Vocabulary</span></h2></div></div>
+  <p class="panel-intro">위치와 장소 어휘예요. 소리 내어 읽어 보세요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Read aloud together</span><span class="mode mode--solo">혼자 Self-test</span></div>
+  <table class="vocab">
+    <caption>① 위치 · Position words</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">위</td><td class="v-rom">wi</td><td class="v-en">on / above</td></tr>
+      <tr><td class="v-ko">아래 / 밑</td><td class="v-rom">arae / mit</td><td class="v-en">under</td></tr>
+      <tr><td class="v-ko">앞</td><td class="v-rom">ap</td><td class="v-en">in front</td></tr>
+      <tr><td class="v-ko">뒤</td><td class="v-rom">dwi</td><td class="v-en">behind</td></tr>
+      <tr><td class="v-ko">옆</td><td class="v-rom">yeop</td><td class="v-en">next to</td></tr>
+      <tr><td class="v-ko">안</td><td class="v-rom">an</td><td class="v-en">inside</td></tr>
+      <tr><td class="v-ko">밖</td><td class="v-rom">bak</td><td class="v-en">outside</td></tr>
+      <tr><td class="v-ko">사이</td><td class="v-rom">sai</td><td class="v-en">between</td></tr>
+    </tbody>
+  </table>
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>② 집 &amp; 사물 · Home &amp; objects</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">방</td><td class="v-rom">bang</td><td class="v-en">room</td></tr>
+      <tr><td class="v-ko">책상</td><td class="v-rom">chaeksang</td><td class="v-en">desk</td></tr>
+      <tr><td class="v-ko">의자</td><td class="v-rom">uija</td><td class="v-en">chair</td></tr>
+      <tr><td class="v-ko">침대</td><td class="v-rom">chimdae</td><td class="v-en">bed</td></tr>
+      <tr><td class="v-ko">창문</td><td class="v-rom">changmun</td><td class="v-en">window</td></tr>
+      <tr><td class="v-ko">문</td><td class="v-rom">mun</td><td class="v-en">door</td></tr>
+      <tr><td class="v-ko">가방</td><td class="v-rom">gabang</td><td class="v-en">bag</td></tr>
+    </tbody>
+  </table>
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>③ 동네 장소 · Around town</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">은행</td><td class="v-rom">eunhaeng</td><td class="v-en">bank</td></tr>
+      <tr><td class="v-ko">병원</td><td class="v-rom">byeongwon</td><td class="v-en">hospital</td></tr>
+      <tr><td class="v-ko">편의점</td><td class="v-rom">pyeonuijeom</td><td class="v-en">convenience store</td></tr>
+      <tr><td class="v-ko">공원</td><td class="v-rom">gongwon</td><td class="v-en">park</td></tr>
+      <tr><td class="v-ko">지하철</td><td class="v-rom">jihacheol</td><td class="v-en">subway</td></tr>
+    </tbody>
+  </table>
+  <div class="exercise" style="margin-top:1.6rem">
+    <h3>⭐ 나의 단어 · My words to remember</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <input class="input" type="text" placeholder="1." data-save="vocab_fav_1" data-label="Favourite word 1" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="2." data-save="vocab_fav_2" data-label="Favourite word 2" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="3." data-save="vocab_fav_3" data-label="Favourite word 3">
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 연습 · Next: Practice →</button></div>
+</section>
+
+<section class="panel" id="practice">
+  <div class="panel-head"><span class="step-no">7</span><div><h2>연습 <span class="panel-head__ko">Practice</span></h2></div></div>
+  <p class="panel-intro">위치 표현을 모아서 연습해요 — 소리 내어 말해 보세요!</p>
+  <div class="exercise">
+    <h3>A. 문장 완성 · Complete the sentence</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q"><div class="q__prompt"><span class="qn">1.</span> "Where is the restroom?" </div><input class="input" type="text" placeholder="화장실이 어디에 있어요?" data-save="prac_a1" data-label="Sentence: where is restroom"></div>
+    <div class="q"><div class="q__prompt"><span class="qn">2.</span> "I study at a café." (카페 / 공부하다)</div><input class="input" type="text" placeholder="카페에서 공부해요." data-save="prac_a2" data-label="Sentence: study at café"></div>
+    <div class="q"><div class="q__prompt"><span class="qn">3.</span> "The cat is under the chair." (고양이 / 의자 / 아래)</div><input class="input" type="text" placeholder="고양이가 의자 아래에 있어요." data-save="prac_a3" data-label="Sentence: cat under chair"></div>
+  </div>
+  <div class="exercise" data-quiz="w8-loc" style="margin-top:1rem">
+    <div class="game__head"><h3>B. 위치 퀴즈 · Location Quiz</h3><span class="game__score">점수 · Score: 0 / 6</span></div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Quiz</span></div>
+    <div class="quiz-q" data-explain="있어요 (exist) takes 에, not 에서."><div class="stem">1. 집___ 있어요. (I'm at home)</div><div class="choices"><button class="choice" data-correct="true">에</button><button class="choice">에서</button><button class="choice">을</button><button class="choice">가</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="An action (공부해요) takes 에서."><div class="stem">2. 카페___ 공부해요.</div><div class="choices"><button class="choice">에</button><button class="choice" data-correct="true">에서</button><button class="choice">를</button><button class="choice">는</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="없어요 = there isn't / I don't have."><div class="stem">3. "I don't have time" is…</div><div class="choices"><button class="choice">시간 있어요</button><button class="choice" data-correct="true">시간 없어요</button><button class="choice">시간 가요</button><button class="choice">시간 해요</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="위 = on/above."><div class="stem">4. "on the desk" is…</div><div class="choices"><button class="choice">책상 아래에</button><button class="choice" data-correct="true">책상 위에</button><button class="choice">책상 옆에</button><button class="choice">책상 안에</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="Going somewhere (가요) takes 에."><div class="stem">5. 학교___ 가요.</div><div class="choices"><button class="choice" data-correct="true">에</button><button class="choice">에서</button><button class="choice">을</button><button class="choice">도</button></div><div class="quiz-feedback"></div></div>
+    <div class="quiz-q" data-explain="옆 = next to / beside."><div class="stem">6. 옆 means…</div><div class="choices"><button class="choice">inside</button><button class="choice">behind</button><button class="choice" data-correct="true">next to</button><button class="choice">under</button></div><div class="quiz-feedback"></div></div>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 게임 · Next: Games →</button></div>
+</section>
+
+<section class="panel" id="games">
+  <div class="panel-head"><span class="step-no">8</span><div><h2>게임 <span class="panel-head__ko">Games</span></h2></div></div>
+  <p class="panel-intro">Flip cards, make matches, and pick the right particle out loud!</p>
+  <div class="mode-tags"><span class="mode mode--play">게임 Play</span><span class="mode mode--solo">혼자 Independent</span><span class="mode mode--teacher">함께 As a class</span></div>
+  <div class="game" data-flashcards="loc" data-flashcards-src="fc-loc-data">
+    <div class="game__head"><h3>🃏 위치 카드 · Location flashcards</h3><span class="flash-counter faint"></span></div>
+    <p class="muted">See the Korean → say the meaning → flip to check.</p>
+    <div class="flash-stage"><div class="flashcard"><div class="flashcard__inner"><div class="flashcard__face flashcard__front"><div class="big"></div></div><div class="flashcard__face flashcard__back"><div><div class="rom"></div><div class="en"></div></div></div></div></div></div>
+    <div class="flash-controls"><button class="btn btn--ghost btn--sm js-flash-prev">← 이전</button><button class="btn btn--ghost btn--sm js-flash-next">다음 →</button><button class="btn btn--gold btn--sm js-flash-shuffle">🔀 섞기 · Shuffle</button></div>
+  </div>
+  <div class="game" data-match="loc-match" data-match-src="match-loc-data">
+    <div class="game__head"><h3>🔗 짝 맞추기 · Match position → English</h3><span class="game__score">맞춤 · Matched: 0 / 6</span></div>
+    <p class="muted">Tap a position word, then tap its English meaning.</p>
+    <div class="match-board"><div class="match-col" data-side="left"><h4>한국어 · Korean</h4></div><div class="match-col" data-side="right"><h4>English</h4></div></div>
+    <div style="margin-top:1rem"><button class="btn btn--ghost btn--sm js-match-reset">↺ 다시 · Reset</button></div>
+  </div>
+  <div class="game">
+    <div class="game__head"><h3>🎯 에 / 에서 고르기 · 에 or 에서 Picker</h3><span class="game__score" id="ppScore">점수: 0 / 6</span></div>
+    <p class="muted">Read each sentence and tap the correct particle. Remember: exist/go = 에, action/from = 에서!</p>
+    <div class="pp" id="ppGame"></div>
+    <button class="btn btn--ghost btn--sm" onclick="resetPP()" style="margin-top:.5rem">↺ 다시 · Reset</button>
+  </div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 대화 · Next: Dialogue →</button></div>
+</section>
+
+<section class="panel" id="dialogue">
+  <div class="panel-head"><span class="step-no">9</span><div><h2>대화 <span class="panel-head__ko">Dialogue &amp; Role-play</span></h2></div></div>
+  <p class="panel-intro">진짜 대화예요. 위치 표현이 가득해요! 소리 내어 읽고 역할을 바꿔요!</p>
+  <div class="dialogue">
+    <h3 style="font-family:var(--sans);margin-bottom:.6rem">🎭 모델 대화 · Finding your way</h3>
+    <div class="mode-tags"><span class="mode mode--teacher">함께 Read A &amp; B aloud — then swap!</span></div>
+    <div class="turn turn--a"><div class="turn__who">A · 나</div><div class="turn__bubble"><div class="turn__ko">실례합니다. 화장실이 어디에 있어요?</div><div class="turn__rom">sillyehamnida. hwajangsiri eodie isseoyo?</div><div class="turn__en">Excuse me. Where is the restroom?</div></div></div>
+    <div class="turn turn--b"><div class="turn__who">B · 점원</div><div class="turn__bubble"><div class="turn__ko">카페 안에 있어요. 문 옆에 있어요.</div><div class="turn__rom">kape ane isseoyo. mun yeope isseoyo.</div><div class="turn__en">It's inside the café. It's next to the door.</div></div></div>
+    <div class="turn turn--a"><div class="turn__who">A · 나</div><div class="turn__bubble"><div class="turn__ko">감사합니다! 근처에 은행도 있어요?</div><div class="turn__rom">gamsahamnida! geuncheoe eunhaengdo isseoyo?</div><div class="turn__en">Thank you! Is there a bank nearby too?</div></div></div>
+    <div class="turn turn--b"><div class="turn__who">B · 점원</div><div class="turn__bubble"><div class="turn__ko">네, 공원 앞에 있어요.</div><div class="turn__rom">ne, gongwon ape isseoyo.</div><div class="turn__en">Yes, it's in front of the park.</div></div></div>
+    <div class="turn turn--a"><div class="turn__who">A · 나</div><div class="turn__bubble"><div class="turn__ko">정말 감사합니다!</div><div class="turn__rom">jeongmal gamsahamnida!</div><div class="turn__en">Thank you so much!</div></div></div>
+  </div>
+  <div class="exercise">
+    <h3>🗣️ 나의 버전 · Your version</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent: write your lines</span><span class="mode mode--teacher">함께 Then perform with a partner</span></div>
+    <p class="muted">Describe your own room or give directions to a place using 에/에서 and position words!</p>
+    <div class="q"><div class="q__prompt"><span class="qn">1.</span> Ask where something is</div><input class="input" type="text" placeholder="___이/가 어디에 있어요?" data-save="dlg_ask" data-label="Dialogue: where is…"></div>
+    <div class="q"><div class="q__prompt"><span class="qn">2.</span> Answer with a position word</div><input class="input" type="text" placeholder="___ 옆에/위에/안에 있어요." data-save="dlg_answer" data-label="Dialogue: it's at…"></div>
+    <div class="q"><div class="q__prompt"><span class="qn">★</span> Describe your room (at least 3 sentences)</div><textarea class="textarea" placeholder="제 방에 책상이 있어요. 침대 옆에 창문이 있어요. ..." data-save="dlg_room" data-label="My room description"></textarea></div>
+  </div>
+  <div class="note note--gold"><h4>도전 · Challenge</h4><p>Describe your room to a partner without showing them — can they draw it correctly from your Korean? Use 위, 아래, 옆, 앞, 뒤! 화이팅! 💪</p></div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button></div>
+</section>
+
+<section class="panel" id="reflect">
+  <div class="panel-head"><span class="step-no">10</span><div><h2>복습 &amp; 돌아보기 <span class="panel-head__ko">Review &amp; Reflect</span></h2></div></div>
+  <p class="panel-intro">정말 잘하셨어요! 이제 위치와 장소를 표현할 수 있어요. 새 문법은 다 배웠어요! 🎉</p>
+  <div class="exercise">
+    <h3>✅ 할 수 있어요 · I can now…</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <ul class="checklist">
+      <li><input type="checkbox" id="ck1" data-save="ck_exist" data-label="Knows 있어요/없어요"><label for="ck1">Use <strong>있어요 / 없어요</strong> for "there is/isn't" and "have/don't have"</label></li>
+      <li><input type="checkbox" id="ck2" data-save="ck_e" data-label="Knows 에"><label for="ck2">Use <strong>에</strong> for location of existence &amp; destination</label></li>
+      <li><input type="checkbox" id="ck3" data-save="ck_eseo" data-label="Knows 에서"><label for="ck3">Use <strong>에서</strong> for where an action happens &amp; "from"</label></li>
+      <li><input type="checkbox" id="ck4" data-save="ck_diff" data-label="Knows 에 vs 에서"><label for="ck4">Tell the difference between <strong>에</strong> and <strong>에서</strong></label></li>
+      <li><input type="checkbox" id="ck5" data-save="ck_position" data-label="Knows position words"><label for="ck5">Use position words (위, 아래, 앞, 뒤, 옆, 안)</label></li>
+      <li><input type="checkbox" id="ck6" data-save="ck_pattern" data-label="Knows position pattern"><label for="ck6">Use the pattern <strong>[thing] [position]에 있어요</strong></label></li>
+      <li><input type="checkbox" id="ck7" data-save="ck_directions" data-label="Can ask directions"><label for="ck7">Ask &amp; answer <strong>"어디에 있어요?"</strong></label></li>
+      <li><input type="checkbox" id="ck8" data-save="ck_words" data-label="Learned 15+ words"><label for="ck8">Use <strong>15+ new words</strong> from this week</label></li>
+    </ul>
+  </div>
+  <div class="exercise" style="margin-top:1rem">
+    <h3>💭 돌아보기 · Reflection</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q"><div class="q__prompt">오늘 가장 좋았던 것은? · One thing you enjoyed today</div><textarea class="textarea" placeholder="예: 방 그리기 게임이 재미있었어요!" data-save="reflect_good" data-label="Reflection: enjoyed"></textarea></div>
+    <div class="q"><div class="q__prompt">어려웠던 것은? · One thing that was tricky</div><textarea class="textarea" placeholder="예: 에 vs 에서 is still a little tricky." data-save="reflect_hard" data-label="Reflection: tricky"></textarea></div>
+    <div class="q"><div class="q__prompt">내 주변 · Write one sentence about where something near you is</div><textarea class="textarea" placeholder="___이/가 ___에 있어요." data-save="reflect_sentence" data-label="Reflection: location sentence"></textarea></div>
+  </div>
+  <div class="card center stack" style="margin-top:1.4rem">
+    <h3>🎉 8주차 완료! · Week 8 Complete!</h3>
+    <p class="muted">새 문법을 모두 배웠어요! You've learned ALL the core beginner grammar — next come review and real conversation. 정말 대단해요!</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap"><button class="btn btn--primary js-finish">✓ 완료 표시 · Mark complete</button><button class="btn btn--gold js-open-library">📓 내 답안 보기 · Review &amp; export</button></div>
+  </div>
+  <div class="note note--jade" style="margin-top:1.6rem"><h4>다음 주 미리보기 · Coming up — Week 9</h4><p><strong>Full Content Review</strong> — next week we pull together everything from Weeks 1–8 with mixed games and challenges to lock it all in before Conversation Day. 화이팅! 💪</p></div>
+  <div class="panel-foot"><button class="btn btn--ghost js-prev">← 이전 · Back</button><a class="btn btn--primary" href="../index.html">홈으로 · Back to course home →</a></div>
+</section>
+
+</main>
+
+<div class="modal-overlay" id="libraryModal" role="dialog" aria-modal="true" aria-labelledby="libTitle">
+  <div class="modal"><div class="modal__head"><h2 id="libTitle">📓 내 답안 · My Library</h2><button class="modal__close js-close-modal" aria-label="Close">×</button></div>
+  <div class="modal__body"></div>
+  <div class="modal__foot"><button class="btn btn--primary btn--sm js-export-csv" type="button">⬇ CSV 내보내기 · Export CSV</button><button class="btn btn--ghost btn--sm js-export-json" type="button">⬇ JSON</button><span class="header-spacer"></span><button class="btn btn--ghost btn--sm js-clear-all" type="button" style="color:var(--jeok);border-color:var(--jeok)">🗑 전체 삭제 · Clear</button></div></div>
+</div>
+
+<footer class="site-footer"><div class="wrap"><span class="foot-brand">한 · BKFES</span><small>Week 8 · Location &amp; Prepositions · Beginning Korean for English Speakers · © <span data-year>2026</span></small></div></footer>
+
+<script type="application/json" id="fc-loc-data">
+[
+  {"front":"있어요","rom":"isseoyo","en":"there is / I have"},
+  {"front":"없어요","rom":"eopseoyo","en":"there isn't / I don't have"},
+  {"front":"위","rom":"wi","en":"on / above"},
+  {"front":"아래","rom":"arae","en":"under / below"},
+  {"front":"앞","rom":"ap","en":"in front"},
+  {"front":"뒤","rom":"dwi","en":"behind"},
+  {"front":"옆","rom":"yeop","en":"next to"},
+  {"front":"안","rom":"an","en":"inside"},
+  {"front":"집에 있어요","rom":"jibe isseoyo","en":"(I'm) at home"},
+  {"front":"카페에서 공부해요","rom":"kape-eseo gongbuhaeyo","en":"I study at a café"}
+]
+</script>
+<script type="application/json" id="match-loc-data">
+[
+  {"id":1,"left":"위","right":"on / above"},
+  {"id":2,"left":"아래","right":"under"},
+  {"id":3,"left":"앞","right":"in front"},
+  {"id":4,"left":"뒤","right":"behind"},
+  {"id":5,"left":"옆","right":"next to"},
+  {"id":6,"left":"안","right":"inside"}
+]
+</script>
+
+<script>
+(function(){
+  var PP_Q=[
+    {pre:'집',post:' 있어요.',en:"I'm at home.",options:['에','에서','을','가'],correct:'에'},
+    {pre:'카페',post:' 공부해요.',en:'I study at a café.',options:['에','에서','를','는'],correct:'에서'},
+    {pre:'학교',post:' 가요.',en:'I go to school.',options:['에','에서','을','도'],correct:'에'},
+    {pre:'식당',post:' 밥을 먹어요.',en:'I eat at a restaurant.',options:['에','에서','이','가'],correct:'에서'},
+    {pre:'미국',post:' 왔어요.',en:'I came from the US.',options:['에','에서','을','는'],correct:'에서'},
+    {pre:'공원',post:' 있어요.',en:"It's at the park.",options:['에','에서','를','도'],correct:'에'}
+  ];
+  var ans=0,cor=0;
+  function build(){var w=document.getElementById('ppGame');if(!w)return;ans=0;cor=0;document.getElementById('ppScore').textContent='점수: 0 / '+PP_Q.length;w.innerHTML='';
+    PP_Q.forEach(function(q,qi){var box=document.createElement('div');box.className='pp-q';var opts=q.options.map(function(o){return '<button class="pp-opt" data-q="'+qi+'" data-o="'+o+'">'+o+'</button>';}).join('');box.innerHTML='<div class="pp-sentence">'+q.pre+'<span class="pp-blank" id="ppB'+qi+'">?</span>'+q.post+'</div><div class="pp-en">'+q.en+'</div><div class="pp-options">'+opts+'</div><div class="pp-feedback" id="ppF'+qi+'"></div>';w.appendChild(box);});
+    w.querySelectorAll('.pp-opt').forEach(function(btn){btn.addEventListener('click',function(){var qi=parseInt(btn.dataset.q);var q=PP_Q[qi];var box=btn.closest('.pp-q');if(box.dataset.done)return;box.dataset.done='1';ans++;var fb=document.getElementById('ppF'+qi);var bl=document.getElementById('ppB'+qi);bl.textContent=btn.dataset.o;if(btn.dataset.o===q.correct){btn.classList.add('correct');cor++;fb.style.color='var(--jade)';fb.textContent='✓ 맞아요!';}else{btn.classList.add('wrong');box.querySelectorAll('.pp-opt').forEach(function(b){if(b.dataset.o===q.correct)b.classList.add('correct');});bl.textContent=q.correct;fb.style.color='var(--jeok)';fb.textContent='✗ 정답은 '+q.correct;}document.getElementById('ppScore').textContent='점수: '+cor+' / '+PP_Q.length;if(ans===PP_Q.length&&window.BKFESStore)window.BKFESStore.saveField('week08','game_e_eseo_picker',cor+'/'+PP_Q.length,'에/에서 Picker game');});});}
+  window.resetPP=build;build();
+})();
+</script>
+
+<script src="../js/weeks.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/worksheet.js"></script>
+<script src="../js/audio.js"></script>
+</body>
+</html>
