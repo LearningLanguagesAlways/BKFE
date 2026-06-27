@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 · Asking Questions · BKFES</title>
+<meta name="description" content="Week 6 of Beginning Korean for English Speakers: question words 뭐, 어디, 언제, 누구, 왜, 어떻게 and how to ask questions with rising intonation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+/* ── Week 6 custom interactive styles ─────────────────────────── */
+
+/* Question word cards */
+.qw-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.9rem; margin:1rem 0; }
+.qw-card { border-radius:var(--radius); padding:1rem 1.1rem; text-align:center; border-top:5px solid var(--cheong); background:var(--hanji-2); transition:transform .15s, box-shadow .15s; }
+.qw-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+.qw-card .qw-ko { font-family:var(--serif); font-size:1.8rem; font-weight:700; color:var(--cheong); }
+.qw-card .qw-rom { font-size:.78rem; color:var(--ink-faint); font-style:italic; margin:.15rem 0; }
+.qw-card .qw-en { font-weight:700; font-size:.95rem; }
+
+/* Statement → question flip */
+.sq-flip { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; justify-content:center; margin:1rem 0; }
+.sq-box { border-radius:var(--radius-sm); padding:.7rem 1.1rem; font-family:var(--serif); font-size:clamp(1.1rem,2.6vw,1.5rem); font-weight:600; border:2px solid; background:var(--hanji-2); text-align:center; }
+.sq-statement { border-color:var(--jade); color:var(--jade); }
+.sq-question  { border-color:var(--jeok); color:var(--jeok); }
+.sq-arrow { font-size:1.6rem; color:var(--ink-faint); }
+.sq-note { display:block; font-family:var(--sans); font-size:.62rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.6; margin-bottom:.2rem; }
+
+/* Q&A builder */
+.qa-builder .qa-row { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin-bottom:.6rem; }
+.qa-builder .qa-lbl { font-weight:700; font-size:.78rem; color:var(--ink-faint); letter-spacing:.07em; text-transform:uppercase; min-width:80px; }
+.qa-out { margin-top:.8rem; background:var(--cheong); color:var(--hanji-2); border-radius:var(--radius-sm); padding:.9rem 1.1rem; font-family:var(--serif); font-size:clamp(1rem,2.2vw,1.25rem); text-align:center; min-height:3rem; line-height:1.6; }
+.qa-out .sub { font-size:var(--fs-small); opacity:.85; margin-top:.3rem; font-style:italic; }
+
+/* Question-word picker game */
+.qwp { margin-top:1rem; }
+.qwp-q { background:var(--hanji-deep); border-radius:var(--radius-sm); padding:1rem 1.2rem; margin-bottom:.8rem; }
+.qwp-sentence { font-family:var(--serif); font-size:1.2rem; margin-bottom:.4rem; }
+.qwp-en { font-size:.8rem; color:var(--ink-faint); font-style:italic; margin-bottom:.7rem; }
+.qwp-blank { display:inline-block; min-width:54px; border-bottom:2.5px dashed var(--jeok); text-align:center; color:var(--jeok); font-weight:700; }
+.qwp-options { display:flex; flex-wrap:wrap; gap:.5rem; }
+.qwp-opt { padding:.45rem 1rem; border:1.5px solid var(--line-strong); border-radius:var(--radius-sm); background:var(--baek); font-family:var(--serif); font-size:1.05rem; cursor:pointer; transition:all .15s; }
+.qwp-opt:hover { border-color:var(--cheong); background:var(--cheong-tint); }
+.qwp-opt.correct { background:var(--jade-tint); border-color:var(--jade); color:var(--jade); font-weight:700; }
+.qwp-opt.wrong { background:var(--jeok-tint); border-color:var(--jeok); color:var(--jeok); }
+.qwp-feedback { font-size:var(--fs-small); font-weight:600; margin-top:.5rem; min-height:1.2em; }
+</style>
+</head>
+<body data-week="week06">
+
+<!-- ══════════ HEADER ══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="wrap site-header__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__seal">한</span>
+      <span class="brand__txt"><b>BKFES</b><span>Beginning Korean · English Speakers</span></span>
+    </a>
+    <span class="header-spacer"></span>
+    <div class="header-actions" data-name-wrap>
+      <span class="faint">👋 <strong data-name-display></strong></span>
+    </div>
+    <div class="header-actions">
+      <a class="btn btn--ghost btn--sm" href="../index.html">← 홈 · Home</a>
+      <button class="btn btn--ghost btn--sm js-open-library" type="button">📓 <span class="label-full">내 답안 · Library</span></button>
+    </div>
+  </div>
+  <div class="saekdong saekdong--thin"></div>
+</header>
+
+<!-- ══════════ HERO ════════════════════════════════════════════════ -->
+<section class="ws-hero">
+  <div class="wrap">
+    <p class="eyebrow">Week 6 · 7월 6일 · July 06</p>
+    <h1>Asking Questions</h1>
+    <p class="ws-hero__sub">뭐? 어디? 언제? — 궁금한 것을 물어보는 법을 배워요!<br>
+    What? Where? When? — learn to ask anything in natural, polite Korean.</p>
+    <div class="ws-progress">
+      <div class="progressbar"><div class="progressbar__fill"></div></div>
+      <span class="progresslabel">0 / 11 완료 · sections done</span>
+    </div>
+    <p class="autosave-note" style="margin-top:.8rem">💾 답안은 자동 저장돼요 · Your answers save automatically as you type.</p>
+  </div>
+</section>
+
+<!-- ══════════ SECTION NAV PILLS ══════════════════════════════════ -->
+<nav class="ws-nav" aria-label="Worksheet sections">
+  <div class="wrap">
+    <div class="ws-nav__track">
+      <button class="pill" data-target="welcome"><span class="pill__no">0</span> 시작 Start</button>
+      <button class="pill" data-target="review"><span class="pill__no">1</span> 복습 Review</button>
+      <button class="pill" data-target="yesno"><span class="pill__no">2</span> 예/아니요</button>
+      <button class="pill" data-target="qwords"><span class="pill__no">3</span> 의문사 Q-words</button>
+      <button class="pill" data-target="howmany"><span class="pill__no">4</span> 얼마/몇</button>
+      <button class="pill" data-target="builder"><span class="pill__no">5</span> 만들기 Builder</button>
+      <button class="pill" data-target="vocab"><span class="pill__no">6</span> 어휘 Vocab</button>
+      <button class="pill" data-target="practice"><span class="pill__no">7</span> 연습 Practice</button>
+      <button class="pill" data-target="games"><span class="pill__no">8</span> 게임 Games</button>
+      <button class="pill" data-target="dialogue"><span class="pill__no">9</span> 대화 Dialogue</button>
+      <button class="pill" data-target="reflect"><span class="pill__no">10</span> 복습 Review</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 0 — Welcome
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel is-active" id="welcome">
+  <div class="panel-head">
+    <span class="step-no">0</span>
+    <div><h2>환영합니다! <span class="panel-head__ko">Welcome Back</span></h2></div>
+  </div>
+  <p class="panel-intro">6주차예요! 이제 문장을 만들 수 있으니, 질문하는 법을 배워요.<br>
+  Week 6! You can make statements — now let's learn to ask questions and keep a conversation going.</p>
+
+  <div class="card stack">
+    <h3>이번 주 목표 · This week you will…</h3>
+    <ul>
+      <li>❓ <strong>Ask yes/no questions</strong> — just raise your voice at the end!</li>
+      <li>🔑 <strong>Learn the 6 key question words</strong> — 뭐, 어디, 언제, 누구, 왜, 어떻게.</li>
+      <li>🔢 <strong>Ask "how much / how many"</strong> — 얼마, 몇 with counters.</li>
+      <li>💬 <strong>Answer questions naturally</strong> — 네 / 아니요 and full replies.</li>
+      <li>🗣️ <strong>Hold a real Q&amp;A conversation</strong> with a partner.</li>
+    </ul>
+  </div>
+
+  <div class="note note--gold">
+    <h4>오늘의 큰 그림 · The big idea today</h4>
+    <p>Good news: in the polite 요 form, a <strong>statement and a question often look identical</strong> — only the intonation changes! <strong>밥을 먹어요.</strong> (You eat.) → <strong>밥을 먹어요?</strong> (Do you eat?) Just raise your pitch at the end. Question words slot right into the sentence where the answer would go.</p>
+  </div>
+
+  <div class="note note--jade">
+    <h4>이렇게 사용하세요 · How to use this worksheet</h4>
+    <p>Tap the pills to move around. Tap any 🔊 to hear the Korean — especially useful this week for hearing question intonation!
+    <span class="mode mode--teacher">함께 Teacher-led</span>
+    <span class="mode mode--solo">혼자 Independent</span>
+    <span class="mode mode--play">게임 Game</span></p>
+  </div>
+
+  <div class="panel-foot">
+    <a class="btn btn--ghost" href="../index.html">← 홈 · Home</a>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 1 — Review (Weeks 1-5)
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="review">
+  <div class="panel-head">
+    <span class="step-no">1</span>
+    <div><h2>복습 <span class="panel-head__ko">Weeks 1–5 Review</span></h2></div>
+  </div>
+  <p class="panel-intro">지난 5주를 빠르게 점검해요 — 소리 내어 읽어 보세요!<br>
+  A quick check of the last five weeks before we go on — read aloud!</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <table class="vocab">
+    <caption>핵심 정리 · Key points so far</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">저는 매일 운동해요</td><td class="v-rom">jeoneun maeil undonghaeyo</td><td class="v-en">I exercise every day</td></tr>
+      <tr><td class="v-ko">친구가 영화를 봐요</td><td class="v-rom">chinguga yeonghwareul bwayo</td><td class="v-en">A friend watches a movie</td></tr>
+      <tr><td class="v-ko">커피를 마셔요</td><td class="v-rom">keopireul masyeoyo</td><td class="v-en">(I) drink coffee</td></tr>
+      <tr><td class="v-ko">공부하다 → 공부해요</td><td class="v-rom">gongbuhada → gongbuhaeyo</td><td class="v-en">to study → study (polite)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" data-quiz="w6-review" style="margin-top:1.4rem">
+    <div class="game__head">
+      <h3>✏️ 빠른 셀프 체크 · Quick self-check</h3>
+      <span class="game__score">점수 · Score: 0 / 4</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Tap an answer to check it instantly. Say the correct one aloud!</p>
+
+    <div class="quiz-q" data-explain="하다 verbs become 해요.">
+      <div class="stem">1. 운동하다 (to exercise) →</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">운동해요</button>
+        <button class="choice">운동하아요</button>
+        <button class="choice">운동어요</button>
+        <button class="choice">운동아요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="Last vowel ㅓ → -어요. 먹 + 어요 = 먹어요.">
+      <div class="stem">2. 먹다 (to eat) →</div>
+      <div class="choices">
+        <button class="choice">먹아요</button>
+        <button class="choice" data-correct="true">먹어요</button>
+        <button class="choice">먹해요</button>
+        <button class="choice">머요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="커피 ends in a vowel and is the object → 를.">
+      <div class="stem">3. 저는 커피___ 마셔요.</div>
+      <div class="choices">
+        <button class="choice">을</button>
+        <button class="choice" data-correct="true">를</button>
+        <button class="choice">가</button>
+        <button class="choice">는</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="가 + 아요 merges to 가요.">
+      <div class="stem">4. 가다 (to go) →</div>
+      <div class="choices">
+        <button class="choice">가아요</button>
+        <button class="choice" data-correct="true">가요</button>
+        <button class="choice">가어요</button>
+        <button class="choice">개요</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 예/아니요 · Next: Yes/No →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 2 — Yes/No Questions
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="yesno">
+  <div class="panel-head">
+    <span class="step-no">2</span>
+    <div><h2>예 / 아니요 <span class="panel-head__ko">Yes/No Questions</span></h2></div>
+  </div>
+  <p class="panel-intro">가장 쉬운 질문이에요 — 끝을 올려서 말하면 질문이 돼요!<br>
+  The easiest questions of all — just raise your pitch at the end and a statement becomes a question.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <div class="note note--gold">
+    <h4>📌 핵심 · The core idea — same words, rising tone</h4>
+    <div class="sq-flip">
+      <div class="sq-box sq-statement"><span class="sq-note">Statement ↓</span>밥을 먹어요.</div>
+      <div class="sq-arrow">→</div>
+      <div class="sq-box sq-question"><span class="sq-note">Question ↑</span>밥을 먹어요?</div>
+    </div>
+    <p style="text-align:center;color:var(--ink-soft)">"(You) eat rice." &nbsp;→&nbsp; "Do (you) eat rice?" — only the intonation changes!</p>
+  </div>
+
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>예/아니요 대답 · Answering yes/no</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">네</td><td class="v-rom">ne</td><td class="v-en">yes</td></tr>
+      <tr><td class="v-ko">아니요</td><td class="v-rom">aniyo</td><td class="v-en">no</td></tr>
+      <tr><td class="v-ko">네, 맞아요</td><td class="v-rom">ne, majayo</td><td class="v-en">yes, that's right</td></tr>
+      <tr><td class="v-ko">아니요, 괜찮아요</td><td class="v-rom">aniyo, gwaenchanayo</td><td class="v-en">no, it's okay</td></tr>
+      <tr><td class="v-ko">잘 모르겠어요</td><td class="v-rom">jal moreugesseoyo</td><td class="v-en">I'm not sure / I don't know</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--jade">
+    <h4>💡 격식 있는 질문 · The formal question ending -ㅂ니까/습니까</h4>
+    <p>In very formal settings you may hear <strong>-습니까?</strong> — like 먹습니까? (Do you eat?) or 갑니까? (Do you go?). You don't need to produce these yet, but it's good to recognise them. For everyday speech, the rising 요 question is perfect!</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 질문 만들기 · Make it a question</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Turn each statement into a yes/no question (just add ?).</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 커피를 좋아해요. → ?</div>
+      <input class="input" type="text" placeholder="커피를 좋아해요?" data-save="yn_q1" data-label="Yes/no: like coffee">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 한국어를 공부해요. → ?</div>
+      <input class="input" type="text" placeholder="한국어를 공부해요?" data-save="yn_q2" data-label="Yes/no: study Korean">
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 의문사 · Next: Question Words →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 3 — Question Words
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="qwords">
+  <div class="panel-head">
+    <span class="step-no">3</span>
+    <div><h2>의문사 <span class="panel-head__ko">The 6 Question Words</span></h2></div>
+  </div>
+  <p class="panel-intro">"누가, 무엇을, 어디서, 언제, 왜, 어떻게" — 영어의 5W1H와 같아요!<br>
+  Korea's question words map neatly onto English who/what/where/when/why/how.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="qw-grid">
+    <div class="qw-card"><div class="qw-ko">뭐 / 무엇</div><div class="qw-rom">mwo / mueot</div><div class="qw-en">what</div></div>
+    <div class="qw-card"><div class="qw-ko">어디</div><div class="qw-rom">eodi</div><div class="qw-en">where</div></div>
+    <div class="qw-card"><div class="qw-ko">언제</div><div class="qw-rom">eonje</div><div class="qw-en">when</div></div>
+    <div class="qw-card"><div class="qw-ko">누구</div><div class="qw-rom">nugu</div><div class="qw-en">who</div></div>
+    <div class="qw-card"><div class="qw-ko">왜</div><div class="qw-rom">wae</div><div class="qw-en">why</div></div>
+    <div class="qw-card"><div class="qw-ko">어떻게</div><div class="qw-rom">eotteoke</div><div class="qw-en">how</div></div>
+  </div>
+
+  <div class="note note--gold">
+    <h4>📌 핵심 · Question words go where the answer goes</h4>
+    <p>Unlike English (which moves the question word to the front), Korean keeps it <strong>in the answer's slot</strong>:</p>
+    <p style="margin-top:.5rem">
+      뭐 먹어요? — <em>What do you eat?</em> (lit. "what eat?")<br>
+      어디 가요? — <em>Where are you going?</em> (lit. "where go?")<br>
+      언제 와요? — <em>When are you coming?</em> (lit. "when come?")
+    </p>
+  </div>
+
+  <table class="vocab" style="margin-top:1.2rem">
+    <caption>실전 질문 · Real questions you'll use</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">이름이 뭐예요?</td><td class="v-rom">ireumi mwoyeyo?</td><td class="v-en">What's your name?</td></tr>
+      <tr><td class="v-ko">어디 가요?</td><td class="v-rom">eodi gayo?</td><td class="v-en">Where are you going?</td></tr>
+      <tr><td class="v-ko">언제 만나요?</td><td class="v-rom">eonje mannayo?</td><td class="v-en">When shall we meet?</td></tr>
+      <tr><td class="v-ko">누구예요?</td><td class="v-rom">nuguyeyo?</td><td class="v-en">Who is it?</td></tr>
+      <tr><td class="v-ko">왜요?</td><td class="v-rom">waeyo?</td><td class="v-en">Why?</td></tr>
+      <tr><td class="v-ko">어떻게 가요?</td><td class="v-rom">eotteoke gayo?</td><td class="v-en">How do I get there?</td></tr>
+      <tr><td class="v-ko">화장실이 어디예요?</td><td class="v-rom">hwajangsiri eodiyeyo?</td><td class="v-en">Where's the restroom?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--jade">
+    <h4>💡 발음 팁 · Pronunciation note — 뭐 vs 무엇</h4>
+    <p><strong>무엇</strong> is the full form (more written/formal); <strong>뭐</strong> is the everyday spoken contraction. In conversation you'll almost always say 뭐. "뭐 해요?" = "What are you doing?" — one of the most useful phrases in Korean!</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 얼마/몇 · Next: How Much/Many →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 4 — How much / How many
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="howmany">
+  <div class="panel-head">
+    <span class="step-no">4</span>
+    <div><h2>얼마 / 몇 <span class="panel-head__ko">How Much · How Many</span></h2></div>
+  </div>
+  <p class="panel-intro">쇼핑하고 개수를 물어볼 때 꼭 필요한 표현이에요.<br>
+  Essential for shopping and counting — asking about price and quantity.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Teacher-led</span></div>
+
+  <div class="qw-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+    <div class="qw-card" style="border-color:var(--jeok)"><div class="qw-ko" style="color:var(--jeok)">얼마</div><div class="qw-rom">eolma</div><div class="qw-en">how much (price)</div></div>
+    <div class="qw-card" style="border-color:var(--jade)"><div class="qw-ko" style="color:var(--jade)">몇</div><div class="qw-rom">myeot</div><div class="qw-en">how many (+ counter)</div></div>
+  </div>
+
+  <table class="vocab" style="margin-top:1rem">
+    <caption>쇼핑 &amp; 개수 · Shopping &amp; quantities</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">이거 얼마예요?</td><td class="v-rom">igeo eolmayeyo?</td><td class="v-en">How much is this?</td></tr>
+      <tr><td class="v-ko">전부 얼마예요?</td><td class="v-rom">jeonbu eolmayeyo?</td><td class="v-en">How much is it all together?</td></tr>
+      <tr><td class="v-ko">몇 개예요?</td><td class="v-rom">myeot gaeyeyo?</td><td class="v-en">How many (things) are there?</td></tr>
+      <tr><td class="v-ko">몇 명이에요?</td><td class="v-rom">myeot myeong-ieyo?</td><td class="v-en">How many people?</td></tr>
+      <tr><td class="v-ko">몇 시예요?</td><td class="v-rom">myeot siyeyo?</td><td class="v-en">What time is it?</td></tr>
+      <tr><td class="v-ko">몇 살이에요?</td><td class="v-rom">myeot sarieyo?</td><td class="v-en">How old are you?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note note--gold">
+    <h4>🛍️ 문화 노트 · Culture note — 깎아 주세요</h4>
+    <p>At traditional markets (시장), it's common to ask for a small discount: <strong>"좀 깎아 주세요"</strong> (jom kkakka juseyo — "please lower it a little"). Pair it with "이거 얼마예요?" and you're ready to shop like a local! (Note: not used in regular shops or department stores.)</p>
+  </div>
+
+  <div class="exercise" style="margin-top:1.2rem">
+    <h3>✏️ 얼마 또는 몇? · 얼마 or 몇?</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> Asking the price of an apple → 이 사과 ___예요?</div>
+      <div class="fillrow"><span class="cue">이 사과</span><input class="input inline-input" type="text" placeholder="얼마 / 몇?" data-save="hm_q1" data-label="얼마/몇: price of apple"></div>
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> Asking how many people → ___ 명이에요?</div>
+      <div class="fillrow"><input class="input inline-input" type="text" placeholder="얼마 / 몇?" data-save="hm_q2" data-label="얼마/몇: how many people"><span class="cue">명이에요?</span></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 만들기 · Next: Question Builder →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 5 — Question Builder
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="builder">
+  <div class="panel-head">
+    <span class="step-no">5</span>
+    <div><h2>만들기 <span class="panel-head__ko">Question Builder</span></h2></div>
+  </div>
+  <p class="panel-intro">의문사와 동사를 골라 질문을 만들어 보세요!<br>
+  Pick a question word and a verb — the builder makes a natural Korean question. Say it aloud!</p>
+  <div class="mode-tags"><span class="mode mode--play">게임 Interactive</span><span class="mode mode--solo">혼자 Independent</span></div>
+
+  <div class="qa-builder card stack">
+    <div class="qa-row">
+      <span class="qa-lbl">의문사 Q-word</span>
+      <select class="input" id="qbWord" onchange="buildQ()">
+        <option value="뭐|what|을 먹어요">뭐 what</option>
+        <option value="어디|where|에 가요">어디 where</option>
+        <option value="언제|when|만나요">언제 when</option>
+        <option value="누구|who|예요">누구 who</option>
+        <option value="왜|why|공부해요">왜 why</option>
+        <option value="어떻게|how|가요">어떻게 how</option>
+      </select>
+    </div>
+    <div class="qa-out" id="qbOut">← 의문사를 선택하세요!</div>
+  </div>
+
+  <div class="note note--gold" style="margin-top:1.2rem">
+    <h4>✏️ 직접 써 보세요 · Now you try</h4>
+    <p>Write a question for each prompt using the right question word.</p>
+  </div>
+
+  <div class="exercise">
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> Ask "What are you doing?" (use 뭐 + 해요)</div>
+      <input class="input" type="text" placeholder="뭐 해요?" data-save="qb_q1" data-label="Build Q: what are you doing">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> Ask "Where are you going?" (use 어디 + 가요)</div>
+      <input class="input" type="text" placeholder="어디 가요?" data-save="qb_q2" data-label="Build Q: where are you going">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> Ask "When shall we meet?" (use 언제 + 만나요)</div>
+      <input class="input" type="text" placeholder="언제 만나요?" data-save="qb_q3" data-label="Build Q: when shall we meet">
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 어휘 · Next: Vocabulary →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 6 — Vocabulary
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="vocab">
+  <div class="panel-head">
+    <span class="step-no">6</span>
+    <div><h2>어휘 <span class="panel-head__ko">Vocabulary</span></h2></div>
+  </div>
+  <p class="panel-intro">질문하고 대답할 때 쓰는 단어들이에요. 소리 내어 읽어 보세요.</p>
+  <div class="mode-tags"><span class="mode mode--teacher">함께 Read aloud together</span><span class="mode mode--solo">혼자 Self-test</span></div>
+
+  <table class="vocab">
+    <caption>① 의문사 · Question words</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">뭐 / 무엇</td><td class="v-rom">mwo / mueot</td><td class="v-en">what</td></tr>
+      <tr><td class="v-ko">어디</td><td class="v-rom">eodi</td><td class="v-en">where</td></tr>
+      <tr><td class="v-ko">언제</td><td class="v-rom">eonje</td><td class="v-en">when</td></tr>
+      <tr><td class="v-ko">누구</td><td class="v-rom">nugu</td><td class="v-en">who</td></tr>
+      <tr><td class="v-ko">왜</td><td class="v-rom">wae</td><td class="v-en">why</td></tr>
+      <tr><td class="v-ko">어떻게</td><td class="v-rom">eotteoke</td><td class="v-en">how</td></tr>
+      <tr><td class="v-ko">얼마</td><td class="v-rom">eolma</td><td class="v-en">how much</td></tr>
+      <tr><td class="v-ko">몇</td><td class="v-rom">myeot</td><td class="v-en">how many</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>② 장소 · Places (great for 어디 questions)</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">집</td><td class="v-rom">jip</td><td class="v-en">home / house</td></tr>
+      <tr><td class="v-ko">학교</td><td class="v-rom">hakgyo</td><td class="v-en">school</td></tr>
+      <tr><td class="v-ko">회사</td><td class="v-rom">hoesa</td><td class="v-en">company / work</td></tr>
+      <tr><td class="v-ko">시장</td><td class="v-rom">sijang</td><td class="v-en">market</td></tr>
+      <tr><td class="v-ko">식당</td><td class="v-rom">sikdang</td><td class="v-en">restaurant</td></tr>
+      <tr><td class="v-ko">카페</td><td class="v-rom">kape</td><td class="v-en">café</td></tr>
+      <tr><td class="v-ko">화장실</td><td class="v-rom">hwajangsil</td><td class="v-en">restroom</td></tr>
+      <tr><td class="v-ko">역</td><td class="v-rom">yeok</td><td class="v-en">station</td></tr>
+    </tbody>
+  </table>
+
+  <table class="vocab" style="margin-top:1.4rem">
+    <caption>③ 대답 표현 · Answering &amp; reacting</caption>
+    <thead><tr><th>한국어</th><th>로마자</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="v-ko">네 / 아니요</td><td class="v-rom">ne / aniyo</td><td class="v-en">yes / no</td></tr>
+      <tr><td class="v-ko">맞아요</td><td class="v-rom">majayo</td><td class="v-en">that's right</td></tr>
+      <tr><td class="v-ko">잘 모르겠어요</td><td class="v-rom">jal moreugesseoyo</td><td class="v-en">I'm not sure</td></tr>
+      <tr><td class="v-ko">다시 말해 주세요</td><td class="v-rom">dasi malhae juseyo</td><td class="v-en">please say it again</td></tr>
+      <tr><td class="v-ko">천천히 말해 주세요</td><td class="v-rom">cheoncheonhi malhae juseyo</td><td class="v-en">please speak slowly</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise" style="margin-top:1.6rem">
+    <h3>⭐ 나의 단어 · My words to remember</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Choose your three favourite new words and write them here.</p>
+    <input class="input" type="text" placeholder="1." data-save="vocab_fav_1" data-label="Favourite word 1" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="2." data-save="vocab_fav_2" data-label="Favourite word 2" style="margin-bottom:.5rem">
+    <input class="input" type="text" placeholder="3." data-save="vocab_fav_3" data-label="Favourite word 3">
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 연습 · Next: Practice →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 7 — Practice
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="practice">
+  <div class="panel-head">
+    <span class="step-no">7</span>
+    <div><h2>연습 <span class="panel-head__ko">Practice</span></h2></div>
+  </div>
+  <p class="panel-intro">질문을 모아서 연습해요 — 소리 내어 말하는 것도 잊지 마세요!</p>
+
+  <div class="exercise">
+    <h3>A. 질문에 답하기 · Answer the questions</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <p class="muted">Answer each question about yourself in a full Korean sentence.</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> 이름이 뭐예요? (What's your name?)</div>
+      <input class="input" type="text" placeholder="제 이름은 ___이에요/예요." data-save="prac_a1" data-label="Answer: name">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> 어디 살아요? (Where do you live?)</div>
+      <input class="input" type="text" placeholder="저는 ___에 살아요." data-save="prac_a2" data-label="Answer: where live">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">3.</span> 뭐 좋아해요? (What do you like?)</div>
+      <input class="input" type="text" placeholder="저는 ___을/를 좋아해요." data-save="prac_a3" data-label="Answer: what like">
+    </div>
+  </div>
+
+  <div class="exercise" data-quiz="w6-questions" style="margin-top:1rem">
+    <div class="game__head">
+      <h3>B. 의문사 퀴즈 · Question-Word Quiz</h3>
+      <span class="game__score">점수 · Score: 0 / 6</span>
+    </div>
+    <div class="mode-tags"><span class="mode mode--play">게임 Quiz</span></div>
+    <p class="muted">Tap the correct question word for each English meaning.</p>
+
+    <div class="quiz-q" data-explain="어디 = where.">
+      <div class="stem">1. "Where?" is…</div>
+      <div class="choices">
+        <button class="choice">언제</button>
+        <button class="choice" data-correct="true">어디</button>
+        <button class="choice">누구</button>
+        <button class="choice">왜</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="뭐 / 무엇 = what.">
+      <div class="stem">2. "What?" is…</div>
+      <div class="choices">
+        <button class="choice" data-correct="true">뭐</button>
+        <button class="choice">어떻게</button>
+        <button class="choice">얼마</button>
+        <button class="choice">어디</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="언제 = when.">
+      <div class="stem">3. "When?" is…</div>
+      <div class="choices">
+        <button class="choice">누구</button>
+        <button class="choice">왜</button>
+        <button class="choice" data-correct="true">언제</button>
+        <button class="choice">몇</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="누구 = who.">
+      <div class="stem">4. "Who?" is…</div>
+      <div class="choices">
+        <button class="choice">어디</button>
+        <button class="choice" data-correct="true">누구</button>
+        <button class="choice">뭐</button>
+        <button class="choice">왜</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="얼마 = how much (price).">
+      <div class="stem">5. To ask a price, you use…</div>
+      <div class="choices">
+        <button class="choice">몇</button>
+        <button class="choice" data-correct="true">얼마</button>
+        <button class="choice">어떻게</button>
+        <button class="choice">언제</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-q" data-explain="어떻게 = how.">
+      <div class="stem">6. "How (do I get there)?" uses…</div>
+      <div class="choices">
+        <button class="choice">왜</button>
+        <button class="choice">누구</button>
+        <button class="choice" data-correct="true">어떻게</button>
+        <button class="choice">뭐</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 게임 · Next: Games →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 8 — Games
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="games">
+  <div class="panel-head">
+    <span class="step-no">8</span>
+    <div><h2>게임 <span class="panel-head__ko">Games</span></h2></div>
+  </div>
+  <p class="panel-intro">Learning sticks when it's fun. Flip cards, make matches, and pick the right question word out loud!</p>
+  <div class="mode-tags"><span class="mode mode--play">게임 Play</span><span class="mode mode--solo">혼자 Independent</span><span class="mode mode--teacher">함께 As a class</span></div>
+
+  <!-- Flashcards: question words -->
+  <div class="game" data-flashcards="qwords" data-flashcards-src="fc-qw-data">
+    <div class="game__head">
+      <h3>🃏 의문사 카드 · Question-word flashcards</h3>
+      <span class="flash-counter faint"></span>
+    </div>
+    <p class="muted">See the Korean → say the meaning → flip to check.</p>
+    <div class="flash-stage">
+      <div class="flashcard">
+        <div class="flashcard__inner">
+          <div class="flashcard__face flashcard__front"><div class="big"></div></div>
+          <div class="flashcard__face flashcard__back"><div><div class="rom"></div><div class="en"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-controls">
+      <button class="btn btn--ghost btn--sm js-flash-prev">← 이전</button>
+      <button class="btn btn--ghost btn--sm js-flash-next">다음 →</button>
+      <button class="btn btn--gold btn--sm js-flash-shuffle">🔀 섞기 · Shuffle</button>
+    </div>
+  </div>
+
+  <!-- Match: question → answer -->
+  <div class="game" data-match="qa-match" data-match-src="match-qa-data">
+    <div class="game__head">
+      <h3>🔗 짝 맞추기 · Match question → natural answer</h3>
+      <span class="game__score">맞춤 · Matched: 0 / 6</span>
+    </div>
+    <p class="muted">Tap a question, then tap a sensible answer.</p>
+    <div class="match-board">
+      <div class="match-col" data-side="left"><h4>질문 · Question</h4></div>
+      <div class="match-col" data-side="right"><h4>대답 · Answer</h4></div>
+    </div>
+    <div style="margin-top:1rem"><button class="btn btn--ghost btn--sm js-match-reset">↺ 다시 · Reset</button></div>
+  </div>
+
+  <!-- Question-word Picker (custom) -->
+  <div class="game">
+    <div class="game__head">
+      <h3>🎯 의문사 고르기 게임 · Question-Word Picker</h3>
+      <span class="game__score" id="qwpScore">점수: 0 / 6</span>
+    </div>
+    <p class="muted">Read each English question and tap the Korean word that fills the blank. Instant feedback!</p>
+    <div class="qwp" id="qwpGame"></div>
+    <button class="btn btn--ghost btn--sm" onclick="resetQWP()" style="margin-top:.5rem">↺ 다시 · Reset</button>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 대화 · Next: Dialogue →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 9 — Dialogue & Role-play
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="dialogue">
+  <div class="panel-head">
+    <span class="step-no">9</span>
+    <div><h2>대화 <span class="panel-head__ko">Dialogue &amp; Role-play</span></h2></div>
+  </div>
+  <p class="panel-intro">진짜 대화예요. 질문이 가득해요! 소리 내어 읽고 역할을 바꿔요!</p>
+
+  <div class="dialogue">
+    <h3 style="font-family:var(--sans);margin-bottom:.6rem">🎭 모델 대화 · Getting to know someone</h3>
+    <div class="mode-tags"><span class="mode mode--teacher">함께 Read A &amp; B aloud — raise your pitch on questions!</span></div>
+
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">안녕하세요! 이름이 뭐예요?</div><div class="turn__rom">annyeonghaseyo! ireumi mwoyeyo?</div><div class="turn__en">Hello! What's your name?</div></div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 지호</div>
+      <div class="turn__bubble"><div class="turn__ko">저는 지호예요. 어디에서 왔어요?</div><div class="turn__rom">jeoneun Jiho-yeyo. eodieseo wasseoyo?</div><div class="turn__en">I'm Jiho. Where are you from?</div></div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">저는 미국에서 왔어요. 지호 씨는 무슨 일 해요?</div><div class="turn__rom">jeoneun Miguk-eseo wasseoyo. Jiho ssineun museun il haeyo?</div><div class="turn__en">I'm from the US. Jiho, what work do you do?</div></div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 지호</div>
+      <div class="turn__bubble"><div class="turn__ko">저는 학생이에요. 한국어 공부 왜 해요?</div><div class="turn__rom">jeoneun haksaeng-ieyo. hangugeo gongbu wae haeyo?</div><div class="turn__en">I'm a student. Why do you study Korean?</div></div>
+    </div>
+    <div class="turn turn--a">
+      <div class="turn__who">A · 나</div>
+      <div class="turn__bubble"><div class="turn__ko">한국 여행을 좋아해요! 우리 언제 또 만나요?</div><div class="turn__rom">Hanguk yeohaeng-eul joahaeyo! uri eonje tto mannayo?</div><div class="turn__en">I love travelling in Korea! When shall we meet again?</div></div>
+    </div>
+    <div class="turn turn--b">
+      <div class="turn__who">B · 지호</div>
+      <div class="turn__bubble"><div class="turn__ko">이번 주말 어때요? 좋아요!</div><div class="turn__rom">ibeon jumal eottaeyo? joayo!</div><div class="turn__en">How about this weekend? Great!</div></div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3>🗣️ 나의 버전 · Your version</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent: write your lines</span><span class="mode mode--teacher">함께 Then perform with a partner</span></div>
+    <p class="muted">Interview a classmate! Write at least three questions using different question words, then ask them.</p>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">1.</span> A "what" question</div>
+      <input class="input" type="text" placeholder="뭐 ___? / 이름이 뭐예요?" data-save="dlg_q1" data-label="My question 1 (what)">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">2.</span> A "where" question</div>
+      <input class="input" type="text" placeholder="어디 ___?" data-save="dlg_q2" data-label="My question 2 (where)">
+    </div>
+    <div class="q">
+      <div class="q__prompt"><span class="qn">★</span> Write the whole interview (questions + answers)</div>
+      <textarea class="textarea" placeholder="A: 이름이 뭐예요?&#10;B: 저는 ___예요.&#10;A: 어디에서 왔어요?&#10;B: ..." data-save="dlg_full" data-label="My full Week 6 interview"></textarea>
+    </div>
+  </div>
+
+  <div class="note note--gold">
+    <h4>도전 · Challenge</h4>
+    <p>Interview <strong>three classmates</strong> using a different question word for each one (뭐, 어디, 언제…). Write down their answers and report one back to the class: "___ 씨는 ___을/를 좋아해요." 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <button class="btn btn--primary js-next">다음: 복습 · Next: Review →</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PANEL 10 — Review & Reflect
+══════════════════════════════════════════════════════════════════ -->
+<section class="panel" id="reflect">
+  <div class="panel-head">
+    <span class="step-no">10</span>
+    <div><h2>복습 &amp; 돌아보기 <span class="panel-head__ko">Review &amp; Reflect</span></h2></div>
+  </div>
+  <p class="panel-intro">정말 잘하셨어요! 이제 질문하고 대답할 수 있어요. 진짜 대화가 가능해요!<br>
+  Excellent work! You can now ask and answer questions — real conversations are within reach!</p>
+
+  <div class="exercise">
+    <h3>✅ 할 수 있어요 · I can now…</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <ul class="checklist">
+      <li><input type="checkbox" id="ck1" data-save="ck_yesno" data-label="Can ask yes/no questions"><label for="ck1">Turn a statement into a <strong>yes/no question</strong> with rising tone</label></li>
+      <li><input type="checkbox" id="ck2" data-save="ck_neaniyo" data-label="Can answer yes/no"><label for="ck2">Answer with <strong>네 / 아니요</strong></label></li>
+      <li><input type="checkbox" id="ck3" data-save="ck_qwords" data-label="Knows 6 question words"><label for="ck3">Use the 6 question words — <strong>뭐, 어디, 언제, 누구, 왜, 어떻게</strong></label></li>
+      <li><input type="checkbox" id="ck4" data-save="ck_position" data-label="Knows q-word position"><label for="ck4">Place the question word <strong>where the answer goes</strong></label></li>
+      <li><input type="checkbox" id="ck5" data-save="ck_eolmamyeot" data-label="Knows 얼마/몇"><label for="ck5">Ask <strong>얼마</strong> (how much) and <strong>몇</strong> (how many)</label></li>
+      <li><input type="checkbox" id="ck6" data-save="ck_useful" data-label="Knows useful questions"><label for="ck6">Ask key questions — <strong>이름이 뭐예요?, 어디 가요?, 얼마예요?</strong></label></li>
+      <li><input type="checkbox" id="ck7" data-save="ck_interview" data-label="Can interview someone"><label for="ck7">Hold a short <strong>Q&amp;A interview</strong> with a partner</label></li>
+      <li><input type="checkbox" id="ck8" data-save="ck_words" data-label="Learned 15+ words"><label for="ck8">Use <strong>15+ new words</strong> from this week</label></li>
+    </ul>
+  </div>
+
+  <div class="exercise" style="margin-top:1rem">
+    <h3>💭 돌아보기 · Reflection</h3>
+    <div class="mode-tags"><span class="mode mode--solo">혼자 Independent</span></div>
+    <div class="q">
+      <div class="q__prompt">오늘 가장 좋았던 것은? · One thing you enjoyed today</div>
+      <textarea class="textarea" placeholder="예: 의문사 고르기 게임이 재미있었어요!" data-save="reflect_good" data-label="Reflection: enjoyed"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">어려웠던 것은? · One thing that was tricky</div>
+      <textarea class="textarea" placeholder="예: Remembering 어떻게 vs 얼마 is still tricky." data-save="reflect_hard" data-label="Reflection: tricky"></textarea>
+    </div>
+    <div class="q">
+      <div class="q__prompt">나의 질문 · Write one question you'd really like to ask a Korean speaker</div>
+      <textarea class="textarea" placeholder="___?" data-save="reflect_question" data-label="Reflection: my own question"></textarea>
+    </div>
+  </div>
+
+  <div class="card center stack" style="margin-top:1.4rem">
+    <h3>🎉 6주차 완료! · Week 6 Complete!</h3>
+    <p class="muted">이제 질문할 수 있어요! You can ask questions now — conversations can finally go both ways. 멋져요!</p>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn--primary js-finish">✓ 완료 표시 · Mark complete</button>
+      <button class="btn btn--gold js-open-library">📓 내 답안 보기 · Review &amp; export</button>
+    </div>
+  </div>
+
+  <div class="note note--jade" style="margin-top:1.6rem">
+    <h4>다음 주 미리보기 · Coming up — Week 7</h4>
+    <p><strong>Past Tense (-았어요 / -었어요)</strong> — you can talk about now and ask questions; next week you'll learn to talk about <em>yesterday</em> and what you <em>did</em>. 매일 질문 하나씩 만들어 보세요! 화이팅! 💪</p>
+  </div>
+
+  <div class="panel-foot">
+    <button class="btn btn--ghost js-prev">← 이전 · Back</button>
+    <a class="btn btn--primary" href="../index.html">홈으로 · Back to course home →</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ LIBRARY MODAL ════════════════════════════════════ -->
+<div class="modal-overlay" id="libraryModal" role="dialog" aria-modal="true" aria-labelledby="libTitle">
+  <div class="modal">
+    <div class="modal__head">
+      <h2 id="libTitle">📓 내 답안 · My Library</h2>
+      <button class="modal__close js-close-modal" aria-label="Close">×</button>
+    </div>
+    <div class="modal__body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--primary btn--sm js-export-csv" type="button">⬇ CSV 내보내기 · Export CSV</button>
+      <button class="btn btn--ghost btn--sm js-export-json" type="button">⬇ JSON</button>
+      <span class="header-spacer"></span>
+      <button class="btn btn--ghost btn--sm js-clear-all" type="button" style="color:var(--jeok);border-color:var(--jeok)">🗑 전체 삭제 · Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ═══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="foot-brand">한 · BKFES</span>
+    <small>Week 6 · Asking Questions · Beginning Korean for English Speakers · © <span data-year>2026</span></small>
+  </div>
+</footer>
+
+<!-- ══════════ GAME DATA (JSON) ══════════════════════════════════ -->
+<script type="application/json" id="fc-qw-data">
+[
+  {"front":"뭐","rom":"mwo","en":"what"},
+  {"front":"어디","rom":"eodi","en":"where"},
+  {"front":"언제","rom":"eonje","en":"when"},
+  {"front":"누구","rom":"nugu","en":"who"},
+  {"front":"왜","rom":"wae","en":"why"},
+  {"front":"어떻게","rom":"eotteoke","en":"how"},
+  {"front":"얼마","rom":"eolma","en":"how much (price)"},
+  {"front":"몇","rom":"myeot","en":"how many (+ counter)"},
+  {"front":"이름이 뭐예요?","rom":"ireumi mwoyeyo?","en":"What's your name?"},
+  {"front":"어디 가요?","rom":"eodi gayo?","en":"Where are you going?"}
+]
+</script>
+
+<script type="application/json" id="match-qa-data">
+[
+  {"id":1,"left":"이름이 뭐예요?","right":"저는 지호예요"},
+  {"id":2,"left":"어디 가요?","right":"학교에 가요"},
+  {"id":3,"left":"언제 만나요?","right":"이번 주말에 만나요"},
+  {"id":4,"left":"이거 얼마예요?","right":"삼천 원이에요"},
+  {"id":5,"left":"누구예요?","right":"제 친구예요"},
+  {"id":6,"left":"왜 한국어를 공부해요?","right":"한국 여행을 좋아해요"}
+]
+</script>
+
+<!-- ══════════ CUSTOM JAVASCRIPT ═════════════════════════════════ -->
+<script>
+(function() {
+  /* ── Question Builder ────────────────────────────────────────── */
+  window.buildQ = function() {
+    var sel = document.getElementById('qbWord');
+    var out = document.getElementById('qbOut');
+    if (!sel || !out) return;
+    var parts = sel.value.split('|');   // [korean, english, tail]
+    var qword = parts[0], qen = parts[1], tail = parts[2];
+    var sentence = qword + ' ' + tail + '?';
+    var enMap = {
+      '을 먹어요':'do you eat?', '에 가요':'are you going?', '만나요':'shall we meet?',
+      '예요':'is it?', '공부해요':'do you study?', '가요':'do you go?'
+    };
+    out.innerHTML = '<span style="font-size:1.15rem">' + sentence + '</span>' +
+      '<div class="sub">(' + qen + ' ' + (enMap[tail] || '') + ')</div>';
+  };
+  if (document.getElementById('qbOut')) buildQ();
+
+  /* ── Question-Word Picker Game ───────────────────────────────── */
+  var QWP_Q = [
+    {pre:'', post:' 가요?', en:'Where are you going?', options:['뭐','어디','언제','누구'], correct:'어디'},
+    {pre:'', post:' 해요?', en:'What are you doing?', options:['뭐','어디','왜','몇'], correct:'뭐'},
+    {pre:'', post:' 만나요?', en:'When shall we meet?', options:['누구','왜','언제','어떻게'], correct:'언제'},
+    {pre:'이거 ', post:'예요?', en:'How much is this?', options:['몇','얼마','뭐','어디'], correct:'얼마'},
+    {pre:'', post:' 한국어를 공부해요?', en:'Why do you study Korean?', options:['왜','어떻게','누구','언제'], correct:'왜'},
+    {pre:'', post:' 가요?', en:'How do you get there?', options:['뭐','얼마','어떻게','누구'], correct:'어떻게'}
+  ];
+  var qwpAnswered = 0, qwpCorrect = 0;
+
+  function buildQWP() {
+    var wrap = document.getElementById('qwpGame');
+    if (!wrap) return;
+    qwpAnswered = 0; qwpCorrect = 0;
+    document.getElementById('qwpScore').textContent = '점수: 0 / ' + QWP_Q.length;
+    wrap.innerHTML = '';
+    QWP_Q.forEach(function(q, qi) {
+      var box = document.createElement('div');
+      box.className = 'qwp-q';
+      var opts = q.options.map(function(o) {
+        return '<button class="qwp-opt" data-q="' + qi + '" data-o="' + o + '">' + o + '</button>';
+      }).join('');
+      box.innerHTML =
+        '<div class="qwp-sentence">' + q.pre + '<span class="qwp-blank" id="qwpBlank' + qi + '">?</span>' + q.post + '</div>' +
+        '<div class="qwp-en">' + q.en + '</div>' +
+        '<div class="qwp-options">' + opts + '</div>' +
+        '<div class="qwp-feedback" id="qwpFb' + qi + '"></div>';
+      wrap.appendChild(box);
+    });
+    wrap.querySelectorAll('.qwp-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var qi = parseInt(btn.dataset.q);
+        var q = QWP_Q[qi];
+        var box = btn.closest('.qwp-q');
+        if (box.dataset.done) return;
+        box.dataset.done = '1';
+        qwpAnswered++;
+        var fb = document.getElementById('qwpFb' + qi);
+        var blank = document.getElementById('qwpBlank' + qi);
+        blank.textContent = btn.dataset.o;
+        if (btn.dataset.o === q.correct) {
+          btn.classList.add('correct'); qwpCorrect++;
+          fb.style.color = 'var(--jade)';
+          fb.textContent = '✓ 맞아요! · Correct';
+        } else {
+          btn.classList.add('wrong');
+          box.querySelectorAll('.qwp-opt').forEach(function(b){ if (b.dataset.o === q.correct) b.classList.add('correct'); });
+          blank.textContent = q.correct;
+          fb.style.color = 'var(--jeok)';
+          fb.textContent = '✗ 정답은 ' + q.correct;
+        }
+        document.getElementById('qwpScore').textContent = '점수: ' + qwpCorrect + ' / ' + QWP_Q.length;
+        if (qwpAnswered === QWP_Q.length && window.BKFESStore) {
+          window.BKFESStore.saveField('week06', 'game_qword_picker', qwpCorrect + '/' + QWP_Q.length, 'Question-Word Picker game');
+        }
+      });
+    });
+  }
+
+  window.resetQWP = buildQWP;
+  buildQWP();
+})();
+</script>
+
+<!-- ══════════ SHARED SCRIPTS (must stay in this order) ═════════ -->
+<script src="../js/weeks.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/worksheet.js"></script>
+<script src="../js/audio.js"></script>
+</body>
+</html>
